@@ -1,10 +1,42 @@
 let baseUrls = [];
 let extraUrls = [];
+let fileUrls = [];
+let selectedTextFile = null;
 
 
 function isValidURL(url) {
     let urlPattern = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.[a-zA-Z]{2,6}(\/\S*)?$/;
     return urlPattern.test(url);
+}
+
+function loadURLFile() {
+    const input = document.getElementById("urls-file");
+    const file = input.files && input.files[0];
+
+    if (!file) {
+        showError("Please choose a .txt file first.");
+        return;
+    }
+
+    if (!file.name.toLowerCase().endsWith(".txt")) {
+        showError("Only .txt files are allowed.");
+        return;
+    }
+
+    selectedTextFile = file;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const content = event.target.result || "";
+        const urls = content.split(/\r?\n/)
+            .map(line => line.trim())
+            .filter(line => line && !line.startsWith("#"))
+            .filter((line, index, arr) => arr.indexOf(line) === index);
+
+        fileUrls = urls;
+        updateFileUrlList();
+    };
+    reader.readAsText(file);
 }
 
 function addBaseURL() {
@@ -79,6 +111,14 @@ function updateExtraUrlList() {
     });
 }
 
+function updateFileUrlList() {
+    let list = document.getElementById("file-url-list");
+    list.innerHTML = "";
+    fileUrls.forEach((url, index) => {
+        list.innerHTML += `<li>${url} <button onclick="removeFileUrl(${index})">X</button></li>`;
+    });
+}
+
 function removeBaseUrl(index) {
     baseUrls.splice(index, 1);
     updateBaseUrlList();
@@ -87,6 +127,11 @@ function removeBaseUrl(index) {
 function removeExtraUrl(index) {
     extraUrls.splice(index, 1);
     updateExtraUrlList();
+}
+
+function removeFileUrl(index) {
+    fileUrls.splice(index, 1);
+    updateFileUrlList();
 }
 
 function showError(message) {
@@ -119,25 +164,36 @@ function displayOutput(data) {
 }
 
 function submitData() {
-    if (baseUrls.length === 0 && extraUrls.length === 0) {
-        showError("At least one URL (Base or Extra) must be provided.");
+    const allUrls = [...baseUrls, ...extraUrls, ...fileUrls];
+
+    if (allUrls.length === 0) {
+        showError("At least one URL (Base, Extra, or .txt file) must be provided.");
         return;
+    }
+
+    const formData = new FormData();
+    formData.append("base_urls", JSON.stringify(baseUrls));
+    formData.append("extra_urls", JSON.stringify([...extraUrls, ...fileUrls]));
+
+    if (selectedTextFile) {
+        formData.append("urls_file", selectedTextFile);
     }
 
     fetch('/submit-urls', {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ base_urls: baseUrls, extra_urls: extraUrls })
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
         displayOutput(data);
         baseUrls = [];
         extraUrls = [];
+        fileUrls = [];
+        selectedTextFile = null;
+        document.getElementById("urls-file").value = "";
         updateBaseUrlList();
         updateExtraUrlList();
+        updateFileUrlList();
     })
     .catch(error => {
         showError("Error submitting URLs");

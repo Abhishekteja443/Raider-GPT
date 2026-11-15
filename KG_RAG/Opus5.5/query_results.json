@@ -1,0 +1,5955 @@
+[
+  {
+    "id": "CQ1",
+    "question": "What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?unitType ?unitLabel ?deptLabel WHERE {\n  ?unit (wsu:isPartOf|^wsu:hasPart) :WSU ;\n        a ?t ;\n        rdfs:label ?unitLabel .\n  VALUES ?t { wsu:College wsu:School wsu:BranchCampus }\n  ?t rdfs:label ?unitType .\n  OPTIONAL {\n    ?dept a wsu:Department ;\n          (wsu:isPartOf|^wsu:hasPart)+ ?unit ;\n          rdfs:label ?deptLabel .\n  }\n} ORDER BY ?unitType ?unitLabel ?deptLabel",
+    "variables": [
+      "unitType",
+      "unitLabel",
+      "deptLabel"
+    ],
+    "bindings": [
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "Branch Campus"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Biomedical, Industrial, and Human Factors Engineering"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Computer Science and Engineering"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Electrical Engineering"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Mechanical and Materials Engineering"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Health and Exercise Science"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Human Services Department"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Leadership Studies in Education and Organizations Department"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Nursing"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Social Work Department"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Teacher Education Department"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Liberal Arts"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Biochemistry and Molecular Biology"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Biological Sciences"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Biomedical Sciences Ph.D. Program"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Chemistry"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Mathematics and Statistics"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Neuroscience, Cell Biology, and Physiology (NCBP)"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Physics"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Psychology"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Economics"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Finance and Financial Services"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Marketing & Entrepreneurship"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Biochemistry and Molecular Biology"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Clinical Neurosciences"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Dermatology"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Emergency Medicine"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Family Medicine"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Geriatrics"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Internal Medicine"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Medical Education"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Military & Veteran Affairs"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Neuroscience, Cell Biology, and Physiology (NCBP)"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Obstetrics and Gynecology (OB/GYN)"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Orthopedic and Plastic Surgery"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Pediatrics"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Pharmacology and Toxicology"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Population and Public Health Sciences"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Psychiatry"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Surgery"
+        }
+      },
+      {
+        "unitType": {
+          "type": "literal",
+          "value": "School"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "School of Graduate Studies"
+        }
+      }
+    ],
+    "count": 41
+  },
+  {
+    "id": "CQ2",
+    "question": "Which academic unit is responsible for a given degree program (here: Microbiology and Immunology, MS)?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?programLabel ?programType ?unitLabel ?unitType ?parentLabel WHERE {\n  VALUES ?program { :Degree_MicrobiologyAndImmunologyMS }\n  ?program rdfs:label ?programLabel ; a ?pt .\n  ?pt rdfs:label ?programType .\n  { ?unit wsu:offersCredential ?program } UNION { ?program wsu:jointlyOfferedBy ?unit }\n  ?unit rdfs:label ?unitLabel ; a ?ut .\n  ?ut rdfs:label ?unitType .\n  OPTIONAL { ?unit wsu:isPartOf/rdfs:label ?parentLabel }\n} ORDER BY ?unitLabel",
+    "variables": [
+      "programLabel",
+      "programType",
+      "unitLabel",
+      "unitType",
+      "parentLabel"
+    ],
+    "bindings": [
+      {
+        "programLabel": {
+          "type": "literal",
+          "value": "Microbiology and Immunology, MS"
+        },
+        "programType": {
+          "type": "literal",
+          "value": "Degree Program"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "College"
+        },
+        "parentLabel": {
+          "type": "literal",
+          "value": "Wright State University"
+        }
+      },
+      {
+        "programLabel": {
+          "type": "literal",
+          "value": "Microbiology and Immunology, MS"
+        },
+        "programType": {
+          "type": "literal",
+          "value": "Degree Program"
+        },
+        "unitLabel": {
+          "type": "literal",
+          "value": "Microbiology and Immunology M.S. Program"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "Academic Unit"
+        },
+        "parentLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      }
+    ],
+    "count": 2
+  },
+  {
+    "id": "CQ3",
+    "question": "What is the physical location, phone number, and email contact for each department or office in the College of Engineering and Computer Science?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?unitLabel ?unitType ?location\n       (GROUP_CONCAT(DISTINCT COALESCE(?phone, \"\"); separator=\" | \") AS ?phones)\n       (GROUP_CONCAT(DISTINCT COALESCE(?fax, \"\"); separator=\" | \") AS ?faxes)\n       (GROUP_CONCAT(DISTINCT COALESCE(?email, \"\"); separator=\" | \") AS ?emails)\nWHERE {\n  ?unit (wsu:isPartOf|^wsu:hasPart)+ :CECS ;\n        a ?t ;\n        rdfs:label ?unitLabel .\n  VALUES ?t { wsu:Department wsu:Office }\n  ?t rdfs:label ?unitType .\n  OPTIONAL { ?unit wsu:locatedIn/rdfs:label ?location }\n  OPTIONAL {\n    ?unit wsu:hasContact ?c .\n    OPTIONAL { ?c wsu:hasPhone ?phone }\n    OPTIONAL { ?c wsu:hasFax ?fax }\n    OPTIONAL { ?c wsu:hasEmail ?email }\n  }\n} GROUP BY ?unitLabel ?unitType ?location\n  ORDER BY ?unitLabel",
+    "variables": [
+      "unitLabel",
+      "unitType",
+      "location",
+      "phones",
+      "faxes",
+      "emails"
+    ],
+    "bindings": [
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biomedical, Industrial, and Human Factors Engineering"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "Department"
+        },
+        "location": {
+          "type": "literal",
+          "value": "207 Russ Engineering Center"
+        },
+        "phones": {
+          "type": "literal",
+          "value": "937-775-5044"
+        },
+        "faxes": {
+          "type": "literal",
+          "value": "937-775-7364"
+        },
+        "emails": {
+          "type": "literal",
+          "value": "bie-dept@wright.edu"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Computer Science and Engineering"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "Department"
+        },
+        "location": {
+          "type": "literal",
+          "value": "303 Russ Engineering Center"
+        },
+        "phones": {
+          "type": "literal",
+          "value": "937-775-5131"
+        },
+        "faxes": {
+          "type": "literal",
+          "value": "937-775-5133"
+        },
+        "emails": {
+          "type": "literal",
+          "value": "cse-dept@wright.edu"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Electrical Engineering"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "Department"
+        },
+        "location": {
+          "type": "literal",
+          "value": "311 Russ Engineering Center"
+        },
+        "phones": {
+          "type": "literal",
+          "value": "937-775-5037"
+        },
+        "faxes": {
+          "type": "literal",
+          "value": "937-775-3936"
+        },
+        "emails": {
+          "type": "literal",
+          "value": "elec-egr@wright.edu"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Mechanical and Materials Engineering"
+        },
+        "unitType": {
+          "type": "literal",
+          "value": "Department"
+        },
+        "location": {
+          "type": "literal",
+          "value": "209 Russ Engineering Center"
+        },
+        "phones": {
+          "type": "literal",
+          "value": "937-775-5040"
+        },
+        "faxes": {
+          "type": "literal",
+          "value": ""
+        },
+        "emails": {
+          "type": "literal",
+          "value": "mme-dept@wright.edu"
+        }
+      }
+    ],
+    "count": 4
+  },
+  {
+    "id": "CQ4",
+    "question": "Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?schoolLabel ?deptLabel WHERE {\n  ?school a wsu:School ;\n          (wsu:isPartOf|^wsu:hasPart) :CHEHS ;\n          rdfs:label ?schoolLabel .\n  OPTIONAL {\n    ?dept a wsu:Department ;\n          (wsu:isPartOf|^wsu:hasPart) ?school ;\n          rdfs:label ?deptLabel .\n  }\n} ORDER BY ?schoolLabel ?deptLabel",
+    "variables": [
+      "schoolLabel",
+      "deptLabel"
+    ],
+    "bindings": [
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Education and Leadership"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Leadership Studies in Education and Organizations Department"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Education and Leadership"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Teacher Education Department"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Health and Exercise Sciences"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Health and Exercise Science"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Nursing"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Nursing"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Nursing, Kinesiology, and Health Sciences"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Professional Psychology"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Social Work and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Human Services Department"
+        }
+      },
+      {
+        "schoolLabel": {
+          "type": "literal",
+          "value": "School of Social Work and Human Services"
+        },
+        "deptLabel": {
+          "type": "literal",
+          "value": "Social Work Department"
+        }
+      }
+    ],
+    "count": 8
+  },
+  {
+    "id": "CQ5",
+    "question": "What administrative divisions and units report to the Provost?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?relation ?label ?type WHERE {\n  { :Provost wsu:hasDivision ?x . BIND(\"division\" AS ?relation) }\n  UNION\n  { :Provost wsu:oversees ?x . BIND(\"oversees\" AS ?relation) }\n  ?x rdfs:label ?label ; a ?t .\n  ?t rdfs:label ?type .\n} ORDER BY ?relation ?label",
+    "variables": [
+      "relation",
+      "label",
+      "type"
+    ],
+    "bindings": [
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Academic Affairs"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Accreditation and Assessment"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Adult and Online Learning"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Curricular and Strategic Initiatives"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Faculty Affairs"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "division"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Research and Innovation"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Provost Division"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "type": {
+          "type": "literal",
+          "value": "School"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "type": {
+          "type": "literal",
+          "value": "College"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "College of Health, Education, and Human Services"
+        },
+        "type": {
+          "type": "literal",
+          "value": "College"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "College of Liberal Arts"
+        },
+        "type": {
+          "type": "literal",
+          "value": "College"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "type": {
+          "type": "literal",
+          "value": "College"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Lake Campus"
+        },
+        "type": {
+          "type": "literal",
+          "value": "Branch Campus"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "type": {
+          "type": "literal",
+          "value": "College"
+        }
+      },
+      {
+        "relation": {
+          "type": "literal",
+          "value": "oversees"
+        },
+        "label": {
+          "type": "literal",
+          "value": "School of Graduate Studies"
+        },
+        "type": {
+          "type": "literal",
+          "value": "School"
+        }
+      }
+    ],
+    "count": 14
+  },
+  {
+    "id": "CQ6",
+    "question": "What types of academic credentials does WSU offer, how many of each, and which units grant them?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?credentialType ?numCredentials\n       (COALESCE(?granted, 0) AS ?numWithKnownGrantor) (COALESCE(?grantorList, \"\") AS ?grantors)\nWHERE {\n  {\n    SELECT ?t (COUNT(DISTINCT ?cred) AS ?numCredentials) WHERE {\n      ?cred a ?t . ?t rdfs:subClassOf* wsu:Credential .\n    } GROUP BY ?t\n  }\n  OPTIONAL {\n    SELECT ?t (COUNT(DISTINCT ?cred) AS ?granted)\n           (GROUP_CONCAT(DISTINCT ?grantorLabel; separator=\" | \") AS ?grantorList)\n    WHERE {\n      ?cred a ?t . ?t rdfs:subClassOf* wsu:Credential .\n      { ?grantor wsu:offersCredential ?cred } UNION { ?cred wsu:jointlyOfferedBy ?grantor }\n      ?grantor rdfs:label ?grantorLabel .\n    } GROUP BY ?t\n  }\n  ?t rdfs:label ?credentialType .\n} ORDER BY DESC(?numCredentials)",
+    "variables": [
+      "credentialType",
+      "numCredentials",
+      "numWithKnownGrantor",
+      "grantors"
+    ],
+    "bindings": [
+      {
+        "credentialType": {
+          "type": "literal",
+          "value": "Degree Program"
+        },
+        "numCredentials": {
+          "type": "literal",
+          "value": "132",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "numWithKnownGrantor": {
+          "type": "literal",
+          "value": "14",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "grantors": {
+          "type": "literal",
+          "value": "College of Science and Mathematics | M.B.A. Program | Human Factors and Industrial/Organizational Psychology Ph.D. Program | Interdisciplinary Applied Science & Mathematics Ph.D. Program | Boonshoft School of Medicine | Microbiology and Immunology M.S. Program | Master of Public Health Program | Biomedical Sciences Ph.D. Program | Environmental Sciences Ph.D. Program"
+        }
+      },
+      {
+        "credentialType": {
+          "type": "literal",
+          "value": "Minor"
+        },
+        "numCredentials": {
+          "type": "literal",
+          "value": "61",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "numWithKnownGrantor": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "grantors": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "credentialType": {
+          "type": "literal",
+          "value": "Certificate"
+        },
+        "numCredentials": {
+          "type": "literal",
+          "value": "48",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "numWithKnownGrantor": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "grantors": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "credentialType": {
+          "type": "literal",
+          "value": "Credential"
+        },
+        "numCredentials": {
+          "type": "literal",
+          "value": "7",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "numWithKnownGrantor": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "grantors": {
+          "type": "literal",
+          "value": ""
+        }
+      }
+    ],
+    "count": 4
+  },
+  {
+    "id": "CQ7",
+    "question": "Which programs or units are shared between two colleges or schools (e.g., Neuroscience, Cell Biology, and Physiology spanning Science & Mathematics and the Boonshoft School of Medicine)?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?kind ?itemLabel ?firstLabel ?secondLabel WHERE {\n  {\n    ?item wsu:jointlyOfferedBy ?a, ?b .\n    BIND(\"degree program jointly offered by\" AS ?kind)\n  } UNION {\n    ?item a/rdfs:subClassOf* wsu:AcademicUnit ;\n          (wsu:isPartOf|^wsu:hasPart) ?a, ?b .\n    BIND(\"unit belonging to\" AS ?kind)\n  }\n  FILTER(STR(?a) < STR(?b))\n  ?item rdfs:label ?itemLabel .\n  ?a rdfs:label ?firstLabel .\n  ?b rdfs:label ?secondLabel .\n} ORDER BY ?kind ?itemLabel",
+    "variables": [
+      "kind",
+      "itemLabel",
+      "firstLabel",
+      "secondLabel"
+    ],
+    "bindings": [
+      {
+        "kind": {
+          "type": "literal",
+          "value": "unit belonging to"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Biochemistry and Molecular Biology"
+        },
+        "firstLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "secondLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "kind": {
+          "type": "literal",
+          "value": "unit belonging to"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Neuroscience, Cell Biology, and Physiology (NCBP)"
+        },
+        "firstLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "secondLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      }
+    ],
+    "count": 2
+  },
+  {
+    "id": "CQ8",
+    "question": "Who holds each university leadership role, and what is the role's scope and area of oversight?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?roleLabel ?personLabel ?scope\n       (GROUP_CONCAT(DISTINCT COALESCE(?overseenLabel, \"\"); separator=\" | \") AS ?oversees)\nWHERE {\n  ?role a wsu:LeadershipRole ; rdfs:label ?roleLabel .\n  OPTIONAL { ?person wsu:holdsRole ?role ; rdfs:label ?personLabel }\n  OPTIONAL { ?role wsu:hasScope ?scope }\n  OPTIONAL { ?role wsu:oversees/rdfs:label ?overseenLabel }\n} GROUP BY ?roleLabel ?personLabel ?scope\n  ORDER BY ?roleLabel",
+    "variables": [
+      "roleLabel",
+      "personLabel",
+      "scope",
+      "oversees"
+    ],
+    "bindings": [
+      {
+        "roleLabel": {
+          "type": "literal",
+          "value": "Interim Dean, Raj Soin College of Business"
+        },
+        "personLabel": {
+          "type": "literal",
+          "value": "Donald Hopkins"
+        },
+        "oversees": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        }
+      },
+      {
+        "roleLabel": {
+          "type": "literal",
+          "value": "Provost"
+        },
+        "scope": {
+          "type": "literal",
+          "value": "Chief academic officer of the university, responsible for academic affairs across the Dayton, Lake, and online campuses and programs; collaborates with the president and other stakeholders in setting overall academic priorities and strategies."
+        },
+        "oversees": {
+          "type": "literal",
+          "value": "Raj Soin College of Business | College of Engineering and Computer Science | School of Graduate Studies | College of Health, Education, and Human Services | Lake Campus | College of Liberal Arts | Boonshoft School of Medicine | College of Science and Mathematics"
+        }
+      },
+      {
+        "roleLabel": {
+          "type": "literal",
+          "value": "University Librarian"
+        },
+        "personLabel": {
+          "type": "literal",
+          "value": "Jane Wildermuth"
+        },
+        "oversees": {
+          "type": "literal",
+          "value": ""
+        }
+      }
+    ],
+    "count": 3
+  },
+  {
+    "id": "CQ9",
+    "question": "What administrative divisions exist under the Office of the Provost, and what function does each provide?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?divisionLabel ?function WHERE {\n  :Provost wsu:hasDivision ?division .\n  ?division rdfs:label ?divisionLabel .\n  OPTIONAL { ?division wsu:providesFunction ?function }\n} ORDER BY ?divisionLabel",
+    "variables": [
+      "divisionLabel",
+      "function"
+    ],
+    "bindings": [
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Academic Affairs"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Resources that enhance, empower, and support success in the classroom, including honors, and other educational programs."
+        }
+      },
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Accreditation and Assessment"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Resources for accreditation, academic program review, and student learning outcomes."
+        }
+      },
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Adult and Online Learning"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Gateway for academic and holistic success for nontraditional and remote learners."
+        }
+      },
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Curricular and Strategic Initiatives"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Resources relating to the curriculum, as well as current projects underway to achieve and advance the university's mission."
+        }
+      },
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Faculty Affairs"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Home to the Center for Faculty Excellence, as well as faculty-specific documents, policies, forms, and other resources."
+        }
+      },
+      {
+        "divisionLabel": {
+          "type": "literal",
+          "value": "Research and Innovation"
+        },
+        "function": {
+          "type": "literal",
+          "value": "Resources and tools for the advancement of research and scholarly activities, as well as their compliance and the development of innovations."
+        }
+      }
+    ],
+    "count": 6
+  },
+  {
+    "id": "CQ10",
+    "question": "What is Wright State's basic institutional profile (namesake, enrollment, number of colleges and programs, campuses)?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?name ?description ?enrollment ?numColleges ?numPrograms ?namesake\n       (GROUP_CONCAT(DISTINCT COALESCE(?campusLabel, \"\"); separator=\" | \") AS ?branchCampuses)\nWHERE {\n  :WSU a wsu:University ; rdfs:label ?name .\n  OPTIONAL { :WSU rdfs:comment ?description }\n  OPTIONAL { :WSU wsu:enrollmentCount ?enrollment }\n  OPTIONAL { :WSU wsu:numColleges ?numColleges }\n  OPTIONAL { :WSU wsu:numPrograms ?numPrograms }\n  OPTIONAL { :Fact_NamedForWrightBrothers rdfs:comment ?namesake }\n  OPTIONAL {\n    ?campus a wsu:BranchCampus ; (wsu:isPartOf|^wsu:hasPart) :WSU ; rdfs:label ?campusLabel .\n  }\n} GROUP BY ?name ?description ?enrollment ?numColleges ?numPrograms ?namesake",
+    "variables": [
+      "name",
+      "description",
+      "enrollment",
+      "numColleges",
+      "numPrograms",
+      "namesake",
+      "branchCampuses"
+    ],
+    "bindings": [
+      {
+        "name": {
+          "type": "literal",
+          "value": "Wright State University"
+        },
+        "description": {
+          "type": "literal",
+          "value": "National public university in Dayton, Ohio, named for aviation pioneers Orville and Wilbur Wright. Source states 'more than 11,000 students' (not an exact enrollment count)."
+        },
+        "numColleges": {
+          "type": "literal",
+          "value": "6",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "numPrograms": {
+          "type": "literal",
+          "value": "315",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "namesake": {
+          "type": "literal",
+          "value": "Wright State University was named to honor aviation pioneers Orville and Wilbur Wright, who invented the world's first successful airplane in their Dayton bicycle shop."
+        },
+        "branchCampuses": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      }
+    ],
+    "count": 1
+  },
+  {
+    "id": "CQ11",
+    "question": "What policies exist within a given policy series (here: Series 3000 – Students and Series 5000 – Graduate Students and Programs), with each policy's number and title?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?seriesLabel ?categoryLabel ?number ?title WHERE {\n  VALUES ?series { :Series_3000 :Series_5000 }\n  ?series rdfs:label ?seriesLabel .\n  ?policy wsu:belongsToSeries ?series ;\n          wsu:hasPolicyNumber ?number ;\n          rdfs:label ?title .\n  OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }\n} ORDER BY ?seriesLabel xsd:integer(?number) ?title",
+    "variables": [
+      "seriesLabel",
+      "categoryLabel",
+      "number",
+      "title"
+    ],
+    "bindings": [
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Federal and State Regulations (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3010"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Student Privacy and Release of Educational Records - FERPA"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Federal and State Regulations (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3020"
+        },
+        "title": {
+          "type": "literal",
+          "value": "F-1 International Students"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Federal and State Regulations (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3030"
+        },
+        "title": {
+          "type": "literal",
+          "value": "J-1 Exchange Visitor"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Federal and State Regulations (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3060"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Ohio Residency Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admissions (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3110"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Undergraduate Degree-Seeking Admissions"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Ohio Residency Policy (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3120"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Undergraduate Non-Degree Seeking Admissions Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admissions (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3130"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Dual Enrollment Admissions (College Credit Plus)"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admissions (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3140"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Readmission"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admissions (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3160"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Wright Path Program"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admissions (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3170"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Second Undergraduate Degree Admissions"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3210"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Ohio Articulation and Transfer Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3215"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit Regulations"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3220"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Prior Learning Assessment Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3230"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Ohio Transfer Module (OTM)"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3240"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Completion of Wright State Core Using Transfer Courses"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3245"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Student Requirements for Writing Across the Curriculum"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3260"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit for \"D\" Grades"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3265"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Policy for Plus/Minus Grading"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3280"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit for Advanced Placement (AP)"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Transfer and Prior Learning Credit (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3285"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit for Military Training, Experience and Coursework"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3315"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Internship Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3320"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Classification based on Hours Completed"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3340"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Dean's List and President's List"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3350"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Standing: Good Standing and Probation"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3365"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Non-Academic Dismissal from Academic Units"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3370"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Fresh Start Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3375"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Second Start Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Undergraduate Academic Standing (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3380"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Religious Excused Absences"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3404"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Required Advisor Approval for Registration Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3405"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Auditing Classes"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3410"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Required Selective Service Registration for In-State Tuition"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3420"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Refunds and Refund Appeals"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3430"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Registration, Add, Attendance, and Administrative Drop Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3435"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Credit Hour Maximums"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Course Drops and Repeats (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3510"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Withdrawal Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Course Drops and Repeats (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3520"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Repeats and Replacement"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3601"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Semester Credit Hours Required to meet Degree Requirements"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3620"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Requirements and Residency for an Undergraduate Degree"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3625"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Substitutions to Accommodate Disabilities"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3630"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Multiple Undergraduate Degrees"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3640"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduating with Latin Honors"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3660"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Posthumous Degrees and Recognitions"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3670"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Honorary Degree"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Degree and Program Completion (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3685"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Degree Application and Commencement Participation"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3710"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3720"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code of Student Conduct"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 3000: Students"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student-Athletes (Series 3000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3810"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Student-Athlete Compensation for Use of Name, Image, and Likeness"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admission (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5010"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Categories of Admission"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admission (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5020"
+        },
+        "title": {
+          "type": "literal",
+          "value": "General Requirements for Graduate Admission"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admission (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5040"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Admission of Students with Three-Year Bachelor’s Degrees"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admission (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5070"
+        },
+        "title": {
+          "type": "literal",
+          "value": "International Students"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Admission (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5080"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Petition for Graduate Admission"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5101"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Assistantships and Scholarships"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5110"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Types of Appointments: Graduate Assistantships and Scholarships"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5120"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Assistants"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5130"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Scholarships"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5140"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Council Scholarships"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Assistantships & Scholarships (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5150"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Fee Remission for Graduate Research Assistants"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5220"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Procedure for Subsequent Registration"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5240"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Audit"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5250"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Full-Time Status"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5270"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Continuing Registration"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5310"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Grading Standards for Dual Listed Courses"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5320"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Retroactive Graduate Credit"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5330"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Credit for Undergraduates"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5340"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5345"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Credit By Examination"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5350"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Non-Contact Course Credit"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5360"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Repeats"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5370"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Standards"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Credit, Grades and Graduation (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5380"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Residence Requirements"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5420"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Advisor-Advisee Interaction"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5430"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Responsibility for Research Project Grading"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5440"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Monitoring of Graduate Student Progress"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5450"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Program Handbooks and Guidelines"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5460"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Program Communications"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Graduate Advising (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5470"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Program of Study"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5515"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Thesis"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5520"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Time Limit for Master's Degrees"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5530"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Credit Hour Requirement for Master's Degrees"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5560"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Second Master's Degree"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5570"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Dual Master's Degree Programs"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Requirements for Master's Degrees (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5580"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Fresh Start Policy"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Post-Master's Level Degree Programs (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5610"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Regulations for Post-Master's Degree Programs"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Doctoral Requirements (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5720"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Requirements Specific to Doctoral Degrees"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Doctoral Requirements (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5740"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Transfer Credit (Doctoral)"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Certificate Programs (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5810"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Standards for Graduate Certificate Programs"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Certificate Programs (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5820"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Credit Hour Residency Requirement for Graduate Certificate Programs"
+        }
+      },
+      {
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 5000: Graduate Students and Programs"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Certificate Programs (Series 5000)"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5830"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Graduate Microcredentials"
+        }
+      }
+    ],
+    "count": 89
+  },
+  {
+    "id": "CQ12",
+    "question": "Which university policy governs a specific procedural topic (academic integrity, course registration, tuition refunds, FERPA/student privacy)?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?topic ?number ?title ?categoryLabel WHERE {\n  VALUES (?topic ?pattern) {\n    (\"academic integrity\"     \"integrity\")\n    (\"course registration\"    \"^Registration|Course Registration\")\n    (\"tuition refunds\"        \"refund\")\n    (\"FERPA / student privacy\" \"FERPA|privacy\")\n  }\n  ?policy a wsu:Policy ;\n          wsu:hasPolicyNumber ?number ;\n          rdfs:label ?title .\n  OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }\n  FILTER(REGEX(?title, ?pattern, \"i\") || REGEX(COALESCE(?categoryLabel, \"\"), ?pattern, \"i\"))\n} ORDER BY ?topic xsd:integer(?number)",
+    "variables": [
+      "topic",
+      "number",
+      "title",
+      "categoryLabel"
+    ],
+    "bindings": [
+      {
+        "topic": {
+          "type": "literal",
+          "value": "FERPA / student privacy"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3010"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Student Privacy and Release of Educational Records - FERPA"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Federal and State Regulations (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "academic integrity"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3710"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "academic integrity"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3720"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code of Student Conduct"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3404"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Required Advisor Approval for Registration Policy"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3405"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Auditing Classes"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3410"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Required Selective Service Registration for In-State Tuition"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3420"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Refunds and Refund Appeals"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3430"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Registration, Add, Attendance, and Administrative Drop Policy"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3435"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Credit Hour Maximums"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5220"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Procedure for Subsequent Registration"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5240"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Course Audit"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5250"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Full-Time Status"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "course registration"
+        },
+        "number": {
+          "type": "literal",
+          "value": "5270"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Continuing Registration"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 5000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "tuition refunds"
+        },
+        "number": {
+          "type": "literal",
+          "value": "3420"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Refunds and Refund Appeals"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Registration (Series 3000)"
+        }
+      },
+      {
+        "topic": {
+          "type": "literal",
+          "value": "tuition refunds"
+        },
+        "number": {
+          "type": "literal",
+          "value": "14510"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Tuition and Fee Refunds for MD Program"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine (Series 14000)"
+        }
+      }
+    ],
+    "count": 15
+  },
+  {
+    "id": "CQ13",
+    "question": "Which policies apply specifically to graduate students, undergraduate students, or the Boonshoft School of Medicine MD program?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?population (COUNT(?policy) AS ?numPolicies)\n       (GROUP_CONCAT(CONCAT(?number, \" \", ?title); separator=\" | \") AS ?policies)\nWHERE {\n  VALUES ?population { \"Undergraduate\" \"Graduate\" \"MDProgram\" }\n  ?policy wsu:appliesToPopulation ?population ;\n          wsu:hasPolicyNumber ?number ;\n          rdfs:label ?title .\n} GROUP BY ?population\n  ORDER BY ?population",
+    "variables": [
+      "population",
+      "numPolicies",
+      "policies"
+    ],
+    "bindings": [
+      {
+        "population": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "numPolicies": {
+          "type": "literal",
+          "value": "42",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "policies": {
+          "type": "literal",
+          "value": "5010 Categories of Admission | 5020 General Requirements for Graduate Admission | 5040 Admission of Students with Three-Year Bachelor’s Degrees | 5070 International Students | 5080 Petition for Graduate Admission | 5101 Graduate Assistantships and Scholarships | 5110 Types of Appointments: Graduate Assistantships and Scholarships | 5120 Graduate Assistants | 5130 Graduate Scholarships | 5140 Graduate Council Scholarships | 5150 Fee Remission for Graduate Research Assistants | 5220 Procedure for Subsequent Registration | 5240 Course Audit | 5250 Full-Time Status | 5270 Continuing Registration | 5310 Grading Standards for Dual Listed Courses | 5320 Retroactive Graduate Credit | 5330 Graduate Credit for Undergraduates | 5340 Transfer Credit | 5345 Credit By Examination | 5350 Non-Contact Course Credit | 5360 Course Repeats | 5370 Academic Standards | 5380 Residence Requirements | 5420 Advisor-Advisee Interaction | 5430 Responsibility for Research Project Grading | 5440 Monitoring of Graduate Student Progress | 5450 Program Handbooks and Guidelines | 5460 Graduate Program Communications | 5470 Program of Study | 5515 Thesis | 5520 Time Limit for Master's Degrees | 5530 Credit Hour Requirement for Master's Degrees | 5560 Second Master's Degree | 5570 Dual Master's Degree Programs | 5580 Fresh Start Policy | 5610 Regulations for Post-Master's Degree Programs | 5720 Requirements Specific to Doctoral Degrees | 5740 Transfer Credit (Doctoral) | 5810 Academic Standards for Graduate Certificate Programs | 5820 Credit Hour Residency Requirement for Graduate Certificate Programs | 5830 Graduate Microcredentials"
+        }
+      },
+      {
+        "population": {
+          "type": "literal",
+          "value": "MDProgram"
+        },
+        "numPolicies": {
+          "type": "literal",
+          "value": "7",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "policies": {
+          "type": "literal",
+          "value": "14410 MD Program Academic Standing | 14440 MD Program Duty Hours | 14450 MD Program Assessment Timeliness | 14460 MD Program USMLE Timing Requirements | 14470 MD Program Immunization Requirements | 14480 MD Program Leaves of Absence | 14510 Tuition and Fee Refunds for MD Program"
+        }
+      },
+      {
+        "population": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "numPolicies": {
+          "type": "literal",
+          "value": "15",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "policies": {
+          "type": "literal",
+          "value": "3110 Undergraduate Degree-Seeking Admissions | 3170 Second Undergraduate Degree Admissions | 3120 Undergraduate Non-Degree Seeking Admissions Policy | 3315 Internship Policy | 3320 Academic Classification based on Hours Completed | 3340 Dean's List and President's List | 3350 Academic Standing: Good Standing and Probation | 3365 Non-Academic Dismissal from Academic Units | 3370 Fresh Start Policy | 3375 Second Start Policy | 3380 Religious Excused Absences | 3620 Requirements and Residency for an Undergraduate Degree | 3630 Multiple Undergraduate Degrees | 4090 Undergraduate Petitions | 5330 Graduate Credit for Undergraduates"
+        }
+      }
+    ],
+    "count": 3
+  },
+  {
+    "id": "CQ14",
+    "question": "When was each policy most recently updated, and which policies were revised most recently?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?number ?title ?lastUpdated WHERE {\n  ?policy a wsu:Policy ;\n          wsu:hasPolicyNumber ?number ;\n          rdfs:label ?title ;\n          wsu:lastUpdated ?lastUpdated .\n} ORDER BY DESC(?lastUpdated)\n  LIMIT 10",
+    "variables": [
+      "number",
+      "title",
+      "lastUpdated"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ15",
+    "question": "What student services are available to WSU students, which office administers each, and which campus do campus-specific services apply to?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?serviceLabel ?officeLabel ?campusLabel WHERE {\n  ?service a wsu:StudentService ; rdfs:label ?serviceLabel .\n  OPTIONAL { ?service wsu:administeredBy/rdfs:label ?officeLabel }\n  OPTIONAL { ?service wsu:appliesToCampus/rdfs:label ?campusLabel }\n} ORDER BY ?campusLabel ?serviceLabel",
+    "variables": [
+      "serviceLabel",
+      "officeLabel",
+      "campusLabel"
+    ],
+    "bindings": [
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Academic Advising"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Academic Success Centers"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Admissions (Graduate)"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Admissions (Undergraduate)"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Bursar"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Career Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Community Standards and Student Conduct"
+        },
+        "officeLabel": {
+          "type": "literal",
+          "value": "Office of Community Standards and Student Conduct"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Computing and Telecommunication Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Counseling and Wellness Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Dining Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Disability Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Division of Student Success"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Enrollment Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Financial Aid"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Foundation Studies"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Math Learning Center"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Parking and Transportation"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Police Department"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Print Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "ROTC, Air Force"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "ROTC, Army"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Raider Cares and Mental Health Emergencies"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Registrar"
+        },
+        "officeLabel": {
+          "type": "literal",
+          "value": "Office of the Registrar"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Residence Life and Housing"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Student Advocacy and Wellness"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Student Health Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Student Union Administrative Office"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Transfer Center"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Tutoring Services"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "University Center for International Education"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "University Honors Program"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "University Libraries"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "University Writing Center"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Veteran and Military Center"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Voter Registration"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Wright State Bookstore"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Academic Advising, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Career Services, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Disability Services, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Enrollment Services, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Housing, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Student Services, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      },
+      {
+        "serviceLabel": {
+          "type": "literal",
+          "value": "Student Success Center, Lake Campus"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "Lake Campus"
+        }
+      }
+    ],
+    "count": 43
+  },
+  {
+    "id": "CQ16",
+    "question": "What policies govern student conduct, student organizations, and general campus life (code of conduct, hazing, posting, alcohol, firearms, and similar)?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT DISTINCT ?number ?title ?categoryLabel ?governedEntity WHERE {\n  {\n    ?policy a wsu:Policy ; wsu:belongsToCategory ?cat .\n    ?cat rdfs:label ?categoryLabel .\n    FILTER(REGEX(?categoryLabel, \"^Student Conduct|^Communications and Access|^Regulations \\\\(Series 7000\\\\)\"))\n  } UNION {\n    ?policy a wsu:Policy ; rdfs:label ?t .\n    FILTER(REGEX(?t, \"Student Conduct|Hazing|Posting|Alcohol|Expressive|Harassment\", \"i\"))\n    OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }\n  } UNION {\n    ?entity a wsu:StudentOrganization ; wsu:governedByPolicy ?policy ; rdfs:label ?governedEntity .\n    OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }\n  }\n  ?policy wsu:hasPolicyNumber ?number ; rdfs:label ?title .\n} ORDER BY xsd:integer(?number)",
+    "variables": [
+      "number",
+      "title",
+      "categoryLabel",
+      "governedEntity"
+    ],
+    "bindings": [
+      {
+        "number": {
+          "type": "literal",
+          "value": "1260"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Expressive Activity; Free Speech"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Principles and Values (Series 1000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "1270"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Sex/Gender-Based Harassment, Discrimination, and Sexual Misconduct Policy"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Principles and Values (Series 1000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "1290"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Hazing"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Principles and Values (Series 1000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "3710"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "3720"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Code of Student Conduct"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity (Series 3000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7110"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Solicitations, Distributions, and Postings"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Communications and Access (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7120"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Bulletin Boards, Signs, and Posting"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Communications and Access (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7130"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Keys and Locks"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Communications and Access (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7210"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Firearms, Deadly Weapons, Explosives or Dangerous Ordnances Policy"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Regulations (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7230"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Tobacco Free Policy"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Regulations (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7240"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Self-Balancing Personal Scooter Ban"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Regulations (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "7250"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Prohibition of Camping on University Property"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Regulations (Series 7000)"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "8001"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Discrimination and Harassment Based on Protected Class"
+        }
+      },
+      {
+        "number": {
+          "type": "literal",
+          "value": "9710"
+        },
+        "title": {
+          "type": "literal",
+          "value": "Alcohol Consumption on University Property"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Hospitality Services/Food (Series 9000)"
+        }
+      }
+    ],
+    "count": 14
+  },
+  {
+    "id": "CQ17",
+    "question": "What is the tuition rate for each student category (level, residency, cohort), and which college or program does it apply to?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?levelLabel ?cohortLabel ?residencyLabel ?rateLabel ?collegeLabel\n       ?ratePerSemester ?ratePerCreditHour\nWHERE {\n  ?rate a wsu:TuitionRate ;\n        rdfs:label ?rateLabel ;\n        wsu:appliesToLevel/rdfs:label ?levelLabel ;\n        wsu:appliesToCohort/rdfs:label ?cohortLabel ;\n        wsu:appliesToResidency/rdfs:label ?residencyLabel .\n  OPTIONAL { ?rate wsu:associatedWithCollege/rdfs:label ?collegeLabel }\n  OPTIONAL { ?rate wsu:ratePerSemester ?ratePerSemester }\n  OPTIONAL { ?rate wsu:ratePerCreditHour ?ratePerCreditHour }\n} ORDER BY ?levelLabel ?cohortLabel ?rateLabel ?residencyLabel",
+    "variables": [
+      "levelLabel",
+      "cohortLabel",
+      "residencyLabel",
+      "rateLabel",
+      "collegeLabel",
+      "ratePerSemester",
+      "ratePerCreditHour"
+    ],
+    "bindings": [
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science Tuition (all programs) 2026–27, Non-Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science Tuition (all programs) 2026–27, Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics Tuition (selected programs) 2026–27, Non-Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics Tuition (selected programs) 2026–27, Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Doctor of Nursing Practice Tuition (11 or more hours) 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Doctor of Nursing Practice Tuition (11 or more hours) 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Graduate Tuition 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "12824.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1188.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Graduate Tuition 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "7580.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "700.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Nursing (M.S.) Tuition 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Nursing (M.S.) Tuition 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Pharmacology and Toxicology (M.S.) Tuition 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Pharmacology and Toxicology (M.S.) Tuition 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Public Health (M.P.H.) Tuition 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Public Health (M.P.H.) Tuition 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business Tuition (all programs) 2026–27, Non-Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "13900.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1288.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business Tuition (all programs) 2026–27, Ohio Resident"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "Raj Soin College of Business"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "8656.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "800.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "School of Professional Psychology Tuition (11 or more hours) 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "18048.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1676.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Graduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "School of Professional Psychology Tuition (11 or more hours) 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "11213.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1039.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Professional"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine Tuition for M1, M2, and M4 (11 or more hours) 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "40761.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Professional"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine Tuition for M1, M2, and M4 (11 or more hours) 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "24465.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Professional"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine Tuition for M3 (11 or more hours) 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "48915.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Professional"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Graduate and Professional 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine Tuition for M3 (11 or more hours) 2026–27, Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "32619.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "10068.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "918.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Commuting)"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27, Ohio Resident (Commuting)"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "4722.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "426.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Living on Campus)"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Non-Guarantee 2026–27, Ohio Resident (Living on Campus)"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "4722.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "426.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27, Non-Ohio Resident"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "11431.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "1038.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Commuting)"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27, Ohio Resident (Commuting)"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "6085.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "546.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      },
+      {
+        "levelLabel": {
+          "type": "literal",
+          "value": "Undergraduate"
+        },
+        "cohortLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27"
+        },
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Living on Campus)"
+        },
+        "rateLabel": {
+          "type": "literal",
+          "value": "Undergraduate Wright Guarantee 2026–27, Ohio Resident (Living on Campus)"
+        },
+        "ratePerSemester": {
+          "type": "literal",
+          "value": "6085.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "ratePerCreditHour": {
+          "type": "literal",
+          "value": "546.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        }
+      }
+    ],
+    "count": 28
+  },
+  {
+    "id": "CQ18",
+    "question": "What additional costs are bundled with tuition under the Wright Guarantee 2026–27 cohort, and how do total costs compare across residency and commuter/on-campus categories?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?residencyLabel ?tuitionPerSemester\n       (GROUP_CONCAT(?componentLabel; separator=\" | \") AS ?costComponents)\n       ?estimatedTotals\nWHERE {\n  ?rate a wsu:TuitionRate ;\n        wsu:appliesToCohort :Cohort_WrightGuarantee_2026_27 ;\n        wsu:appliesToResidency/rdfs:label ?residencyLabel ;\n        wsu:ratePerSemester ?tuitionPerSemester .\n  OPTIONAL { ?rate wsu:hasCostComponent/rdfs:label ?componentLabel }\n  OPTIONAL { ?rate rdfs:comment ?estimatedTotals }\n} GROUP BY ?residencyLabel ?tuitionPerSemester ?estimatedTotals\n  ORDER BY ?tuitionPerSemester ?residencyLabel",
+    "variables": [
+      "residencyLabel",
+      "tuitionPerSemester",
+      "costComponents",
+      "estimatedTotals"
+    ],
+    "bindings": [
+      {
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Commuting)"
+        },
+        "tuitionPerSemester": {
+          "type": "literal",
+          "value": "6085.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "costComponents": {
+          "type": "literal",
+          "value": "Required Fees, Wright Guarantee 2026–27: $233.50 per semester"
+        },
+        "estimatedTotals": {
+          "type": "literal",
+          "value": "Estimated total cost: $6,318.50 for one semester; $12,637.00 for two semesters (fall and spring)."
+        }
+      },
+      {
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Ohio Resident (Living on Campus)"
+        },
+        "tuitionPerSemester": {
+          "type": "literal",
+          "value": "6085.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "costComponents": {
+          "type": "literal",
+          "value": "Campus Housing (Woods Double), Wright Guarantee 2026–27: $2,878 per semester | Meals (Gold Campus Dining), Wright Guarantee 2026–27: $2,000 per semester | Activity/Communications/Hospitality Fees, Wright Guarantee 2026–27: $463 per semester | Required Fees, Wright Guarantee 2026–27: $233.50 per semester"
+        },
+        "estimatedTotals": {
+          "type": "literal",
+          "value": "Estimated total cost: $11,659.50 for one semester; $23,319.00 for two semesters (fall and spring)."
+        }
+      },
+      {
+        "residencyLabel": {
+          "type": "literal",
+          "value": "Non-Ohio Resident"
+        },
+        "tuitionPerSemester": {
+          "type": "literal",
+          "value": "11431.00",
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal"
+        },
+        "costComponents": {
+          "type": "literal",
+          "value": "Campus Housing (Woods Double), Wright Guarantee 2026–27: $2,878 per semester | Meals (Gold Campus Dining), Wright Guarantee 2026–27: $2,000 per semester | Activity/Communications/Hospitality Fees, Wright Guarantee 2026–27: $463 per semester | Required Fees, Wright Guarantee 2026–27: $233.50 per semester"
+        },
+        "estimatedTotals": {
+          "type": "literal",
+          "value": "Estimated total cost: $17,005.50 for one semester; $34,011.00 for two semesters (fall and spring). Non-Ohio resident portion of tuition ($5,346 or $492/hour) is not guaranteed."
+        }
+      }
+    ],
+    "count": 3
+  },
+  {
+    "id": "CQ19",
+    "question": "What research units exist at WSU, which college (or parent unit) does each belong to, and how much research output is associated with each?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?unitLabel ?collegeLabel\n       (GROUP_CONCAT(DISTINCT COALESCE(?parentLabel, \"\"); separator=\" | \") AS ?parentUnits)\n       (COUNT(DISTINCT ?output) AS ?numOutputs)\n       (GROUP_CONCAT(DISTINCT COALESCE(?outputType, \"\"); separator=\" | \") AS ?outputTypes)\nWHERE {\n  ?unit a wsu:ResearchUnit ; rdfs:label ?unitLabel .\n  OPTIONAL { ?unit wsu:associatedWithCollege/rdfs:label ?collegeLabel }\n  OPTIONAL { ?unit wsu:isPartOf/rdfs:label ?parentLabel }\n  OPTIONAL {\n    ?unit wsu:produces ?output .\n    OPTIONAL { ?output wsu:outputType ?outputType }\n  }\n} GROUP BY ?unitLabel ?collegeLabel\n  ORDER BY ?collegeLabel ?unitLabel",
+    "variables": [
+      "unitLabel",
+      "collegeLabel",
+      "parentUnits",
+      "numOutputs",
+      "outputTypes"
+    ],
+    "bindings": [
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Dermatology"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Economics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Finance, Accountancy, Management Information Systems, and Economics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Emergency Medicine"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Family Medicine"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Finance and Financial Services"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Finance, Accountancy, Management Information Systems, and Economics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Geriatrics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Health and Exercise Science"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Health and Exercise Sciences"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Human Services Department"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Social Work and Human Services"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Internal Medicine"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Management and International Business"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Management, Human Resources & International Business"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Marketing & Entrepreneurship"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Supply Chain Management, Marketing, and Management"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Medical Education"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Military & Veteran Affairs"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Nursing"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Nursing"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Obstetrics and Gynecology (OB/GYN)"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Orthopedic and Plastic Surgery"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Pediatrics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Pharmacology and Toxicology"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Population and Public Health Sciences"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Psychiatry"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Social Work Department"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "School of Social Work and Human Services"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Surgery"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biomedical, Industrial, and Human Factors Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Computer Science and Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Electrical Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Mechanical and Materials Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biochemistry and Molecular Biology"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine | College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biological Sciences"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biomedical Sciences Ph.D. Program"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Chemistry"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Mathematics and Statistics"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Neuroscience, Cell Biology, and Physiology (NCBP)"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "Boonshoft School of Medicine | College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Physics"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Psychology"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "parentUnits": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        },
+        "numOutputs": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "outputTypes": {
+          "type": "literal",
+          "value": ""
+        }
+      }
+    ],
+    "count": 34
+  },
+  {
+    "id": "CQ20",
+    "question": "What is the step-by-step graduate admission procedure, what requirements and milestones lead to graduation, and which university policy governs each item?",
+    "query": "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\nPREFIX wsu:  <https://example.org/wsu-ontology#>\nPREFIX :     <https://example.org/wsu-data/>\n\nSELECT ?stage ?seq ?itemLabel ?detail ?policyNumber ?policyTitle WHERE {\n  {\n    SELECT ?stage ?item (COUNT(DISTINCT ?earlier) + 1 AS ?seq) WHERE {\n      :Procedure_GraduateDegreeAdmission wsu:hasStep ?item ;\n                                         rdfs:label ?stage .\n      OPTIONAL { ?earlier wsu:precedesStep+ ?item }\n    } GROUP BY ?stage ?item\n  } UNION {\n    ?item a wsu:DegreeRequirement .\n    BIND(\"Degree requirement\" AS ?stage)\n  } UNION {\n    ?item a wsu:AcademicMilestone .\n    BIND(\"Academic milestone\" AS ?stage)\n  }\n  ?item rdfs:label ?itemLabel .\n  OPTIONAL { ?item rdfs:comment ?comment }\n  OPTIONAL { ?item wsu:hasFee ?fee }\n  BIND(IF(BOUND(?fee), CONCAT(\"Fee: $\", STR(?fee), \". \", COALESCE(?comment, \"\")), COALESCE(?comment, \"\")) AS ?detail)\n  OPTIONAL {\n    ?item wsu:governedByPolicy ?policy .\n    ?policy wsu:hasPolicyNumber ?policyNumber ; rdfs:label ?policyTitle .\n  }\n} ORDER BY DESC(?stage = \"Admission Procedure for Graduate Degree Status\") ?stage ?seq ?itemLabel",
+    "variables": [
+      "stage",
+      "seq",
+      "itemLabel",
+      "detail",
+      "policyNumber",
+      "policyTitle"
+    ],
+    "bindings": [
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "1",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 1: Submit application"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Submit a completed graduate admission application via the online portal. Applications and all supporting credentials should be received at least four weeks before registration for the starting semester; some programs have earlier deadlines."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "2",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 2: Request official transcripts"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Request that registrars of all previously attended colleges or universities send one official transcript directly to the Graduate School."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "3",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 3: Pay application fee"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Pay a $40 (domestic) or $70 (international) non-refundable application fee; McNair Scholars may have the fee waived with a Certification of Participation."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "4",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 4: Submit test scores and supporting materials"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Submit test scores and/or documents such as letters of recommendation or statements of purpose if the program requires them, and meet any additional program requirements."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "5",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 5: Graduate School file review"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "The Graduate School reviews the file, calculates undergraduate and graduate GPAs, and sends the application to the program for an admission recommendation."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "6",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 6: Program recommendation"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "The program reviews the applicant's academic credentials and sends an admission recommendation to the Graduate School."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "7",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 7: Associate Director determination"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "The Associate Director of Graduate Admissions reviews the recommendation and credentials and determines whether Graduate School admission requirements have been met."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "8",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 8: Notification"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "The Graduate School notifies the applicant by letter of the admission decision."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "seq": {
+          "type": "literal",
+          "value": "9",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status, step 9: Petition for admission"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "An applicant who does not meet minimum requirements, or a dismissed student, may petition for admission per Policy 5080."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5080"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Petition for Graduate Admission"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Administrative Adjustment Petition"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Petitions involving university or administrative errors or requiring a retroactive administrative drop for verified non-attendance, which the University Registrar may approve."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Comprehensive Examination"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Required by some programs; may be written, oral, or both. Arrangements should be made at least three weeks before the examination date."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Graduate Academic Petition"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Petition to the Graduate School requesting a waiver of a policy governing graduate students; should include the program advisor's recommendation (and the instructor's for course-related petitions). Results may not be further appealed."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Graduate Admission Petition"
+        },
+        "detail": {
+          "type": "literal",
+          "value": ""
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5080"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Petition for Graduate Admission"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Graduate Re-admission Petition"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Only for use by those who have been academically dismissed."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5080"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Petition for Graduate Admission"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Graduation Application"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Fee: $35.00. Submitted online only through WINGS Express; the $35 fee applies each time an application is submitted, and a separate application is required for each degree."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Academic milestone"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Thesis or Dissertation"
+        },
+        "detail": {
+          "type": "literal",
+          "value": ""
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5515"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Thesis"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Approved program of study on file"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Have a current and approved program of study on file in the Graduate School and/or a current degree audit in uAchieve."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5470"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Program of Study"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Approved thesis/dissertation (if required)"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Present one copy of an approved thesis/dissertation for approval of the dean of the Graduate School and submission to OhioLINK (Policy 5515.1.9)."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5515"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Thesis"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "At least 50 percent of credit hours at Wright State"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Complete at least 50 percent of the credit hours at Wright State."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5380"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Residence Requirements"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Doctoral degree time limit"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Complete doctoral program requirements within ten years (Policy 5720.3)."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5720"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Requirements Specific to Doctoral Degrees"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Final comprehensive examination (if required)"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Complete a final comprehensive examination if required by the program."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Foreign language reading knowledge (if required)"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "A master's candidate may be required to demonstrate reading knowledge of a foreign language, by examination or college credit, depending on the program."
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Graduate certificate time limit"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Complete graduate certificate requirements within five years (Policy 5810.2)."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5810"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Academic Standards for Graduate Certificate Programs"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Master's degree time limit"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Complete master's program requirements within seven calendar years."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5520"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Time Limit for Master's Degrees"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Minimum cumulative GPA of 3.0"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Achieve a cumulative GPA of at least 3.0 in all courses taken for graduate credit; no more than six semester hours of 'C' may be applied to degree requirements (Policy 5370.1)."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5370"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Academic Standards"
+        }
+      },
+      {
+        "stage": {
+          "type": "literal",
+          "value": "Degree requirement"
+        },
+        "itemLabel": {
+          "type": "literal",
+          "value": "Registration during thesis/dissertation defense term"
+        },
+        "detail": {
+          "type": "literal",
+          "value": "Register for at least one graduate credit hour during the term in which a thesis/dissertation is defended."
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "5270"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Continuing Registration"
+        }
+      }
+    ],
+    "count": 26
+  }
+]

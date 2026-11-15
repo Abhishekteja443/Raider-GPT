@@ -1,0 +1,2896 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix wsu:  <https://example.org/wsu-ontology#> .
+@prefix :     <https://example.org/wsu-data/> .
+
+# Instance data for the Wright State University Ontology (https://example.org/wsu-ontology).
+# Schema terms (wsu:) are reused unchanged; instances use the default (:) namespace.
+# Facts are drawn from the combined wright.edu source pages (_combined.md).
+
+<https://example.org/wsu-data> a owl:Ontology ;
+    rdfs:label "Wright State University knowledge graph" ;
+    owl:imports <https://example.org/wsu-ontology> .
+
+
+# ==== University ====
+
+:WSU a wsu:University ;
+    rdfs:label "Wright State University" ;
+    rdfs:comment "National public university in Dayton, Ohio, named for aviation pioneers Orville and Wilbur Wright. Source states 'more than 11,000 students' (not an exact enrollment count)." ;
+    wsu:numPrograms "315"^^xsd:integer ;
+    wsu:numColleges "6"^^xsd:integer ;
+    wsu:partneredWith :PremierHealth ;
+    wsu:receivedRecognition :Recognition_CWURGlobal2000_2026 .
+
+:PremierHealth a wsu:Organization ;
+    rdfs:label "Premier Health" ;
+    rdfs:comment "Health system with a longstanding working relationship with Wright State to advance academic medicine, community health, and workforce development." .
+
+
+# ==== Colleges, schools, and branch campus ====
+
+:RSCOB a wsu:College ;
+    rdfs:label "Raj Soin College of Business" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_100RikeHall ;
+    wsu:hasContact :Contact_RSCOB ;
+    wsu:hasSocialMedia :RSCOB_Facebook, :RSCOB_Instagram, :RSCOB_LinkedIn ;
+    rdfs:comment "Offers bachelor's and master's degrees, certificates, and continuing education; curriculum emphasizes real-world experiences and entrepreneurship." ;
+    wsu:accreditedBy :AACSBAccreditation ;
+    wsu:receivedRecognition :Recognition_PrincetonReviewBestBusinessSchool, :Recognition_USNewsBestOnlineBusinessProgramMasters .
+
+:CECS a wsu:College ;
+    rdfs:label "College of Engineering and Computer Science" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_405RussEngineeringCenter ;
+    wsu:hasContact :Contact_CECS ;
+    wsu:hasSocialMedia :CECS_Facebook, :CECS_Instagram, :CECS_LinkedIn ;
+    rdfs:comment "Offers bachelor's, master's, and doctoral degrees and undergraduate and graduate certificates; many bachelor's programs have a 4+1 bachelor's/master's option." .
+
+:GraduateSchool a wsu:School ;
+    rdfs:label "School of Graduate Studies" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_350UniversityHall ;
+    wsu:hasContact :Contact_GraduateSchool ;
+    rdfs:comment "Also referred to as the Graduate School. Offers graduate assistantships and fellowships." .
+
+:CHEHS a wsu:College ;
+    rdfs:label "College of Health, Education, and Human Services" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_163MillettHall ;
+    wsu:hasContact :Contact_CHEHS ;
+    wsu:hasSocialMedia :CHEHS_Facebook, :CHEHS_Instagram ;
+    rdfs:comment "Launched in Fall Semester 2021; programs organized into four schools." .
+
+:LakeCampus a wsu:BranchCampus ;
+    rdfs:label "Lake Campus" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_7600LakeCampusDriveCelinaOH45822 ;
+    wsu:hasContact :Contact_LakeCampus ;
+    wsu:hasSocialMedia :LakeCampus_Facebook, :LakeCampus_Instagram, :LakeCampus_LinkedIn, :LakeCampus_X ;
+    rdfs:comment "173-acre campus on the shore of Grand Lake St. Marys, a 90-minute drive from the Dayton campus. The Western Ohio College in Celina became a Wright State branch campus in 1969; it now has four buildings." .
+
+:CoLA a wsu:College ;
+    rdfs:label "College of Liberal Arts" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_114AllynHall ;
+    wsu:hasContact :Contact_CoLA ;
+    wsu:hasSocialMedia :CoLA_Facebook, :CoLA_Instagram, :CoLA_LinkedIn, :CoLA_Snapchat, :CoLA_X ;
+    rdfs:comment "Offers bachelor's and master's degrees and undergraduate and graduate certificates in the social sciences, humanities, fine and performing arts, and interdisciplinary programs." .
+
+:BSOM a wsu:School ;
+    rdfs:label "Boonshoft School of Medicine" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_290WhiteHall ;
+    wsu:hasContact :Contact_BSOM ;
+    wsu:hasSocialMedia :BSOM_Facebook, :BSOM_Instagram, :BSOM_LinkedIn, :BSOM_X, :BSOM_YouTube ;
+    rdfs:comment "Medical school offering education leading to the M.D., M.D./Ph.D., M.D./M.B.A., or M.D./M.P.H. degree, residency and fellowship training, and master's programs; affiliated with major teaching hospitals in the greater Dayton area." ;
+    wsu:offersCredential :Degree_MedicineMD, :Degree_MedicineAndPhilosophyMDPhD, :Degree_MedicineAndBusinessAdministrationMDMBA, :Degree_MedicineAndPublicHealthMDMPH .
+
+:CoSM a wsu:College ;
+    rdfs:label "College of Science and Mathematics" ;
+    wsu:isPartOf :WSU ;
+    wsu:locatedIn :Loc_134OelmanHall ;
+    wsu:hasContact :Contact_CoSM ;
+    wsu:hasSocialMedia :CoSM_Facebook, :CoSM_Instagram, :CoSM_LinkedIn ;
+    rdfs:comment "Offers bachelor's, master's, and doctoral programs and undergraduate and graduate certificates; largest departments are biological sciences and psychology." ;
+    wsu:offersCredential :Degree_AnatomyMS, :Degree_BiochemistryAndMolecularBiologyMS, :Degree_MicrobiologyAndImmunologyMS, :Degree_PhysiologyAndNeuroscienceMS, :Degree_BiomedicalSciencesPhD, :Degree_EnvironmentalSciencesPhD, :Degree_HumanFactorsIndustrialPsychologyPhD, :Degree_InterdisciplinaryAppliedScienceAndMathematicsPhD .
+
+
+# ==== Locations ====
+
+:Loc_100RikeHall a wsu:Location ;
+    rdfs:label "100 Rike Hall" .
+
+:Loc_405RussEngineeringCenter a wsu:Location ;
+    rdfs:label "405 Russ Engineering Center" .
+
+:Loc_350UniversityHall a wsu:Location ;
+    rdfs:label "350 University Hall" .
+
+:Loc_163MillettHall a wsu:Location ;
+    rdfs:label "163 Millett Hall" .
+
+:Loc_7600LakeCampusDriveCelinaOH45822 a wsu:Location ;
+    rdfs:label "7600 Lake Campus Drive, Celina, OH 45822, United States" .
+
+:Loc_114AllynHall a wsu:Location ;
+    rdfs:label "114 Allyn Hall" .
+
+:Loc_290WhiteHall a wsu:Location ;
+    rdfs:label "290 White Hall" .
+
+:Loc_134OelmanHall a wsu:Location ;
+    rdfs:label "134 Oelman Hall" .
+
+:Loc_250RikeHall a wsu:Location ;
+    rdfs:label "250 Rike Hall" .
+
+:Loc_110RikeHall a wsu:Location ;
+    rdfs:label "110 Rike Hall" .
+
+:Loc_254RikeHall a wsu:Location ;
+    rdfs:label "254 Rike Hall" .
+
+:Loc_207RussEngineeringCenter a wsu:Location ;
+    rdfs:label "207 Russ Engineering Center" .
+
+:Loc_303RussEngineeringCenter a wsu:Location ;
+    rdfs:label "303 Russ Engineering Center" .
+
+:Loc_311RussEngineeringCenter a wsu:Location ;
+    rdfs:label "311 Russ Engineering Center" .
+
+:Loc_209RussEngineeringCenter a wsu:Location ;
+    rdfs:label "209 Russ Engineering Center" .
+
+:Loc_140MillettHall a wsu:Location ;
+    rdfs:label "140 Millett Hall" .
+
+:Loc_470MillettHall a wsu:Location ;
+    rdfs:label "470 Millett Hall" .
+
+:Loc_270MillettHall a wsu:Location ;
+    rdfs:label "270 Millett Hall" .
+
+:Loc_225MillettHall a wsu:Location ;
+    rdfs:label "225 Millett Hall" .
+
+:Loc_120MillettHall a wsu:Location ;
+    rdfs:label "120 Millett Hall" .
+
+:Loc_325MillettHall a wsu:Location ;
+    rdfs:label "325 Millett Hall" .
+
+:Loc_370MillettHall a wsu:Location ;
+    rdfs:label "370 Millett Hall" .
+
+:Loc_112AllynHall a wsu:Location ;
+    rdfs:label "112 Allyn Hall" .
+
+:Loc_088CreativeArtsCenter a wsu:Location ;
+    rdfs:label "088 Creative Arts Center" .
+
+:Loc_415AllynHall a wsu:Location ;
+    rdfs:label "415 Allyn Hall" .
+
+:Loc_366AllynHall a wsu:Location ;
+    rdfs:label "366 Allyn Hall" .
+
+:Loc_378AllynHall a wsu:Location ;
+    rdfs:label "378 Allyn Hall" .
+
+:Loc_140CreativeArtsCenter a wsu:Location ;
+    rdfs:label "140 Creative Arts Center" .
+
+:Loc_108StudentUnion a wsu:Location ;
+    rdfs:label "108 Student Union" .
+
+:Loc_2555UniversityBlvdSuite210FairbornOH45324 a wsu:Location ;
+    rdfs:label "2555 University Blvd., Suite 210, Fairborn, OH 45324, United States" .
+
+:Loc_162MatthewODiggsIIILaboratory a wsu:Location ;
+    rdfs:label "162 Matthew O. Diggs III Laboratory" .
+
+:Loc_MiamiValleyHospital30EAppleStSuite6257DaytonOH45409 a wsu:Location ;
+    rdfs:label "Miami Valley Hospital, 30 E. Apple St., Suite 6257, Dayton, OH 45409, United States" .
+
+:Loc_725UniversityBlvdFairbornOH45324 a wsu:Location ;
+    rdfs:label "725 University Blvd, Fairborn, OH 45324, United States" .
+
+:Loc_2555UniversityBlvd110DaytonOH45324 a wsu:Location ;
+    rdfs:label "2555 University Blvd., 110, Dayton, OH 45324, United States" .
+
+:Loc_30EAppleStSuite6258DaytonOH45409 a wsu:Location ;
+    rdfs:label "30 E. Apple St., Suite 6258, Dayton, OH 45409, United States" .
+
+:Loc_725UniversityBlvdDaytonOH454350001 a wsu:Location ;
+    rdfs:label "725 University Blvd, Dayton, OH 45435-0001, United States" .
+
+:Loc_30EAppleStSuite3290DaytonOH45409 a wsu:Location ;
+    rdfs:label "30 E. Apple St., Suite 3290, Dayton, OH 45409, United States" .
+
+:Loc_143BiologicalSciencesII a wsu:Location ;
+    rdfs:label "143 Biological Sciences II" .
+
+:Loc_1WyomingStreetBG020DaytonOH45409 a wsu:Location ;
+    rdfs:label "1 Wyoming Street, BG 020, Dayton, OH 45409, United States" .
+
+:Loc_30EAppleStreetSuite2200DaytonOH45409 a wsu:Location ;
+    rdfs:label "30 E. Apple Street, Suite 2200, Dayton, OH 45409, United States" .
+
+:Loc_GandhiMedicalEducationCenter140WhiteHall a wsu:Location ;
+    rdfs:label "Gandhi Medical Education Center, 140 White Hall" .
+
+:Loc_OneChildrenSPlazaDaytonOH45404 a wsu:Location ;
+    rdfs:label "One Children's Plaza, Dayton, OH 45404, United States" .
+
+:Loc_207HealthSciencesBldg a wsu:Location ;
+    rdfs:label "207 Health Sciences Bldg." .
+
+:Loc_725UniversityBlvdDaytonOH45324 a wsu:Location ;
+    rdfs:label "725 University Blvd., Dayton, OH 45324, United States" .
+
+:Loc_235ABiologicalSciences a wsu:Location ;
+    rdfs:label "235A Biological Sciences" .
+
+:Loc_114BiologicalSciencesI a wsu:Location ;
+    rdfs:label "114 Biological Sciences I" .
+
+:Loc_202OelmanHall a wsu:Location ;
+    rdfs:label "202 Oelman Hall" .
+
+:Loc_204BBiologicalSciencesI a wsu:Location ;
+    rdfs:label "204B Biological Sciences I" .
+
+:Loc_016AMathematicalAndMicrobiologySciences a wsu:Location ;
+    rdfs:label "016A Mathematical & Microbiology Sciences" .
+
+:Loc_248FawcettHall a wsu:Location ;
+    rdfs:label "248 Fawcett Hall" .
+
+:Loc_335FawcettHall a wsu:Location ;
+    rdfs:label "335 Fawcett Hall" .
+
+:Loc_106OelmanHall a wsu:Location ;
+    rdfs:label "106 Oelman Hall" .
+
+:Loc_3640ColonelGlennHighwayDaytonOhio45435 a wsu:Location ;
+    rdfs:label "3640 Colonel Glenn Highway, Dayton, Ohio 45435" .
+
+
+# ==== Contact points ====
+
+:Contact_RSCOB a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2437" ;
+    wsu:hasFax "937-775-3545" ;
+    wsu:hasEmail "rscob-admin@wright.edu" .
+
+:Contact_CECS a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-5001" ;
+    wsu:hasFax "937-775-5009" ;
+    wsu:hasEmail "cecs-dean@wright.edu" .
+
+:Contact_GraduateSchool a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2976" ;
+    wsu:hasFax "937-775-2453" ;
+    wsu:hasEmail "wsugrad@wright.edu" .
+
+:Contact_CHEHS a wsu:ContactPoint ;
+    wsu:hasPhone "Dean's Office: 937-775-2821" ;
+    wsu:hasFax "937-775-4855" ;
+    wsu:hasEmail "cheh-info@wright.edu" .
+
+:Contact_LakeCampus a wsu:ContactPoint ;
+    wsu:hasPhone "419-586-0300", "Toll-free: 1-800-237-1477" .
+
+:Contact_CoLA a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2225", "Advising: 937-775-2601" ;
+    wsu:hasEmail "liberalarts@wright.edu" .
+
+:Contact_BSOM a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2161" .
+
+:Contact_CoSM a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2611" ;
+    wsu:hasFax "937-775-3068" ;
+    wsu:hasEmail "cosm@wright.edu" .
+
+:Contact_SchoolOfFAME a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2895" .
+
+:Contact_MBAProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2437" ;
+    wsu:hasEmail "mba@wright.edu" .
+
+:Contact_OfficeOfCareerManagement a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2437" ;
+    wsu:hasEmail "rscob-careers@wright.edu" .
+
+:Contact_SchoolOfSCMM a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3047" ;
+    wsu:hasEmail "rscob-scmm@wright.edu" .
+
+:Contact_BIHFE a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-5044" ;
+    wsu:hasFax "937-775-7364" ;
+    wsu:hasEmail "bie-dept@wright.edu" .
+
+:Contact_ComputerScienceAndEngineering a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-5131" ;
+    wsu:hasFax "937-775-5133" ;
+    wsu:hasEmail "cse-dept@wright.edu" .
+
+:Contact_ElectricalEngineering a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-5037" ;
+    wsu:hasFax "937-775-3936" ;
+    wsu:hasEmail "elec-egr@wright.edu" .
+
+:Contact_MechanicalAndMaterialsEngineering a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-5040" ;
+    wsu:hasEmail "mme-dept@wright.edu" .
+
+:Contact_CHEHSAcademicAdvising a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3086" ;
+    wsu:hasFax "937-775-2099" ;
+    wsu:hasEmail "cheh-advisors@wright.edu" .
+
+:Contact_LSEODepartment a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2516" ;
+    wsu:hasEmail "cheh-ldr@wright.edu" .
+
+:Contact_TeacherEducationDepartment a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2677" ;
+    wsu:hasEmail "cheh-ted@wright.edu" .
+
+:Contact_SchoolOfHealthAndExerciseSciences a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3223" ;
+    wsu:hasEmail "cheh-knh@wright.edu" .
+
+:Contact_SchoolOfNursing a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3132" ;
+    wsu:hasFax "937-775-4571" ;
+    wsu:hasEmail "nursing@wright.edu" .
+
+:Contact_OfficeOfPartnershipsAndFieldExperiences a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2107" ;
+    wsu:hasFax "937-775-2099" ;
+    wsu:hasEmail "cehs-opfe@wright.edu" .
+
+:Contact_SchoolOfProfessionalPsychology a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3490" ;
+    wsu:hasFax "937-775-3434" ;
+    wsu:hasEmail "sopp@wright.edu" .
+
+:Contact_HumanServicesDepartment a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2075" ;
+    wsu:hasFax "937-775-2042" ;
+    wsu:hasEmail "cheh-hs@wright.edu" .
+
+:Contact_SocialWorkDepartment a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2751" ;
+    wsu:hasFax "937-775-2042" ;
+    wsu:hasEmail "social_work@wright.edu" .
+
+:Contact_CoLAAdvising a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2601" ;
+    wsu:hasEmail "cola-advisors@wright.edu" .
+
+:Contact_SchoolOfFineAndPerformingArts a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2346" ;
+    wsu:hasEmail "SoFPA@wright.edu" .
+
+:Contact_SchoolOfHumanitiesAndCulturalStudies a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3136" ;
+    wsu:hasEmail "sohcs@wright.edu" .
+
+:Contact_PreLawAdvising a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2942" ;
+    wsu:hasEmail "sean.wilson@wright.edu" .
+
+:Contact_SchoolOfSocialSciencesAndInternationalStudies a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2942" ;
+    wsu:hasEmail "sossis@wright.edu" .
+
+:Contact_TheatreProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2346" .
+
+:Contact_WorkforceDevelopment a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3638" .
+
+:Contact_DivisionOfAerospaceMedicine a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-1430" .
+
+:Contact_BiochemistryAndMolecularBiology a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3041" ;
+    wsu:hasFax "937-775-3730" ;
+    wsu:hasEmail "bmb@wright.edu" .
+
+:Contact_ClinicalNeurosciences a wsu:ContactPoint ;
+    wsu:hasPhone "937-208-4384" ;
+    wsu:hasEmail "bsom-neurores@wright.edu" .
+
+:Contact_Dermatology a wsu:ContactPoint ;
+    wsu:hasPhone "937-245-7254" ;
+    wsu:hasFax "937-245-7927" .
+
+:Contact_EmergencyMedicine a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-8188" ;
+    wsu:hasFax "937-775-8187" ;
+    wsu:hasEmail "som_em@wright.edu" .
+
+:Contact_GeneralSurgery a wsu:ContactPoint ;
+    wsu:hasPhone "937-245-7227" ;
+    wsu:hasEmail "randy.woods@wright.edu" .
+
+:Contact_GlobalHealthScholarsProgram a wsu:ContactPoint ;
+    wsu:hasEmail "samantha.holcombe@wright.edu" .
+
+:Contact_InternalMedicine a wsu:ContactPoint ;
+    wsu:hasPhone "937-208-2866" .
+
+:Contact_MedicalEducation a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2161" ;
+    wsu:hasFax "937-775-2842" ;
+    wsu:hasEmail "laurie.bankston@wright.edu" .
+
+:Contact_NCBP a wsu:ContactPoint ;
+    wsu:hasPhone "Administrative: 937-775-2360", "Academic: 937-775-4496" ;
+    wsu:hasFax "937-775-3391" ;
+    wsu:hasEmail "ncbp@wright.edu" .
+
+:Contact_ObstetricsAndGynecology a wsu:ContactPoint ;
+    wsu:hasPhone "937-208-2301" ;
+    wsu:hasFax "937-222-7255" ;
+    wsu:hasEmail "joan.mangan-boles@wright.edu" .
+
+:Contact_OrthopedicAndPlasticSurgery a wsu:ContactPoint ;
+    wsu:hasPhone "937-208-4955" ;
+    wsu:hasFax "937-208-2920" .
+
+:Contact_Pathology a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2625" ;
+    wsu:hasFax "937-775-2633" ;
+    wsu:hasEmail "som_pathology@wright.edu" .
+
+:Contact_Pediatrics a wsu:ContactPoint ;
+    wsu:hasPhone "937-641-5605" ;
+    wsu:hasEmail "saeeds@childrensdayton.org" .
+
+:Contact_PharmacologyAndToxicology a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2463" ;
+    wsu:hasFax "937-775-7221" ;
+    wsu:hasEmail "pharmtox@wright.edu" .
+
+:Contact_PhysicianLeadershipDevelopmentProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2161" ;
+    wsu:hasEmail "bsom-pldp@wright.edu" .
+
+:Contact_PopulationAndPublicHealthSciences a wsu:ContactPoint ;
+    wsu:hasFax "937-775-1495" ;
+    wsu:hasEmail "sara.paton@wright.edu" .
+
+:Contact_Psychiatry a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-7792" ;
+    wsu:hasFax "937-775-8100" ;
+    wsu:hasEmail "darla.todd@wright.edu" .
+
+:Contact_MasterOfPublicHealthProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-1427" ;
+    wsu:hasFax "937-775-1495" ;
+    wsu:hasEmail "lori.metivier@wright.edu" .
+
+:Contact_BiologicalSciences a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2655" ;
+    wsu:hasFax "937-775-3320" ;
+    wsu:hasEmail "biology@wright.edu" .
+
+:Contact_BiomedicalSciences a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2504" ;
+    wsu:hasEmail "director.bms@wright.edu" .
+
+:Contact_Chemistry a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2855" ;
+    wsu:hasFax "937-775-2717" ;
+    wsu:hasEmail "chemistry@wright.edu" .
+
+:Contact_EnvironmentalSciencesPhDProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3192" ;
+    wsu:hasFax "937-775-3485" ;
+    wsu:hasEmail "director.envsci@wright.edu" .
+
+:Contact_HFIOPhDProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3563" ;
+    wsu:hasFax "937-775-3347" ;
+    wsu:hasEmail "scott.watamaniuk@wright.edu" .
+
+:Contact_IASMPhDProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3273" ;
+    wsu:hasFax "937-775-3485" ;
+    wsu:hasEmail "amit.sharma@wright.edu" .
+
+:Contact_MicrobiologyAndImmunologyMSProgram a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-4993" ;
+    wsu:hasFax "937-775-3391" ;
+    wsu:hasEmail "dawn.wooley@wright.edu" .
+
+:Contact_Physics a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2955" ;
+    wsu:hasEmail "physics@wright.edu" .
+
+:Contact_Psychology a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-2391" ;
+    wsu:hasFax "937-775-3347" ;
+    wsu:hasEmail "psych@wright.edu" .
+
+:Contact_CoSMUndergraduateAcademicAdvising a wsu:ContactPoint ;
+    wsu:hasPhone "937-775-3180" ;
+    wsu:hasEmail "cosm-advisors@wright.edu" .
+
+
+# ==== Social media channels ====
+
+:RSCOB_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:RSCOB_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:RSCOB_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:CECS_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:CECS_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:CECS_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:CHEHS_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:CHEHS_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:LakeCampus_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:LakeCampus_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:LakeCampus_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:LakeCampus_X a wsu:SocialMediaChannel ;
+    rdfs:label "X (formerly Twitter)" .
+
+:CoLA_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:CoLA_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:CoLA_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:CoLA_Snapchat a wsu:SocialMediaChannel ;
+    rdfs:label "Snapchat" .
+
+:CoLA_X a wsu:SocialMediaChannel ;
+    rdfs:label "X (formerly Twitter)" .
+
+:BSOM_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:BSOM_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:BSOM_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:BSOM_X a wsu:SocialMediaChannel ;
+    rdfs:label "X (formerly Twitter)" .
+
+:BSOM_YouTube a wsu:SocialMediaChannel ;
+    rdfs:label "YouTube" .
+
+:CoSM_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:CoSM_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:CoSM_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:SchoolOfHumanitiesAndCulturalStudies_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:SchoolOfHumanitiesAndCulturalStudies_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:SchoolOfSocialSciencesAndInternationalStudies_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:SchoolOfSocialSciencesAndInternationalStudies_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:SchoolOfSocialSciencesAndInternationalStudies_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:TheatreProgram_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:GeneralSurgery_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:GeneralSurgery_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:GeneralSurgery_X a wsu:SocialMediaChannel ;
+    rdfs:label "X (formerly Twitter)" .
+
+:GlobalHealthScholarsProgram_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:GlobalHealthScholarsProgram_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:PharmacologyAndToxicology_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:PharmacologyAndToxicology_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:PharmacologyAndToxicology_LinkedIn a wsu:SocialMediaChannel ;
+    rdfs:label "LinkedIn" .
+
+:PopulationAndPublicHealthSciences_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:PopulationAndPublicHealthSciences_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:Psychiatry_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:BiologicalSciences_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+:Psychology_Facebook a wsu:SocialMediaChannel ;
+    rdfs:label "Facebook" .
+
+:Psychology_Instagram a wsu:SocialMediaChannel ;
+    rdfs:label "Instagram" .
+
+
+# ==== Business units ====
+
+:SchoolOfFAME a wsu:School ;
+    rdfs:label "School of Finance, Accountancy, Management Information Systems, and Economics" ;
+    wsu:isPartOf :RSCOB ;
+    wsu:locatedIn :Loc_250RikeHall ;
+    wsu:hasContact :Contact_SchoolOfFAME .
+
+:MBAProgram a wsu:AcademicUnit ;
+    rdfs:label "M.B.A. Program" ;
+    wsu:isPartOf :RSCOB ;
+    wsu:locatedIn :Loc_110RikeHall ;
+    wsu:hasContact :Contact_MBAProgram ;
+    wsu:receivedRecognition :Recognition_PrincetonReviewBestOnCampusMBA_2027 ;
+    wsu:offersCredential :Degree_BusinessMBA .
+
+:OfficeOfCareerManagement a wsu:Office ;
+    rdfs:label "Office of Career Management" ;
+    wsu:isPartOf :RSCOB ;
+    wsu:locatedIn :Loc_100RikeHall ;
+    wsu:hasContact :Contact_OfficeOfCareerManagement .
+
+:SchoolOfSCMM a wsu:School ;
+    rdfs:label "School of Supply Chain Management, Marketing, and Management" ;
+    wsu:isPartOf :RSCOB ;
+    wsu:locatedIn :Loc_254RikeHall ;
+    wsu:hasContact :Contact_SchoolOfSCMM .
+
+:ManagementHumanResourcesAndInternationalBusiness a wsu:AcademicUnit ;
+    rdfs:label "Management, Human Resources & International Business" .
+
+
+# ==== Engineering and Computer Science units ====
+
+:BIHFE a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Biomedical, Industrial, and Human Factors Engineering" ;
+    wsu:isPartOf :CECS ;
+    wsu:locatedIn :Loc_207RussEngineeringCenter ;
+    wsu:hasContact :Contact_BIHFE ;
+    wsu:associatedWithCollege :CECS .
+
+:ComputerScienceAndEngineering a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Computer Science and Engineering" ;
+    wsu:isPartOf :CECS ;
+    wsu:locatedIn :Loc_303RussEngineeringCenter ;
+    wsu:hasContact :Contact_ComputerScienceAndEngineering ;
+    wsu:associatedWithCollege :CECS .
+
+:ElectricalEngineering a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Electrical Engineering" ;
+    wsu:isPartOf :CECS ;
+    wsu:locatedIn :Loc_311RussEngineeringCenter ;
+    wsu:hasContact :Contact_ElectricalEngineering ;
+    wsu:associatedWithCollege :CECS .
+
+:MechanicalAndMaterialsEngineering a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Mechanical and Materials Engineering" ;
+    wsu:isPartOf :CECS ;
+    wsu:locatedIn :Loc_209RussEngineeringCenter ;
+    wsu:hasContact :Contact_MechanicalAndMaterialsEngineering ;
+    wsu:associatedWithCollege :CECS .
+
+
+# ==== Health, Education, and Human Services units ====
+
+:CHEHSAcademicAdvising a wsu:Office ;
+    rdfs:label "Academic Advising, College of Health, Education, and Human Services" ;
+    wsu:isPartOf :CHEHS ;
+    wsu:locatedIn :Loc_140MillettHall ;
+    wsu:hasContact :Contact_CHEHSAcademicAdvising .
+
+:SchoolOfEducationAndLeadership a wsu:School ;
+    rdfs:label "School of Education and Leadership" ;
+    wsu:isPartOf :CHEHS .
+
+:LSEODepartment a wsu:Department ;
+    rdfs:label "Leadership Studies in Education and Organizations Department" ;
+    wsu:isPartOf :SchoolOfEducationAndLeadership ;
+    wsu:locatedIn :Loc_470MillettHall ;
+    wsu:hasContact :Contact_LSEODepartment .
+
+:TeacherEducationDepartment a wsu:Department ;
+    rdfs:label "Teacher Education Department" ;
+    wsu:isPartOf :SchoolOfEducationAndLeadership ;
+    wsu:locatedIn :Loc_470MillettHall ;
+    wsu:hasContact :Contact_TeacherEducationDepartment .
+
+:SchoolOfHealthAndExerciseSciences a wsu:School ;
+    rdfs:label "School of Health and Exercise Sciences" ;
+    wsu:isPartOf :CHEHS ;
+    wsu:locatedIn :Loc_270MillettHall ;
+    wsu:hasContact :Contact_SchoolOfHealthAndExerciseSciences .
+
+:SchoolOfNursingKinesiologyAndHealthSciences a wsu:School ;
+    rdfs:label "School of Nursing, Kinesiology, and Health Sciences" ;
+    wsu:isPartOf :CHEHS ;
+    rdfs:comment "Named on the Colleges and Schools page as one of the four CHEHS schools; the directory instead lists a School of Nursing and a School of Health and Exercise Sciences." .
+
+:SchoolOfNursing a wsu:School ;
+    rdfs:label "School of Nursing" ;
+    wsu:isPartOf :CHEHS ;
+    wsu:locatedIn :Loc_225MillettHall ;
+    wsu:hasContact :Contact_SchoolOfNursing .
+
+:OfficeOfPartnershipsAndFieldExperiences a wsu:Office ;
+    rdfs:label "Office of Partnerships and Field Experiences" ;
+    wsu:isPartOf :CHEHS ;
+    wsu:locatedIn :Loc_120MillettHall ;
+    wsu:hasContact :Contact_OfficeOfPartnershipsAndFieldExperiences .
+
+:SchoolOfProfessionalPsychology a wsu:School ;
+    rdfs:label "School of Professional Psychology" ;
+    wsu:isPartOf :CHEHS ;
+    wsu:locatedIn :Loc_325MillettHall ;
+    wsu:hasContact :Contact_SchoolOfProfessionalPsychology .
+
+:SchoolOfSocialWorkAndHumanServices a wsu:School ;
+    rdfs:label "School of Social Work and Human Services" ;
+    wsu:isPartOf :CHEHS .
+
+:HumanServicesDepartment a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Human Services Department" ;
+    wsu:isPartOf :SchoolOfSocialWorkAndHumanServices ;
+    wsu:locatedIn :Loc_370MillettHall ;
+    wsu:hasContact :Contact_HumanServicesDepartment .
+
+:SocialWorkDepartment a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Social Work Department" ;
+    wsu:isPartOf :SchoolOfSocialWorkAndHumanServices ;
+    wsu:locatedIn :Loc_370MillettHall ;
+    wsu:hasContact :Contact_SocialWorkDepartment .
+
+
+# ==== Liberal Arts units ====
+
+:CoLAAdvising a wsu:Office ;
+    rdfs:label "Advising, College of Liberal Arts" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_112AllynHall ;
+    wsu:hasContact :Contact_CoLAAdvising .
+
+:SchoolOfFineAndPerformingArts a wsu:School ;
+    rdfs:label "School of Fine and Performing Arts" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_088CreativeArtsCenter ;
+    wsu:hasContact :Contact_SchoolOfFineAndPerformingArts .
+
+:SchoolOfHumanitiesAndCulturalStudies a wsu:School ;
+    rdfs:label "School of Humanities and Cultural Studies" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_415AllynHall ;
+    wsu:hasContact :Contact_SchoolOfHumanitiesAndCulturalStudies ;
+    wsu:hasSocialMedia :SchoolOfHumanitiesAndCulturalStudies_Facebook, :SchoolOfHumanitiesAndCulturalStudies_Instagram .
+
+:PreLawAdvising a wsu:Office ;
+    rdfs:label "Pre-Law Advising" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_366AllynHall ;
+    wsu:hasContact :Contact_PreLawAdvising .
+
+:SchoolOfSocialSciencesAndInternationalStudies a wsu:School ;
+    rdfs:label "School of Social Sciences and International Studies" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_378AllynHall ;
+    wsu:hasContact :Contact_SchoolOfSocialSciencesAndInternationalStudies ;
+    wsu:hasSocialMedia :SchoolOfSocialSciencesAndInternationalStudies_Facebook, :SchoolOfSocialSciencesAndInternationalStudies_Instagram, :SchoolOfSocialSciencesAndInternationalStudies_LinkedIn .
+
+:TheatreProgram a wsu:AcademicUnit ;
+    rdfs:label "Theatre Program" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_140CreativeArtsCenter ;
+    wsu:hasContact :Contact_TheatreProgram ;
+    wsu:hasSocialMedia :TheatreProgram_Instagram .
+
+:WorkforceDevelopment a wsu:Office ;
+    rdfs:label "Workforce Development" ;
+    wsu:isPartOf :CoLA ;
+    wsu:locatedIn :Loc_108StudentUnion ;
+    wsu:hasContact :Contact_WorkforceDevelopment .
+
+
+# ==== Boonshoft School of Medicine units ====
+
+:DivisionOfAerospaceMedicine a wsu:AcademicUnit ;
+    rdfs:label "Division of Aerospace Medicine" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_2555UniversityBlvdSuite210FairbornOH45324 ;
+    wsu:hasContact :Contact_DivisionOfAerospaceMedicine .
+
+:BiochemistryAndMolecularBiology a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Biochemistry and Molecular Biology" ;
+    wsu:isPartOf :BSOM, :CoSM ;
+    wsu:locatedIn :Loc_162MatthewODiggsIIILaboratory ;
+    wsu:hasContact :Contact_BiochemistryAndMolecularBiology ;
+    wsu:associatedWithCollege :CoSM .
+
+:ClinicalNeurosciences a wsu:Department ;
+    rdfs:label "Clinical Neurosciences" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_MiamiValleyHospital30EAppleStSuite6257DaytonOH45409 ;
+    wsu:hasContact :Contact_ClinicalNeurosciences .
+
+:Dermatology a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Dermatology" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_725UniversityBlvdFairbornOH45324 ;
+    wsu:hasContact :Contact_Dermatology .
+
+:EmergencyMedicine a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Emergency Medicine" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_2555UniversityBlvd110DaytonOH45324 ;
+    wsu:hasContact :Contact_EmergencyMedicine .
+
+:GeneralSurgery a wsu:AcademicUnit ;
+    rdfs:label "General Surgery" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_30EAppleStSuite6258DaytonOH45409 ;
+    wsu:hasContact :Contact_GeneralSurgery ;
+    wsu:hasSocialMedia :GeneralSurgery_Facebook, :GeneralSurgery_Instagram, :GeneralSurgery_X .
+
+:GlobalHealthScholarsProgram a wsu:AcademicUnit ;
+    rdfs:label "Global Health Scholars Program" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_725UniversityBlvdDaytonOH454350001 ;
+    wsu:hasContact :Contact_GlobalHealthScholarsProgram ;
+    wsu:hasSocialMedia :GlobalHealthScholarsProgram_Facebook, :GlobalHealthScholarsProgram_Instagram ;
+    rdfs:comment "Directory lists Samantha Holcombe as Program Coordinator." .
+
+:InternalMedicine a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Internal Medicine" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_30EAppleStSuite3290DaytonOH45409 ;
+    wsu:hasContact :Contact_InternalMedicine .
+
+:MedicalEducation a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Medical Education" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_290WhiteHall ;
+    wsu:hasContact :Contact_MedicalEducation .
+
+:NCBP a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Neuroscience, Cell Biology, and Physiology (NCBP)" ;
+    wsu:isPartOf :BSOM, :CoSM ;
+    wsu:locatedIn :Loc_143BiologicalSciencesII ;
+    wsu:hasContact :Contact_NCBP ;
+    wsu:associatedWithCollege :CoSM .
+
+:ObstetricsAndGynecology a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Obstetrics and Gynecology (OB/GYN)" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_1WyomingStreetBG020DaytonOH45409 ;
+    wsu:hasContact :Contact_ObstetricsAndGynecology .
+
+:OrthopedicAndPlasticSurgery a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Orthopedic and Plastic Surgery" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_30EAppleStreetSuite2200DaytonOH45409 ;
+    wsu:hasContact :Contact_OrthopedicAndPlasticSurgery .
+
+:Pathology a wsu:AcademicUnit ;
+    rdfs:label "Pathology" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_GandhiMedicalEducationCenter140WhiteHall ;
+    wsu:hasContact :Contact_Pathology .
+
+:Pediatrics a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Pediatrics" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_OneChildrenSPlazaDaytonOH45404 ;
+    wsu:hasContact :Contact_Pediatrics .
+
+:PharmacologyAndToxicology a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Pharmacology and Toxicology" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_207HealthSciencesBldg ;
+    wsu:hasContact :Contact_PharmacologyAndToxicology ;
+    wsu:hasSocialMedia :PharmacologyAndToxicology_Facebook, :PharmacologyAndToxicology_Instagram, :PharmacologyAndToxicology_LinkedIn .
+
+:PhysicianLeadershipDevelopmentProgram a wsu:AcademicUnit ;
+    rdfs:label "Physician Leadership Development Program" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_290WhiteHall ;
+    wsu:hasContact :Contact_PhysicianLeadershipDevelopmentProgram .
+
+:PopulationAndPublicHealthSciences a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Population and Public Health Sciences" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_225MillettHall ;
+    wsu:hasContact :Contact_PopulationAndPublicHealthSciences ;
+    wsu:hasSocialMedia :PopulationAndPublicHealthSciences_Facebook, :PopulationAndPublicHealthSciences_Instagram .
+
+:Psychiatry a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Psychiatry" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_725UniversityBlvdDaytonOH45324 ;
+    wsu:hasContact :Contact_Psychiatry ;
+    wsu:hasSocialMedia :Psychiatry_Instagram .
+
+:MasterOfPublicHealthProgram a wsu:AcademicUnit ;
+    rdfs:label "Master of Public Health Program" ;
+    wsu:isPartOf :BSOM ;
+    wsu:locatedIn :Loc_2555UniversityBlvdSuite210FairbornOH45324 ;
+    wsu:hasContact :Contact_MasterOfPublicHealthProgram ;
+    wsu:offersCredential :Degree_PublicHealthMPH .
+
+:FamilyMedicine a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Family Medicine" ;
+    wsu:isPartOf :BSOM .
+
+:Geriatrics a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Geriatrics" ;
+    wsu:isPartOf :BSOM .
+
+:MilitaryAndVeteranAffairs a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Military & Veteran Affairs" ;
+    wsu:isPartOf :BSOM .
+
+:Surgery a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Surgery" ;
+    wsu:isPartOf :BSOM .
+
+
+# ==== Science and Mathematics units ====
+
+:BiologicalSciences a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Biological Sciences" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_235ABiologicalSciences ;
+    wsu:hasContact :Contact_BiologicalSciences ;
+    wsu:hasSocialMedia :BiologicalSciences_Instagram ;
+    wsu:associatedWithCollege :CoSM .
+
+:BiomedicalSciences a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Biomedical Sciences Ph.D. Program" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_114BiologicalSciencesI ;
+    wsu:hasContact :Contact_BiomedicalSciences ;
+    rdfs:comment "Listed in the research portal as the department 'Biomedical Sciences'." ;
+    wsu:associatedWithCollege :CoSM ;
+    wsu:offersCredential :Degree_BiomedicalSciencesPhD .
+
+:Chemistry a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Chemistry" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_202OelmanHall ;
+    wsu:hasContact :Contact_Chemistry ;
+    wsu:associatedWithCollege :CoSM .
+
+:EnvironmentalSciencesPhDProgram a wsu:AcademicUnit ;
+    rdfs:label "Environmental Sciences Ph.D. Program" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_204BBiologicalSciencesI ;
+    wsu:hasContact :Contact_EnvironmentalSciencesPhDProgram ;
+    wsu:offersCredential :Degree_EnvironmentalSciencesPhD .
+
+:HFIOPhDProgram a wsu:AcademicUnit ;
+    rdfs:label "Human Factors and Industrial/Organizational Psychology Ph.D. Program" ;
+    wsu:isPartOf :CoSM ;
+    wsu:hasContact :Contact_HFIOPhDProgram ;
+    wsu:offersCredential :Degree_HumanFactorsIndustrialPsychologyPhD .
+
+:IASMPhDProgram a wsu:AcademicUnit ;
+    rdfs:label "Interdisciplinary Applied Science & Mathematics Ph.D. Program" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_114BiologicalSciencesI ;
+    wsu:hasContact :Contact_IASMPhDProgram ;
+    wsu:offersCredential :Degree_InterdisciplinaryAppliedScienceAndMathematicsPhD .
+
+:MicrobiologyAndImmunologyMSProgram a wsu:AcademicUnit ;
+    rdfs:label "Microbiology and Immunology M.S. Program" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_016AMathematicalAndMicrobiologySciences ;
+    wsu:hasContact :Contact_MicrobiologyAndImmunologyMSProgram ;
+    wsu:offersCredential :Degree_MicrobiologyAndImmunologyMS .
+
+:Physics a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Physics" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_248FawcettHall ;
+    wsu:hasContact :Contact_Physics ;
+    wsu:associatedWithCollege :CoSM .
+
+:Psychology a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Psychology" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_335FawcettHall ;
+    wsu:hasContact :Contact_Psychology ;
+    wsu:hasSocialMedia :Psychology_Facebook, :Psychology_Instagram ;
+    wsu:associatedWithCollege :CoSM .
+
+:CoSMUndergraduateAcademicAdvising a wsu:Office ;
+    rdfs:label "Undergraduate Academic Advising, Science and Mathematics" ;
+    wsu:isPartOf :CoSM ;
+    wsu:locatedIn :Loc_106OelmanHall ;
+    wsu:hasContact :Contact_CoSMUndergraduateAcademicAdvising .
+
+:MathematicsAndStatistics a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Mathematics and Statistics" ;
+    wsu:isPartOf :CoSM ;
+    wsu:associatedWithCollege :CoSM .
+
+
+# ==== Departments listed only in the research portal ====
+
+:Economics a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Economics" ;
+    wsu:isPartOf :SchoolOfFAME .
+
+:FinanceAndFinancialServices a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Finance and Financial Services" ;
+    wsu:isPartOf :SchoolOfFAME .
+
+:HealthAndExerciseScience a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Health and Exercise Science" ;
+    wsu:isPartOf :SchoolOfHealthAndExerciseSciences .
+
+:ManagementAndInternationalBusiness a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Management and International Business" ;
+    wsu:isPartOf :ManagementHumanResourcesAndInternationalBusiness .
+
+:MarketingAndEntrepreneurship a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Marketing & Entrepreneurship" ;
+    wsu:isPartOf :SchoolOfSCMM .
+
+:NursingDepartment a wsu:Department, wsu:ResearchUnit ;
+    rdfs:label "Nursing" ;
+    wsu:isPartOf :SchoolOfNursing .
+
+
+# ==== Centers ====
+
+:CenterForCivicsCultureAndWorkforceDevelopment a wsu:Center ;
+    rdfs:label "Center for Civics, Culture, and Workforce Development" ;
+    rdfs:comment "Directory contact email: jason.anderson@wright.edu." .
+
+:BrandeberryCareerDevelopmentCenter a wsu:Center ;
+    rdfs:label "Brandeberry Career Development Center" ;
+    rdfs:comment "Part of the College of Engineering and Computer Science. Directory: 280 Joshi Research Center; phone 937-775-4491; email mariann.boron@wright.edu." .
+
+:RobertAndElaineSteinGalleries a wsu:Center ;
+    rdfs:label "Robert and Elaine Stein Galleries" ;
+    rdfs:comment "Housed in the College of Liberal Arts; exhibits contemporary art and educational programs. Directory: 160 Creative Arts Center; phone 937-775-2973; email artgalleries@wright.edu; Facebook; Instagram." .
+
+:ClinicalTrialsResearchAlliance a wsu:Center ;
+    rdfs:label "Clinical Trials Research Alliance" ;
+    rdfs:comment "Listed under the Boonshoft School of Medicine. Directory: 4035 Colonel Glenn Hwy., Suite 230, Dayton, OH 45431; phone 937-245-7322; fax 937-705-1095; email jennifer.l.daniels@wright.edu." .
+
+:CenterForInterventionsTreatmentAndAddictionsResearch a wsu:Center ;
+    rdfs:label "Center for Interventions, Treatment and Addictions Research (CITAR)" ;
+    rdfs:comment "Listed under the Boonshoft School of Medicine. Directory: 2555 University Blvd. Suite 200, Dayton, OH 45324; phone 937-775-1300." .
+
+:MicroscopyCoreFacility a wsu:Center ;
+    rdfs:label "Microscopy Core Facility" ;
+    rdfs:comment "Listed under the Boonshoft School of Medicine. Directory: 294 & 298 Neuroscience Engineering Collaboration Building; phone Director 937-775-4692, Manager 937-775-3019; email david.ladle@wright.edu, hanna.gabriel@wright.edu." .
+
+:NeuroscienceInstitute a wsu:Center ;
+    rdfs:label "Neuroscience Institute, Wright State University & Premier Health" ;
+    rdfs:comment "Listed under the Boonshoft School of Medicine. Directory contact email: alicia.hendricks@wright.edu." .
+
+:CenterForGenomicsResearch a wsu:Center ;
+    rdfs:label "Center for Genomics Research" ;
+    rdfs:comment "Listed under the College of Science and Mathematics. Directory: 035 Diggs Laboratory; phone 937-775-4536; email michael.markey@wright.edu." .
+
+:StatisticalConsultingCenter a wsu:Center ;
+    rdfs:label "Statistical Consulting Center" ;
+    rdfs:comment "Directory: 130 Mathematics and Microbiological Sciences Building; phone 937-775-3370." .
+
+:CenterForFacultyExcellence a wsu:Center ;
+    rdfs:label "Center for Faculty Excellence" ;
+    rdfs:comment "Housed in the Faculty Affairs division of the Office of the Provost." .
+
+
+# ==== Offices ====
+
+:OfficeOfTheProvost a wsu:Office ;
+    rdfs:label "Office of the Provost" .
+
+:OfficeOfTheRegistrar a wsu:Office ;
+    rdfs:label "Office of the Registrar" ;
+    wsu:locatedIn :Loc_3640ColonelGlennHighwayDaytonOhio45435 .
+
+:OfficeOfTheDeanOfStudents a wsu:Office ;
+    rdfs:label "Office of the Dean of Students" ;
+    rdfs:comment "Addresses questions and concerns about the Student Handbook." .
+
+:OfficeOfCommunityStandardsAndStudentConduct a wsu:Office ;
+    rdfs:label "Office of Community Standards and Student Conduct" .
+
+:OfficeOfThePresident a wsu:Office ;
+    rdfs:label "Office of the President" .
+
+:OmbudsOffice a wsu:Office ;
+    rdfs:label "Ombuds Office" .
+
+:FacultyPresidentsOffice a wsu:Office ;
+    rdfs:label "Faculty President's Office" .
+
+
+# ==== Leadership, divisions, and people ====
+
+:Provost a wsu:LeadershipRole ;
+    rdfs:label "Provost" ;
+    wsu:hasScope "Chief academic officer of the university, responsible for academic affairs across the Dayton, Lake, and online campuses and programs; collaborates with the president and other stakeholders in setting overall academic priorities and strategies." ;
+    wsu:hasDivision :Division_AcademicAffairs, :Division_AdultAndOnlineLearning, :Division_AccreditationAndAssessment, :Division_FacultyAffairs, :Division_CurricularAndStrategicInitiatives, :Division_ResearchAndInnovation ;
+    wsu:oversees :RSCOB, :CECS, :GraduateSchool, :CHEHS, :LakeCampus, :CoLA, :BSOM, :CoSM .
+
+:Division_AcademicAffairs a wsu:ProvostDivision ;
+    rdfs:label "Academic Affairs" ;
+    wsu:providesFunction "Resources that enhance, empower, and support success in the classroom, including honors, and other educational programs." .
+
+:Division_AdultAndOnlineLearning a wsu:ProvostDivision ;
+    rdfs:label "Adult and Online Learning" ;
+    wsu:providesFunction "Gateway for academic and holistic success for nontraditional and remote learners." .
+
+:Division_AccreditationAndAssessment a wsu:ProvostDivision ;
+    rdfs:label "Accreditation and Assessment" ;
+    wsu:providesFunction "Resources for accreditation, academic program review, and student learning outcomes." .
+
+:Division_FacultyAffairs a wsu:ProvostDivision ;
+    rdfs:label "Faculty Affairs" ;
+    wsu:providesFunction "Home to the Center for Faculty Excellence, as well as faculty-specific documents, policies, forms, and other resources." .
+
+:Division_CurricularAndStrategicInitiatives a wsu:ProvostDivision ;
+    rdfs:label "Curricular and Strategic Initiatives" ;
+    wsu:providesFunction "Resources relating to the curriculum, as well as current projects underway to achieve and advance the university's mission." .
+
+:Division_ResearchAndInnovation a wsu:ProvostDivision ;
+    rdfs:label "Research and Innovation" ;
+    wsu:providesFunction "Resources and tools for the advancement of research and scholarly activities, as well as their compliance and the development of innovations." .
+
+:InterimDeanRajSoinCollegeOfBusiness a wsu:LeadershipRole ;
+    rdfs:label "Interim Dean, Raj Soin College of Business" ;
+    wsu:oversees :RSCOB .
+
+:UniversityLibrarian a wsu:LeadershipRole ;
+    rdfs:label "University Librarian" .
+
+:DonaldHopkins a wsu:Person ;
+    rdfs:label "Donald Hopkins" ;
+    wsu:holdsRole :InterimDeanRajSoinCollegeOfBusiness ;
+    rdfs:comment "Office of the Provost announcement: 'Donald Hopkins, Raj Soin College of Business Interim Dean, to Retire'." .
+
+:JaneWildermuth a wsu:Person ;
+    rdfs:label "Jane Wildermuth" ;
+    wsu:holdsRole :UniversityLibrarian ;
+    rdfs:comment "Office of the Provost announcement: 'Jane Wildermuth Named University Librarian'." .
+
+
+# ==== Organizations and committees ====
+
+:AAUPChapter a wsu:Committee ;
+    rdfs:label "American Association of University Professors (AAUP)" .
+
+:FacultySenate a wsu:Committee ;
+    rdfs:label "Faculty Senate" .
+
+:StaffSenate a wsu:Committee ;
+    rdfs:label "Staff Senate" .
+
+:UndergraduateCurriculumAndAcademicPolicyCommittee a wsu:Committee ;
+    rdfs:label "Undergraduate Curriculum and Academic Policy Committee" .
+
+:GraduateStudentAffairsCommittee a wsu:Committee ;
+    rdfs:label "Graduate Student Affairs Committee (GSAC)" ;
+    rdfs:comment "Adjudicates unresolved differences on graduate petitions between students, the college/school, and the Dean of the Graduate School." .
+
+:BoardOfTrustees a wsu:Committee ;
+    rdfs:label "Board of Trustees" ;
+    rdfs:comment "Determines graduate and professional tuition rates annually." .
+
+:StudentGovernmentAssociation a wsu:StudentOrganization ;
+    rdfs:label "Student Government Association" .
+
+
+# ==== Accreditation and recognition ====
+
+:AACSBAccreditation a wsu:Accreditation ;
+    rdfs:label "AACSB accreditation for business and accounting" ;
+    rdfs:comment "Granted by the Association to Advance Collegiate Schools of Business (AACSB), the leading association of business schools." .
+
+:Recognition_CWURGlobal2000_2026 a wsu:Recognition ;
+    rdfs:label "Top 7% of universities worldwide, 2026 Center for World University Rankings Global 2000" ;
+    rdfs:comment "Reported June 05, 2026." .
+
+:Recognition_PrincetonReviewBestOnCampusMBA_2027 a wsu:Recognition ;
+    rdfs:label "The Princeton Review Best On-Campus Programs (Best Business Schools for 2027)" ;
+    rdfs:comment "Reported August 31, 2026; based on survey data including career outcomes, admission rate, and academics." .
+
+:Recognition_PrincetonReviewBestBusinessSchool a wsu:Recognition ;
+    rdfs:label "The Princeton Review 'Best Business School'" .
+
+:Recognition_USNewsBestOnlineBusinessProgramMasters a wsu:Recognition ;
+    rdfs:label "U.S. News & World Report 'Best Online Business Program (Master's)'" .
+
+
+# ==== Announcements and news ====
+
+:Announcement_FurtherTogether_2026_09_16 a wsu:Announcement ;
+    rdfs:label "Further Together (September 16, 2026)" ;
+    rdfs:comment "Office of the Provost newsletter dated September 16, 2026." ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FurtherTogether_2026_09_09 a wsu:Announcement ;
+    rdfs:label "Further Together (September 9, 2026)" ;
+    rdfs:comment "Office of the Provost newsletter dated September 9, 2026." ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FurtherTogether_2026_08_26 a wsu:Announcement ;
+    rdfs:label "Further Together (August 26, 2026)" ;
+    rdfs:comment "Office of the Provost newsletter dated August 26, 2026." ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FurtherTogether_2026_08_19 a wsu:Announcement ;
+    rdfs:label "Further Together (August 19, 2026)" ;
+    rdfs:comment "Office of the Provost newsletter dated August 19, 2026." ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FurtherTogether_2026_02_25 a wsu:Announcement ;
+    rdfs:label "Further Together (February 25, 2026)" ;
+    rdfs:comment "Office of the Provost newsletter dated February 25, 2026." ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_HopkinsRetirement a wsu:Announcement ;
+    rdfs:label "OFFICIAL: Donald Hopkins, Raj Soin College of Business Interim Dean, to Retire" ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_StudentEvaluationChanges a wsu:Announcement ;
+    rdfs:label "OFFICIAL: Important changes to student evaluation process" ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FirstYearSeminarInstructors a wsu:Announcement ;
+    rdfs:label "OFFICIAL: Instructors needed for First Year Seminars this fall" ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_FacultyTeachingLoadRevisions a wsu:Announcement ;
+    rdfs:label "[OFFICIAL-L] Revisions to Faculty Teaching Load Policy" ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:Announcement_WildermuthUniversityLibrarian a wsu:Announcement ;
+    rdfs:label "[OFFICIAL-L] Jane Wildermuth Named University Librarian" ;
+    wsu:authoredBy :OfficeOfTheProvost .
+
+:News_ActiveDutyMilitaryScholarship a wsu:NewsArticle ;
+    rdfs:label "Wright State University launches new undergraduate scholarship for active-duty military" ;
+    rdfs:comment "June 10, 2025. Active-duty military members, activated Guard members and reservists can pursue a bachelor's degree with support from the new Active Duty Military Undergraduate Scholarship." ;
+    rdfs:seeAlso <https://webapp2.wright.edu/web1/newsroom/2025/06/10/wright-state-university-launches-new-undergraduate-scholarship-for-active-duty-military/> .
+
+:News_ScherzingerTonyAward a wsu:NewsArticle ;
+    rdfs:label "Wright State alum Nicole Scherzinger wins first Tony Award for starring role in 'Sunset Boulevard'" ;
+    rdfs:comment "June 9, 2025. Nicole Scherzinger, who studied musical theatre and acting at Wright State, received the Tony Award for best leading actress in a musical." ;
+    rdfs:seeAlso <https://webapp2.wright.edu/web1/newsroom/2025/06/09/wright-state-alum-nicole-scherzinger-wins-first-tony-award-for-sunset-boulevard-performance/> .
+
+:News_MediaHighlightsJune1to6 a wsu:NewsArticle ;
+    rdfs:label "Wright State media highlights, June 1–6" ;
+    rdfs:comment "June 6, 2025. Coverage of a historic NCAA upset, consumer behavior expertise, a new academic partnership in health care, and a semiconductor internship program." ;
+    rdfs:seeAlso <https://webapp2.wright.edu/web1/newsroom/2025/06/06/wright-state-media-highlights-june-1-6/> .
+
+:News_MBAPrincetonReview2026 a wsu:NewsArticle ;
+    rdfs:label "Wright State MBA earns national recognition as one of The Princeton Review's Best On-Campus Programs" ;
+    rdfs:comment "August 31, 2026." .
+
+:News_GlobalRankings2026 a wsu:NewsArticle ;
+    rdfs:label "Global rankings place Wright State among the world's top universities" ;
+    rdfs:comment "June 05, 2026." .
+
+
+# ==== Facts ====
+
+:Fact_NamedForWrightBrothers a wsu:Fact ;
+    rdfs:label "Named for the Wright brothers" ;
+    rdfs:comment "Wright State University was named to honor aviation pioneers Orville and Wilbur Wright, who invented the world's first successful airplane in their Dayton bicycle shop." .
+
+:Fact_PublicArt a wsu:Fact ;
+    rdfs:label "Public art on campus" ;
+    rdfs:comment "The Wright State campus features artistic pieces both in- and outdoors; more public art will be added as structures are renovated and new buildings constructed." .
+
+:Fact_TunnelSystem a wsu:Fact ;
+    rdfs:label "Pedestrian tunnel system" ;
+    rdfs:comment "Nearly two miles of tunnels (10,436 feet) beneath the Dayton campus link 21 of 22 buildings in the academic section; believed to be one of the most extensive collegiate pedestrian tunnel systems in the United States." .
+
+:Fact_CampusFacilities a wsu:Fact ;
+    rdfs:label "Campus facilities" ;
+    rdfs:comment "32 academic buildings on 730 acres across two campuses." .
+
+:Fact_AlumniNetwork a wsu:Fact ;
+    rdfs:label "Alumni network" ;
+    rdfs:comment "More than 111,000 Wright State alumni." .
+
+
+# ==== Policy series, categories, and policies ====
+
+:Policy_0001 a wsu:Policy ; rdfs:label "Policy on Policies" ; wsu:hasPolicyNumber "0001" .
+
+:Series_1000 a wsu:PolicySeries ;
+    rdfs:label "Series 1000: Organization, Mission and Values" .
+
+:Cat_1000_1 a wsu:PolicyCategory ;
+    rdfs:label "Organization (Series 1000)" .
+
+:Policy_1010 a wsu:Policy ; rdfs:label "Administrative Organization" ; wsu:hasPolicyNumber "1010" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_1 .
+:Policy_1020 a wsu:Policy ; rdfs:label "Academic Organization" ; wsu:hasPolicyNumber "1020" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_1 .
+:Policy_1030 a wsu:Policy ; rdfs:label "Reorganization" ; wsu:hasPolicyNumber "1030" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_1 .
+
+:Cat_1000_2 a wsu:PolicyCategory ;
+    rdfs:label "Mission and Vision (Series 1000)" .
+
+:Policy_1120 a wsu:Policy ; rdfs:label "Mission and Commitment Statements" ; wsu:hasPolicyNumber "1120" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_2 .
+:Policy_1130 a wsu:Policy ; rdfs:label "Wright State University Vision Statement" ; wsu:hasPolicyNumber "1130" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_2 .
+
+:Cat_1000_3 a wsu:PolicyCategory ;
+    rdfs:label "Principles and Values (Series 1000)" .
+
+:Policy_1210 a wsu:Policy ; rdfs:label "Ethics Policy" ; wsu:hasPolicyNumber "1210" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1220 a wsu:Policy ; rdfs:label "Academic Freedom and Professional Responsibilities" ; wsu:hasPolicyNumber "1220" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1235 a wsu:Policy ; rdfs:label "Notice of Non-Discrimination" ; wsu:hasPolicyNumber "1235" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1250 a wsu:Policy ; rdfs:label "Lobbying Registration and Reporting" ; wsu:hasPolicyNumber "1250" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1260 a wsu:Policy ; rdfs:label "Expressive Activity; Free Speech" ; wsu:hasPolicyNumber "1260" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1270 a wsu:Policy ; rdfs:label "Sex/Gender-Based Harassment, Discrimination, and Sexual Misconduct Policy" ; wsu:hasPolicyNumber "1270" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1280 a wsu:Policy ; rdfs:label "Non-Discrimination" ; wsu:hasPolicyNumber "1280" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1281 a wsu:Policy ; rdfs:label "Non-Retaliation Policy" ; wsu:hasPolicyNumber "1281" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1282 a wsu:Policy ; rdfs:label "Affirmations; Prohibited Acts" ; wsu:hasPolicyNumber "1282" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+:Policy_1290 a wsu:Policy ; rdfs:label "Hazing" ; wsu:hasPolicyNumber "1290" ; wsu:belongsToSeries :Series_1000 ; wsu:belongsToCategory :Cat_1000_3 .
+
+:Series_2000 a wsu:PolicySeries ;
+    rdfs:label "Series 2000: Faculty" .
+
+:Cat_2000_1 a wsu:PolicyCategory ;
+    rdfs:label "Faculty Rights and Responsibilities (Series 2000)" .
+
+:Policy_2010 a wsu:Policy ; rdfs:label "Faculty Constitution" ; wsu:hasPolicyNumber "2010" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2020 a wsu:Policy ; rdfs:label "Faculty Workload Policy" ; wsu:hasPolicyNumber "2020" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2025 a wsu:Policy ; rdfs:label "Textbook Selection" ; wsu:hasPolicyNumber "2025" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2030 a wsu:Policy ; rdfs:label "Faculty Rights and Responsibilities" ; wsu:hasPolicyNumber "2030" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2035 a wsu:Policy ; rdfs:label "Faculty Credentials" ; wsu:hasPolicyNumber "2035" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2040 a wsu:Policy ; rdfs:label "Faculty Awards" ; wsu:hasPolicyNumber "2040" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2050 a wsu:Policy ; rdfs:label "Consensual Relations" ; wsu:hasPolicyNumber "2050" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2060 a wsu:Policy ; rdfs:label "Review of Administrators" ; wsu:hasPolicyNumber "2060" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2080 a wsu:Policy ; rdfs:label "Parental Accommodations" ; wsu:hasPolicyNumber "2080" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_1 ; wsu:appliesToPopulation "Faculty" .
+
+:Cat_2000_2 a wsu:PolicyCategory ;
+    rdfs:label "Faculty Rank and Promotion (Series 2000)" .
+
+:Policy_2120 a wsu:Policy ; rdfs:label "Policies and Procedures for the Granting of Promotion and Tenure" ; wsu:hasPolicyNumber "2120" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2125 a wsu:Policy ; rdfs:label "Guidelines for University Promotion and Tenure Committee Deliberations" ; wsu:hasPolicyNumber "2125" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2140 a wsu:Policy ; rdfs:label "Policies and Procedures for Promotion to Senior Lecturer and Clinical Assistant Professor" ; wsu:hasPolicyNumber "2140" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2160 a wsu:Policy ; rdfs:label "Graduate Faculty Membership" ; wsu:hasPolicyNumber "2160" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2180 a wsu:Policy ; rdfs:label "Emeritus Faculty" ; wsu:hasPolicyNumber "2180" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2185 a wsu:Policy ; rdfs:label "Emeritus Dean" ; wsu:hasPolicyNumber "2185" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_2 ; wsu:appliesToPopulation "Faculty" .
+
+:Cat_2000_3 a wsu:PolicyCategory ;
+    rdfs:label "Teaching (Series 2000)" .
+
+:Policy_2330 a wsu:Policy ; rdfs:label "Excused Absence Guidelines" ; wsu:hasPolicyNumber "2330" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_3 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2350 a wsu:Policy ; rdfs:label "Final Exam Policy" ; wsu:hasPolicyNumber "2350" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_3 ; wsu:appliesToPopulation "Faculty" .
+:Policy_2360 a wsu:Policy ; rdfs:label "Online Proctoring Software and Services" ; wsu:hasPolicyNumber "2360" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_3 ; wsu:appliesToPopulation "Faculty" .
+
+:Cat_2000_4 a wsu:PolicyCategory ;
+    rdfs:label "Evaluation of Faculty (Series 2000)" .
+
+:Policy_2410 a wsu:Policy ; rdfs:label "Annual Faculty Evaluation" ; wsu:hasPolicyNumber "2410" ; wsu:belongsToSeries :Series_2000 ; wsu:belongsToCategory :Cat_2000_4 ; wsu:appliesToPopulation "Faculty" .
+
+:Series_3000 a wsu:PolicySeries ;
+    rdfs:label "Series 3000: Students" .
+
+:Cat_3000_1 a wsu:PolicyCategory ;
+    rdfs:label "Federal and State Regulations (Series 3000)" .
+
+:Policy_3010 a wsu:Policy ; rdfs:label "Student Privacy and Release of Educational Records - FERPA" ; wsu:hasPolicyNumber "3010" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_1 .
+:Policy_3020 a wsu:Policy ; rdfs:label "F-1 International Students" ; wsu:hasPolicyNumber "3020" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_1 .
+:Policy_3030 a wsu:Policy ; rdfs:label "J-1 Exchange Visitor" ; wsu:hasPolicyNumber "3030" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_1 .
+:Policy_3060 a wsu:Policy ; rdfs:label "Ohio Residency Policy" ; wsu:hasPolicyNumber "3060" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_1 .
+
+:Cat_3000_2 a wsu:PolicyCategory ;
+    rdfs:label "Admissions (Series 3000)" .
+
+:Policy_3110 a wsu:Policy ; rdfs:label "Undergraduate Degree-Seeking Admissions" ; wsu:hasPolicyNumber "3110" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_2 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3130 a wsu:Policy ; rdfs:label "Dual Enrollment Admissions (College Credit Plus)" ; wsu:hasPolicyNumber "3130" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_2 .
+:Policy_3140 a wsu:Policy ; rdfs:label "Readmission" ; wsu:hasPolicyNumber "3140" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_2 .
+:Policy_3160 a wsu:Policy ; rdfs:label "Wright Path Program" ; wsu:hasPolicyNumber "3160" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_2 .
+:Policy_3170 a wsu:Policy ; rdfs:label "Second Undergraduate Degree Admissions" ; wsu:hasPolicyNumber "3170" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_2 ; wsu:appliesToPopulation "Undergraduate" .
+
+:Cat_3000_3 a wsu:PolicyCategory ;
+    rdfs:label "Ohio Residency Policy (Series 3000)" .
+
+:Policy_3120 a wsu:Policy ; rdfs:label "Undergraduate Non-Degree Seeking Admissions Policy" ; wsu:hasPolicyNumber "3120" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_3 ; wsu:appliesToPopulation "Undergraduate" .
+
+:Cat_3000_4 a wsu:PolicyCategory ;
+    rdfs:label "Transfer and Prior Learning Credit (Series 3000)" .
+
+:Policy_3210 a wsu:Policy ; rdfs:label "Ohio Articulation and Transfer Policy" ; wsu:hasPolicyNumber "3210" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3215 a wsu:Policy ; rdfs:label "Transfer Credit Regulations" ; wsu:hasPolicyNumber "3215" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3220 a wsu:Policy ; rdfs:label "Prior Learning Assessment Policy" ; wsu:hasPolicyNumber "3220" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3230 a wsu:Policy ; rdfs:label "Ohio Transfer Module (OTM)" ; wsu:hasPolicyNumber "3230" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3240 a wsu:Policy ; rdfs:label "Completion of Wright State Core Using Transfer Courses" ; wsu:hasPolicyNumber "3240" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3245 a wsu:Policy ; rdfs:label "Transfer Student Requirements for Writing Across the Curriculum" ; wsu:hasPolicyNumber "3245" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3260 a wsu:Policy ; rdfs:label "Transfer Credit for \"D\" Grades" ; wsu:hasPolicyNumber "3260" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3265 a wsu:Policy ; rdfs:label "Transfer Policy for Plus/Minus Grading" ; wsu:hasPolicyNumber "3265" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3280 a wsu:Policy ; rdfs:label "Transfer Credit for Advanced Placement (AP)" ; wsu:hasPolicyNumber "3280" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+:Policy_3285 a wsu:Policy ; rdfs:label "Transfer Credit for Military Training, Experience and Coursework" ; wsu:hasPolicyNumber "3285" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_4 .
+
+:Cat_3000_5 a wsu:PolicyCategory ;
+    rdfs:label "Undergraduate Academic Standing (Series 3000)" .
+
+:Policy_3315 a wsu:Policy ; rdfs:label "Internship Policy" ; wsu:hasPolicyNumber "3315" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3320 a wsu:Policy ; rdfs:label "Academic Classification based on Hours Completed" ; wsu:hasPolicyNumber "3320" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3340 a wsu:Policy ; rdfs:label "Dean's List and President's List" ; wsu:hasPolicyNumber "3340" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3350 a wsu:Policy ; rdfs:label "Academic Standing: Good Standing and Probation" ; wsu:hasPolicyNumber "3350" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3365 a wsu:Policy ; rdfs:label "Non-Academic Dismissal from Academic Units" ; wsu:hasPolicyNumber "3365" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3370 a wsu:Policy ; rdfs:label "Fresh Start Policy" ; wsu:hasPolicyNumber "3370" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3375 a wsu:Policy ; rdfs:label "Second Start Policy" ; wsu:hasPolicyNumber "3375" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3380 a wsu:Policy ; rdfs:label "Religious Excused Absences" ; wsu:hasPolicyNumber "3380" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_5 ; wsu:appliesToPopulation "Undergraduate" .
+
+:Cat_3000_6 a wsu:PolicyCategory ;
+    rdfs:label "Registration (Series 3000)" .
+
+:Policy_3404 a wsu:Policy ; rdfs:label "Required Advisor Approval for Registration Policy" ; wsu:hasPolicyNumber "3404" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+:Policy_3405 a wsu:Policy ; rdfs:label "Auditing Classes" ; wsu:hasPolicyNumber "3405" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+:Policy_3410 a wsu:Policy ; rdfs:label "Required Selective Service Registration for In-State Tuition" ; wsu:hasPolicyNumber "3410" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+:Policy_3420 a wsu:Policy ; rdfs:label "Refunds and Refund Appeals" ; wsu:hasPolicyNumber "3420" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+:Policy_3430 a wsu:Policy ; rdfs:label "Course Registration, Add, Attendance, and Administrative Drop Policy" ; wsu:hasPolicyNumber "3430" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+:Policy_3435 a wsu:Policy ; rdfs:label "Credit Hour Maximums" ; wsu:hasPolicyNumber "3435" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_6 .
+
+:Cat_3000_7 a wsu:PolicyCategory ;
+    rdfs:label "Course Drops and Repeats (Series 3000)" .
+
+:Policy_3510 a wsu:Policy ; rdfs:label "Withdrawal Policy" ; wsu:hasPolicyNumber "3510" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_7 .
+:Policy_3520 a wsu:Policy ; rdfs:label "Course Repeats and Replacement" ; wsu:hasPolicyNumber "3520" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_7 .
+
+:Cat_3000_8 a wsu:PolicyCategory ;
+    rdfs:label "Requirements for Degree and Program Completion (Series 3000)" .
+
+:Policy_3601 a wsu:Policy ; rdfs:label "Semester Credit Hours Required to meet Degree Requirements" ; wsu:hasPolicyNumber "3601" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+:Policy_3620 a wsu:Policy ; rdfs:label "Requirements and Residency for an Undergraduate Degree" ; wsu:hasPolicyNumber "3620" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3625 a wsu:Policy ; rdfs:label "Course Substitutions to Accommodate Disabilities" ; wsu:hasPolicyNumber "3625" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+:Policy_3630 a wsu:Policy ; rdfs:label "Multiple Undergraduate Degrees" ; wsu:hasPolicyNumber "3630" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 ; wsu:appliesToPopulation "Undergraduate" .
+:Policy_3640 a wsu:Policy ; rdfs:label "Graduating with Latin Honors" ; wsu:hasPolicyNumber "3640" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+:Policy_3660 a wsu:Policy ; rdfs:label "Posthumous Degrees and Recognitions" ; wsu:hasPolicyNumber "3660" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+:Policy_3670 a wsu:Policy ; rdfs:label "Honorary Degree" ; wsu:hasPolicyNumber "3670" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+:Policy_3685 a wsu:Policy ; rdfs:label "Degree Application and Commencement Participation" ; wsu:hasPolicyNumber "3685" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_8 .
+
+:Cat_3000_9 a wsu:PolicyCategory ;
+    rdfs:label "Student Conduct and Integrity (Series 3000)" .
+
+:Policy_3710 a wsu:Policy ; rdfs:label "Academic Integrity Standards and Process for Misconduct" ; wsu:hasPolicyNumber "3710" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_9 .
+:Policy_3720 a wsu:Policy ; rdfs:label "Code of Student Conduct" ; wsu:hasPolicyNumber "3720" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_9 .
+
+:Cat_3000_10 a wsu:PolicyCategory ;
+    rdfs:label "Student-Athletes (Series 3000)" .
+
+:Policy_3810 a wsu:Policy ; rdfs:label "Student-Athlete Compensation for Use of Name, Image, and Likeness" ; wsu:hasPolicyNumber "3810" ; wsu:belongsToSeries :Series_3000 ; wsu:belongsToCategory :Cat_3000_10 .
+
+:Series_4000 a wsu:PolicySeries ;
+    rdfs:label "Series 4000: Academic Standards and Curriculum" .
+
+:Cat_4000_1 a wsu:PolicyCategory ;
+    rdfs:label "Academic Credits (Series 4000)" .
+
+:Policy_4001 a wsu:Policy ; rdfs:label "Curricular Approval" ; wsu:hasPolicyNumber "4001" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 .
+:Policy_4002 a wsu:Policy ; rdfs:label "Credit Hour Policy" ; wsu:hasPolicyNumber "4002" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 .
+:Policy_4010 a wsu:Policy ; rdfs:label "Grading System" ; wsu:hasPolicyNumber "4010" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 .
+:Policy_4020 a wsu:Policy ; rdfs:label "Official Grade Point Average" ; wsu:hasPolicyNumber "4020" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 .
+:Policy_4030 a wsu:Policy ; rdfs:label "Conversion of Quarter to Semester Hours" ; wsu:hasPolicyNumber "4030" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 .
+:Policy_4090 a wsu:Policy ; rdfs:label "Undergraduate Petitions" ; wsu:hasPolicyNumber "4090" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_1 ; wsu:appliesToPopulation "Undergraduate" .
+
+:Cat_4000_2 a wsu:PolicyCategory ;
+    rdfs:label "Curriculum (Series 4000)" .
+
+:Policy_4110 a wsu:Policy ; rdfs:label "Course Numbering" ; wsu:hasPolicyNumber "4110" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4120 a wsu:Policy ; rdfs:label "Course Prerequisites, Corequisites, Restrictions and Notes" ; wsu:hasPolicyNumber "4120" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4125 a wsu:Policy ; rdfs:label "Cross-Listed and Meet-With Course Policy" ; wsu:hasPolicyNumber "4125" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4130 a wsu:Policy ; rdfs:label "Wright State Core" ; wsu:hasPolicyNumber "4130" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4140 a wsu:Policy ; rdfs:label "Wright State Core Transition Guide" ; wsu:hasPolicyNumber "4140" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4160 a wsu:Policy ; rdfs:label "Course Delivery Terminology" ; wsu:hasPolicyNumber "4160" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+:Policy_4180 a wsu:Policy ; rdfs:label "Independent Study" ; wsu:hasPolicyNumber "4180" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_2 .
+
+:Cat_4000_3 a wsu:PolicyCategory ;
+    rdfs:label "Curriculum Development and Review (Series 4000)" .
+
+:Policy_4200 a wsu:Policy ; rdfs:label "Policy on Curricular Cooperation" ; wsu:hasPolicyNumber "4200" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4202 a wsu:Policy ; rdfs:label "Graduate Curricular Approval Procedures" ; wsu:hasPolicyNumber "4202" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4220 a wsu:Policy ; rdfs:label "Preparing New Undergraduate Degree or Major Program Proposals" ; wsu:hasPolicyNumber "4220" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4230 a wsu:Policy ; rdfs:label "New Minor Program or Concentration Proposals" ; wsu:hasPolicyNumber "4230" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4240 a wsu:Policy ; rdfs:label "Undergraduate Certificate Programs" ; wsu:hasPolicyNumber "4240" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4245 a wsu:Policy ; rdfs:label "Integrated Writing Course Development and Approval" ; wsu:hasPolicyNumber "4245" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4250 a wsu:Policy ; rdfs:label "Inclusive Excellence and Global Inquiry Course Development and Approval" ; wsu:hasPolicyNumber "4250" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4253 a wsu:Policy ; rdfs:label "Service Learning Course Development and Approval" ; wsu:hasPolicyNumber "4253" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4256 a wsu:Policy ; rdfs:label "Distance Education Program Development and Approval" ; wsu:hasPolicyNumber "4256" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4260 a wsu:Policy ; rdfs:label "Undergraduate Microcredentials" ; wsu:hasPolicyNumber "4260" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4270 a wsu:Policy ; rdfs:label "Preparing Program Modifications" ; wsu:hasPolicyNumber "4270" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+:Policy_4280 a wsu:Policy ; rdfs:label "Course Addition, Modification, and Deletion Policy" ; wsu:hasPolicyNumber "4280" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_3 .
+
+:Cat_4000_4 a wsu:PolicyCategory ;
+    rdfs:label "Course Scheduling (Series 4000)" .
+
+:Policy_4310 a wsu:Policy ; rdfs:label "Standard Course Scheduling Timeblocks" ; wsu:hasPolicyNumber "4310" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_4 .
+
+:Cat_4000_5 a wsu:PolicyCategory ;
+    rdfs:label "Course Fees (Series 4000)" .
+
+:Policy_4410 a wsu:Policy ; rdfs:label "Course and Program Fee Approval Guidelines and Approval Forms" ; wsu:hasPolicyNumber "4410" ; wsu:belongsToSeries :Series_4000 ; wsu:belongsToCategory :Cat_4000_5 .
+
+:Series_5000 a wsu:PolicySeries ;
+    rdfs:label "Series 5000: Graduate Students and Programs" .
+
+:Cat_5000_1 a wsu:PolicyCategory ;
+    rdfs:label "Admission (Series 5000)" .
+
+:Policy_5010 a wsu:Policy ; rdfs:label "Categories of Admission" ; wsu:hasPolicyNumber "5010" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_1 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5020 a wsu:Policy ; rdfs:label "General Requirements for Graduate Admission" ; wsu:hasPolicyNumber "5020" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_1 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5040 a wsu:Policy ; rdfs:label "Admission of Students with Three-Year Bachelor’s Degrees" ; wsu:hasPolicyNumber "5040" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_1 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5070 a wsu:Policy ; rdfs:label "International Students" ; wsu:hasPolicyNumber "5070" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_1 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5080 a wsu:Policy ; rdfs:label "Petition for Graduate Admission" ; wsu:hasPolicyNumber "5080" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_1 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_2 a wsu:PolicyCategory ;
+    rdfs:label "Graduate Assistantships & Scholarships (Series 5000)" .
+
+:Policy_5101 a wsu:Policy ; rdfs:label "Graduate Assistantships and Scholarships" ; wsu:hasPolicyNumber "5101" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5110 a wsu:Policy ; rdfs:label "Types of Appointments: Graduate Assistantships and Scholarships" ; wsu:hasPolicyNumber "5110" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5120 a wsu:Policy ; rdfs:label "Graduate Assistants" ; wsu:hasPolicyNumber "5120" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5130 a wsu:Policy ; rdfs:label "Graduate Scholarships" ; wsu:hasPolicyNumber "5130" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5140 a wsu:Policy ; rdfs:label "Graduate Council Scholarships" ; wsu:hasPolicyNumber "5140" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5150 a wsu:Policy ; rdfs:label "Fee Remission for Graduate Research Assistants" ; wsu:hasPolicyNumber "5150" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_2 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_3 a wsu:PolicyCategory ;
+    rdfs:label "Registration (Series 5000)" .
+
+:Policy_5220 a wsu:Policy ; rdfs:label "Procedure for Subsequent Registration" ; wsu:hasPolicyNumber "5220" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_3 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5240 a wsu:Policy ; rdfs:label "Course Audit" ; wsu:hasPolicyNumber "5240" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_3 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5250 a wsu:Policy ; rdfs:label "Full-Time Status" ; wsu:hasPolicyNumber "5250" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_3 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5270 a wsu:Policy ; rdfs:label "Continuing Registration" ; wsu:hasPolicyNumber "5270" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_3 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_4 a wsu:PolicyCategory ;
+    rdfs:label "Graduate Credit, Grades and Graduation (Series 5000)" .
+
+:Policy_5310 a wsu:Policy ; rdfs:label "Grading Standards for Dual Listed Courses" ; wsu:hasPolicyNumber "5310" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5320 a wsu:Policy ; rdfs:label "Retroactive Graduate Credit" ; wsu:hasPolicyNumber "5320" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5330 a wsu:Policy ; rdfs:label "Graduate Credit for Undergraduates" ; wsu:hasPolicyNumber "5330" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate", "Undergraduate" .
+:Policy_5340 a wsu:Policy ; rdfs:label "Transfer Credit" ; wsu:hasPolicyNumber "5340" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5345 a wsu:Policy ; rdfs:label "Credit By Examination" ; wsu:hasPolicyNumber "5345" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5350 a wsu:Policy ; rdfs:label "Non-Contact Course Credit" ; wsu:hasPolicyNumber "5350" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5360 a wsu:Policy ; rdfs:label "Course Repeats" ; wsu:hasPolicyNumber "5360" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5370 a wsu:Policy ; rdfs:label "Academic Standards" ; wsu:hasPolicyNumber "5370" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5380 a wsu:Policy ; rdfs:label "Residence Requirements" ; wsu:hasPolicyNumber "5380" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_4 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_5 a wsu:PolicyCategory ;
+    rdfs:label "Graduate Advising (Series 5000)" .
+
+:Policy_5420 a wsu:Policy ; rdfs:label "Advisor-Advisee Interaction" ; wsu:hasPolicyNumber "5420" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5430 a wsu:Policy ; rdfs:label "Responsibility for Research Project Grading" ; wsu:hasPolicyNumber "5430" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5440 a wsu:Policy ; rdfs:label "Monitoring of Graduate Student Progress" ; wsu:hasPolicyNumber "5440" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5450 a wsu:Policy ; rdfs:label "Program Handbooks and Guidelines" ; wsu:hasPolicyNumber "5450" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5460 a wsu:Policy ; rdfs:label "Graduate Program Communications" ; wsu:hasPolicyNumber "5460" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5470 a wsu:Policy ; rdfs:label "Program of Study" ; wsu:hasPolicyNumber "5470" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_5 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_6 a wsu:PolicyCategory ;
+    rdfs:label "Requirements for Master's Degrees (Series 5000)" .
+
+:Policy_5515 a wsu:Policy ; rdfs:label "Thesis" ; wsu:hasPolicyNumber "5515" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5520 a wsu:Policy ; rdfs:label "Time Limit for Master's Degrees" ; wsu:hasPolicyNumber "5520" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5530 a wsu:Policy ; rdfs:label "Credit Hour Requirement for Master's Degrees" ; wsu:hasPolicyNumber "5530" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5560 a wsu:Policy ; rdfs:label "Second Master's Degree" ; wsu:hasPolicyNumber "5560" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5570 a wsu:Policy ; rdfs:label "Dual Master's Degree Programs" ; wsu:hasPolicyNumber "5570" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5580 a wsu:Policy ; rdfs:label "Fresh Start Policy" ; wsu:hasPolicyNumber "5580" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_6 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_7 a wsu:PolicyCategory ;
+    rdfs:label "Post-Master's Level Degree Programs (Series 5000)" .
+
+:Policy_5610 a wsu:Policy ; rdfs:label "Regulations for Post-Master's Degree Programs" ; wsu:hasPolicyNumber "5610" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_7 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_8 a wsu:PolicyCategory ;
+    rdfs:label "Doctoral Requirements (Series 5000)" .
+
+:Policy_5720 a wsu:Policy ; rdfs:label "Requirements Specific to Doctoral Degrees" ; wsu:hasPolicyNumber "5720" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_8 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5740 a wsu:Policy ; rdfs:label "Transfer Credit (Doctoral)" ; wsu:hasPolicyNumber "5740" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_8 ; wsu:appliesToPopulation "Graduate" .
+
+:Cat_5000_9 a wsu:PolicyCategory ;
+    rdfs:label "Certificate Programs (Series 5000)" .
+
+:Policy_5810 a wsu:Policy ; rdfs:label "Academic Standards for Graduate Certificate Programs" ; wsu:hasPolicyNumber "5810" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_9 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5820 a wsu:Policy ; rdfs:label "Credit Hour Residency Requirement for Graduate Certificate Programs" ; wsu:hasPolicyNumber "5820" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_9 ; wsu:appliesToPopulation "Graduate" .
+:Policy_5830 a wsu:Policy ; rdfs:label "Graduate Microcredentials" ; wsu:hasPolicyNumber "5830" ; wsu:belongsToSeries :Series_5000 ; wsu:belongsToCategory :Cat_5000_9 ; wsu:appliesToPopulation "Graduate" .
+
+:Series_6000 a wsu:PolicySeries ;
+    rdfs:label "Series 6000: Research" .
+
+:Cat_6000_1 a wsu:PolicyCategory ;
+    rdfs:label "Researcher Rights and Responsibilities (Series 6000)" .
+
+:Policy_6110 a wsu:Policy ; rdfs:label "Research Conflict of Interest and Financial Disclosure Policy" ; wsu:hasPolicyNumber "6110" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_1 .
+:Policy_6120 a wsu:Policy ; rdfs:label "Administrative Procedures for Allegations of Research Misconduct" ; wsu:hasPolicyNumber "6120" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_1 .
+:Policy_6130 a wsu:Policy ; rdfs:label "Controlled Substances Research" ; wsu:hasPolicyNumber "6130" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_1 .
+:Policy_6150 a wsu:Policy ; rdfs:label "U.S. Export/Trade Controls Compliance" ; wsu:hasPolicyNumber "6150" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_1 .
+
+:Cat_6000_2 a wsu:PolicyCategory ;
+    rdfs:label "Technology Commercialization (Series 6000)" .
+
+:Policy_6230 a wsu:Policy ; rdfs:label "Intellectual Property" ; wsu:hasPolicyNumber "6230" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_2 .
+
+:Cat_6000_3 a wsu:PolicyCategory ;
+    rdfs:label "Research Records and Accounting (Series 6000)" .
+
+:Policy_6340 a wsu:Policy ; rdfs:label "Facilities and Administrative (Indirect) Costs for Sponsored Programs" ; wsu:hasPolicyNumber "6340" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_3 .
+:Policy_6350 a wsu:Policy ; rdfs:label "Overexpenditures, Disallowances, and Uncollectible Receivables on Sponsored Program Accounts" ; wsu:hasPolicyNumber "6350" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_3 .
+:Policy_6360 a wsu:Policy ; rdfs:label "Interinstitutional Acquisition or Release of Research Equipment" ; wsu:hasPolicyNumber "6360" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_3 .
+:Policy_6370 a wsu:Policy ; rdfs:label "Visiting Scholars" ; wsu:hasPolicyNumber "6370" ; wsu:belongsToSeries :Series_6000 ; wsu:belongsToCategory :Cat_6000_3 .
+
+:Series_7000 a wsu:PolicySeries ;
+    rdfs:label "Series 7000: Facilities and Operations" .
+
+:Cat_7000_1 a wsu:PolicyCategory ;
+    rdfs:label "Communications and Access (Series 7000)" .
+
+:Policy_7110 a wsu:Policy ; rdfs:label "Solicitations, Distributions, and Postings" ; wsu:hasPolicyNumber "7110" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_1 .
+:Policy_7120 a wsu:Policy ; rdfs:label "Bulletin Boards, Signs, and Posting" ; wsu:hasPolicyNumber "7120" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_1 .
+:Policy_7130 a wsu:Policy ; rdfs:label "Keys and Locks" ; wsu:hasPolicyNumber "7130" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_1 .
+
+:Cat_7000_2 a wsu:PolicyCategory ;
+    rdfs:label "Regulations (Series 7000)" .
+
+:Policy_7210 a wsu:Policy ; rdfs:label "Firearms, Deadly Weapons, Explosives or Dangerous Ordnances Policy" ; wsu:hasPolicyNumber "7210" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_2 .
+:Policy_7230 a wsu:Policy ; rdfs:label "Tobacco Free Policy" ; wsu:hasPolicyNumber "7230" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_2 .
+:Policy_7240 a wsu:Policy ; rdfs:label "Self-Balancing Personal Scooter Ban" ; wsu:hasPolicyNumber "7240" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_2 .
+:Policy_7250 a wsu:Policy ; rdfs:label "Prohibition of Camping on University Property" ; wsu:hasPolicyNumber "7250" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_2 .
+
+:Cat_7000_3 a wsu:PolicyCategory ;
+    rdfs:label "Campus Facilities (Series 7000)" .
+
+:Policy_7310 a wsu:Policy ; rdfs:label "Capital Projects" ; wsu:hasPolicyNumber "7310" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_3 .
+:Policy_7320 a wsu:Policy ; rdfs:label "Real Property Leasing" ; wsu:hasPolicyNumber "7320" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_3 .
+
+:Cat_7000_4 a wsu:PolicyCategory ;
+    rdfs:label "Parking and Traffic (Series 7000)" .
+
+:Policy_7410 a wsu:Policy ; rdfs:label "Parking" ; wsu:hasPolicyNumber "7410" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_4 .
+:Policy_7420 a wsu:Policy ; rdfs:label "Campus Traffic Control" ; wsu:hasPolicyNumber "7420" ; wsu:belongsToSeries :Series_7000 ; wsu:belongsToCategory :Cat_7000_4 .
+
+:Series_8000 a wsu:PolicySeries ;
+    rdfs:label "Series 8000: Human Resources" .
+
+:Cat_8000_1 a wsu:PolicyCategory ;
+    rdfs:label "Equity and Inclusion (Series 8000)" .
+
+:Policy_8010 a wsu:Policy ; rdfs:label "Nepotism" ; wsu:hasPolicyNumber "8010" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_1 .
+:Policy_8060 a wsu:Policy ; rdfs:label "Violence in the Workplace" ; wsu:hasPolicyNumber "8060" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_1 .
+
+:Cat_8000_2 a wsu:PolicyCategory ;
+    rdfs:label "Appointment, Promotion and Separation (Series 8000)" .
+
+:Policy_8110 a wsu:Policy ; rdfs:label "Hiring" ; wsu:hasPolicyNumber "8110" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8115 a wsu:Policy ; rdfs:label "Faculty Opportunity Hire Program" ; wsu:hasPolicyNumber "8115" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8125 a wsu:Policy ; rdfs:label "Orientation and Onboarding" ; wsu:hasPolicyNumber "8125" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8130 a wsu:Policy ; rdfs:label "Background Checks" ; wsu:hasPolicyNumber "8130" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8140 a wsu:Policy ; rdfs:label "Immigration Policy and Procedures for Employment or Sponsorship of Foreign Nationals" ; wsu:hasPolicyNumber "8140" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8150 a wsu:Policy ; rdfs:label "Adjunct Teaching by Staff Employees" ; wsu:hasPolicyNumber "8150" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8160 a wsu:Policy ; rdfs:label "Internal Promotion" ; wsu:hasPolicyNumber "8160" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8170 a wsu:Policy ; rdfs:label "Internal/Lateral Transfer" ; wsu:hasPolicyNumber "8170" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+:Policy_8180 a wsu:Policy ; rdfs:label "Employee Separation" ; wsu:hasPolicyNumber "8180" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_2 .
+
+:Cat_8000_3 a wsu:PolicyCategory ;
+    rdfs:label "Conditions of Employment (Series 8000)" .
+
+:Policy_8205 a wsu:Policy ; rdfs:label "Employee Categories" ; wsu:hasPolicyNumber "8205" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8210 a wsu:Policy ; rdfs:label "Conditions of Employment for Unclassified Staff" ; wsu:hasPolicyNumber "8210" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8215 a wsu:Policy ; rdfs:label "Notice of Involuntary Separation" ; wsu:hasPolicyNumber "8215" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8217 a wsu:Policy ; rdfs:label "Reduction in Workforce (RIF) and Notice of Job Elimination" ; wsu:hasPolicyNumber "8217" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8220 a wsu:Policy ; rdfs:label "Employment Specifications for Grant/Contract Funded Positions" ; wsu:hasPolicyNumber "8220" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8230 a wsu:Policy ; rdfs:label "Working Hours" ; wsu:hasPolicyNumber "8230" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+:Policy_8240 a wsu:Policy ; rdfs:label "Drug-Free Workplace" ; wsu:hasPolicyNumber "8240" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_3 .
+
+:Cat_8000_4 a wsu:PolicyCategory ;
+    rdfs:label "Benefits (Series 8000)" .
+
+:Policy_8310 a wsu:Policy ; rdfs:label "Holidays" ; wsu:hasPolicyNumber "8310" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_4 .
+:Policy_8320 a wsu:Policy ; rdfs:label "Educational Benefits Program" ; wsu:hasPolicyNumber "8320" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_4 .
+:Policy_8330 a wsu:Policy ; rdfs:label "Employee Assistance Program" ; wsu:hasPolicyNumber "8330" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_4 .
+
+:Cat_8000_5 a wsu:PolicyCategory ;
+    rdfs:label "Leaves (Series 8000)" .
+
+:Policy_8410 a wsu:Policy ; rdfs:label "Vacation" ; wsu:hasPolicyNumber "8410" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+:Policy_8420 a wsu:Policy ; rdfs:label "Sick Leave" ; wsu:hasPolicyNumber "8420" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+:Policy_8430 a wsu:Policy ; rdfs:label "Leaves of Absence" ; wsu:hasPolicyNumber "8430" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+:Policy_8440 a wsu:Policy ; rdfs:label "Winter Break" ; wsu:hasPolicyNumber "8440" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+:Policy_8450 a wsu:Policy ; rdfs:label "Flexible Work Arrangement" ; wsu:hasPolicyNumber "8450" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+:Policy_8470 a wsu:Policy ; rdfs:label "Furlough Leave" ; wsu:hasPolicyNumber "8470" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_5 .
+
+:Cat_8000_6 a wsu:PolicyCategory ;
+    rdfs:label "Compensation (Series 8000)" .
+
+:Policy_8510 a wsu:Policy ; rdfs:label "Compensation" ; wsu:hasPolicyNumber "8510" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_6 .
+:Policy_8520 a wsu:Policy ; rdfs:label "Special Salary Adjustments for Administrative (Unclassified) Staff" ; wsu:hasPolicyNumber "8520" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_6 .
+:Policy_8580 a wsu:Policy ; rdfs:label "Additional Compensation" ; wsu:hasPolicyNumber "8580" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_6 .
+:Policy_8585 a wsu:Policy ; rdfs:label "Extended Work Week (EWW) Pay for Employees Working on Contracts" ; wsu:hasPolicyNumber "8585" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_6 .
+
+:Cat_8000_7 a wsu:PolicyCategory ;
+    rdfs:label "Staff Development (Series 8000)" .
+
+:Policy_8610 a wsu:Policy ; rdfs:label "Staff Service and Professional Development" ; wsu:hasPolicyNumber "8610" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_7 .
+:Policy_8620 a wsu:Policy ; rdfs:label "Temporary Event Assignments for University Employees" ; wsu:hasPolicyNumber "8620" ; wsu:belongsToSeries :Series_8000 ; wsu:belongsToCategory :Cat_8000_7 .
+
+:Series_9000 a wsu:PolicySeries ;
+    rdfs:label "Series 9000: Business and Finance" .
+
+:Cat_9000_1 a wsu:PolicyCategory ;
+    rdfs:label "Financial (Series 9000)" .
+
+:Policy_9110 a wsu:Policy ; rdfs:label "Accounting Policies for Auxiliary Enterprises" ; wsu:hasPolicyNumber "9110" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+:Policy_9120 a wsu:Policy ; rdfs:label "Cash Collection and E-commerce Policy and Procedures" ; wsu:hasPolicyNumber "9120" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+:Policy_9130 a wsu:Policy ; rdfs:label "Expenditure Guidelines" ; wsu:hasPolicyNumber "9130" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+:Policy_9140 a wsu:Policy ; rdfs:label "Budget Guidelines" ; wsu:hasPolicyNumber "9140" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+:Policy_9180 a wsu:Policy ; rdfs:label "Payroll" ; wsu:hasPolicyNumber "9180" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+:Policy_9190 a wsu:Policy ; rdfs:label "External Audit Process" ; wsu:hasPolicyNumber "9190" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_1 .
+
+:Cat_9000_2 a wsu:PolicyCategory ;
+    rdfs:label "Transportation (Series 9000)" .
+
+:Policy_9210 a wsu:Policy ; rdfs:label "University Owned, Leased, Loaned, Rented, and Privately Owned Vehicles" ; wsu:hasPolicyNumber "9210" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_2 .
+
+:Cat_9000_3 a wsu:PolicyCategory ;
+    rdfs:label "Contracting and Procurement (Series 9000)" .
+
+:Policy_9310 a wsu:Policy ; rdfs:label "Certificate of Exemption" ; wsu:hasPolicyNumber "9310" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_3 .
+:Policy_9320 a wsu:Policy ; rdfs:label "Purchasing from External Vendors" ; wsu:hasPolicyNumber "9320" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_3 .
+:Policy_9330 a wsu:Policy ; rdfs:label "Minority Set-Aside Purchases" ; wsu:hasPolicyNumber "9330" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_3 .
+:Policy_9340 a wsu:Policy ; rdfs:label "Procurement Card Policies and Procedures" ; wsu:hasPolicyNumber "9340" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_3 .
+:Policy_9350 a wsu:Policy ; rdfs:label "Contract Approval and Signatory Authority Policy" ; wsu:hasPolicyNumber "9350" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_3 .
+
+:Cat_9000_4 a wsu:PolicyCategory ;
+    rdfs:label "Equipment and Supplies (Series 9000)" .
+
+:Policy_9410 a wsu:Policy ; rdfs:label "Excess and Surplus Property Management (ESPM)" ; wsu:hasPolicyNumber "9410" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_4 .
+:Policy_9440 a wsu:Policy ; rdfs:label "Shipping and Receiving" ; wsu:hasPolicyNumber "9440" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_4 .
+
+:Cat_9000_5 a wsu:PolicyCategory ;
+    rdfs:label "Employee Expenditures (Series 9000)" .
+
+:Policy_9510 a wsu:Policy ; rdfs:label "Travel" ; wsu:hasPolicyNumber "9510" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_5 .
+:Policy_9530 a wsu:Policy ; rdfs:label "Cell Phone Usage Policy" ; wsu:hasPolicyNumber "9530" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_5 .
+
+:Cat_9000_6 a wsu:PolicyCategory ;
+    rdfs:label "Security of Data and Information (Series 9000)" .
+
+:Policy_9610 a wsu:Policy ; rdfs:label "Identity Theft Prevention Program" ; wsu:hasPolicyNumber "9610" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_6 .
+
+:Cat_9000_7 a wsu:PolicyCategory ;
+    rdfs:label "Hospitality Services/Food (Series 9000)" .
+
+:Policy_9710 a wsu:Policy ; rdfs:label "Alcohol Consumption on University Property" ; wsu:hasPolicyNumber "9710" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_7 .
+
+:Cat_9000_8 a wsu:PolicyCategory ;
+    rdfs:label "Business and Finance (Series 9000)" .
+
+:Policy_9810 a wsu:Policy ; rdfs:label "Gift Cards and Alternative Payment Methods" ; wsu:hasPolicyNumber "9810" ; wsu:belongsToSeries :Series_9000 ; wsu:belongsToCategory :Cat_9000_8 .
+
+:Series_10000 a wsu:PolicySeries ;
+    rdfs:label "Series 10000: Advancement" .
+
+:Cat_10000_1 a wsu:PolicyCategory ;
+    rdfs:label "Advancement (Series 10000)" .
+
+:Policy_10100 a wsu:Policy ; rdfs:label "Facilities and Endowments" ; wsu:hasPolicyNumber "10100" ; wsu:belongsToSeries :Series_10000 ; wsu:belongsToCategory :Cat_10000_1 .
+:Policy_10200 a wsu:Policy ; rdfs:label "Quasi-Endowment Fund" ; wsu:hasPolicyNumber "10200" ; wsu:belongsToSeries :Series_10000 ; wsu:belongsToCategory :Cat_10000_1 .
+:Policy_10300 a wsu:Policy ; rdfs:label "Soliciting and Administering Financial Support from External Sources" ; wsu:hasPolicyNumber "10300" ; wsu:belongsToSeries :Series_10000 ; wsu:belongsToCategory :Cat_10000_1 .
+
+:Series_11000 a wsu:PolicySeries ;
+    rdfs:label "Series 11000: Information Technology" .
+
+:Cat_11000_1 a wsu:PolicyCategory ;
+    rdfs:label "Information Technology (Series 11000)" .
+
+:Policy_11100 a wsu:Policy ; rdfs:label "World Wide Web" ; wsu:hasPolicyNumber "11100" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+:Policy_11200 a wsu:Policy ; rdfs:label "Wright State University Network" ; wsu:hasPolicyNumber "11200" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+:Policy_11210 a wsu:Policy ; rdfs:label "Responsible Use of University Computing Resources" ; wsu:hasPolicyNumber "11210" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+:Policy_11300 a wsu:Policy ; rdfs:label "IT Security Policy" ; wsu:hasPolicyNumber "11300" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+:Policy_11400 a wsu:Policy ; rdfs:label "University Email" ; wsu:hasPolicyNumber "11400" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+:Policy_11500 a wsu:Policy ; rdfs:label "Recording Devices" ; wsu:hasPolicyNumber "11500" ; wsu:belongsToSeries :Series_11000 ; wsu:belongsToCategory :Cat_11000_1 .
+
+:Series_12000 a wsu:PolicySeries ;
+    rdfs:label "Series 12000: Institutional Identity and Records" .
+
+:Cat_12000_1 a wsu:PolicyCategory ;
+    rdfs:label "Regulations (Series 12000)" .
+
+:Policy_12010 a wsu:Policy ; rdfs:label "Copyrighted Materials" ; wsu:hasPolicyNumber "12010" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_1 .
+:Policy_12020 a wsu:Policy ; rdfs:label "University Marks, Words, Logos, and Symbols" ; wsu:hasPolicyNumber "12020" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_1 .
+:Policy_12030 a wsu:Policy ; rdfs:label "Institutional Identity Program and Publications" ; wsu:hasPolicyNumber "12030" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_1 .
+
+:Cat_12000_2 a wsu:PolicyCategory ;
+    rdfs:label "University Publications (Series 12000)" .
+
+:Policy_12110 a wsu:Policy ; rdfs:label "Production of Official University Publications and Acquisition of Printed Materials" ; wsu:hasPolicyNumber "12110" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_2 .
+:Policy_12120 a wsu:Policy ; rdfs:label "Advertising" ; wsu:hasPolicyNumber "12120" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_2 .
+
+:Cat_12000_3 a wsu:PolicyCategory ;
+    rdfs:label "Records (Series 12000)" .
+
+:Policy_12210 a wsu:Policy ; rdfs:label "Public Records Policy" ; wsu:hasPolicyNumber "12210" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_3 .
+:Policy_12220 a wsu:Policy ; rdfs:label "Records Management and Retention" ; wsu:hasPolicyNumber "12220" ; wsu:belongsToSeries :Series_12000 ; wsu:belongsToCategory :Cat_12000_3 .
+
+:Series_13000 a wsu:PolicySeries ;
+    rdfs:label "Series 13000: Emergency, Health, Safety and Accessibility" .
+
+:Cat_13000_1 a wsu:PolicyCategory ;
+    rdfs:label "Emergencies, Injuries and Illnesses (Series 13000)" .
+
+:Policy_13210 a wsu:Policy ; rdfs:label "Emergency Management" ; wsu:hasPolicyNumber "13210" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_1 .
+:Policy_13220 a wsu:Policy ; rdfs:label "Emergency Closing Procedures" ; wsu:hasPolicyNumber "13220" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_1 .
+:Policy_13270 a wsu:Policy ; rdfs:label "Emergency Care for Injuries and Illnesses" ; wsu:hasPolicyNumber "13270" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_1 .
+:Policy_13275 a wsu:Policy ; rdfs:label "Reporting Injuries and Illnesses" ; wsu:hasPolicyNumber "13275" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_1 .
+
+:Cat_13000_2 a wsu:PolicyCategory ;
+    rdfs:label "Environmental Health and Safety (Series 13000)" .
+
+:Policy_13301 a wsu:Policy ; rdfs:label "Environmental Health and Safety" ; wsu:hasPolicyNumber "13301" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13310 a wsu:Policy ; rdfs:label "Fire Safety Plan" ; wsu:hasPolicyNumber "13310" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13320 a wsu:Policy ; rdfs:label "Pregnancy in the Workplace and in Academic and Research Settings" ; wsu:hasPolicyNumber "13320" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13330 a wsu:Policy ; rdfs:label "Exit Policy for the Closeout/Decommissioning of University Laboratories" ; wsu:hasPolicyNumber "13330" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13340 a wsu:Policy ; rdfs:label "Safety Shoes" ; wsu:hasPolicyNumber "13340" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13350 a wsu:Policy ; rdfs:label "Non-occupational Exposure to Bloodborne Pathogens" ; wsu:hasPolicyNumber "13350" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13370 a wsu:Policy ; rdfs:label "Space Heater Usage" ; wsu:hasPolicyNumber "13370" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+:Policy_13375 a wsu:Policy ; rdfs:label "Holiday Lighting & Decoration" ; wsu:hasPolicyNumber "13375" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_2 .
+
+:Cat_13000_3 a wsu:PolicyCategory ;
+    rdfs:label "Emergency, Health, Safety and Accessibility (Series 13000)" .
+
+:Policy_13410 a wsu:Policy ; rdfs:label "Children on Campus and Working with Minors Policy" ; wsu:hasPolicyNumber "13410" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_3 .
+
+:Cat_13000_4 a wsu:PolicyCategory ;
+    rdfs:label "Accessibility (Series 13000)" .
+
+:Policy_13620 a wsu:Policy ; rdfs:label "Digital Accessibility" ; wsu:hasPolicyNumber "13620" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_4 .
+:Policy_13650 a wsu:Policy ; rdfs:label "Service Animal Use on Campus" ; wsu:hasPolicyNumber "13650" ; wsu:belongsToSeries :Series_13000 ; wsu:belongsToCategory :Cat_13000_4 .
+
+:Series_14000 a wsu:PolicySeries ;
+    rdfs:label "Series 14000: Boonshoft School of Medicine" .
+
+:Cat_14000_1 a wsu:PolicyCategory ;
+    rdfs:label "Boonshoft School of Medicine (Series 14000)" .
+
+:Policy_14010 a wsu:Policy ; rdfs:label "Non-Faculty Instructors" ; wsu:hasPolicyNumber "14010" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14020 a wsu:Policy ; rdfs:label "Non-Involvement of Care Providers in Medical Student Assessment and Promotion" ; wsu:hasPolicyNumber "14020" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14410 a wsu:Policy ; rdfs:label "MD Program Academic Standing" ; wsu:hasPolicyNumber "14410" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14420 a wsu:Policy ; rdfs:label "Advancement and Graduation" ; wsu:hasPolicyNumber "14420" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14430 a wsu:Policy ; rdfs:label "Appeals" ; wsu:hasPolicyNumber "14430" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14440 a wsu:Policy ; rdfs:label "MD Program Duty Hours" ; wsu:hasPolicyNumber "14440" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14450 a wsu:Policy ; rdfs:label "MD Program Assessment Timeliness" ; wsu:hasPolicyNumber "14450" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14460 a wsu:Policy ; rdfs:label "MD Program USMLE Timing Requirements" ; wsu:hasPolicyNumber "14460" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14470 a wsu:Policy ; rdfs:label "MD Program Immunization Requirements" ; wsu:hasPolicyNumber "14470" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14480_TechnicalStandards a wsu:Policy ; rdfs:label "Technical Standards" ; wsu:hasPolicyNumber "14480" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14480_MDProgramLeavesOfAbsence a wsu:Policy ; rdfs:label "MD Program Leaves of Absence" ; wsu:hasPolicyNumber "14480" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+:Policy_14490 a wsu:Policy ; rdfs:label "Transfers" ; wsu:hasPolicyNumber "14490" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 .
+:Policy_14510 a wsu:Policy ; rdfs:label "Tuition and Fee Refunds for MD Program" ; wsu:hasPolicyNumber "14510" ; wsu:belongsToSeries :Series_14000 ; wsu:belongsToCategory :Cat_14000_1 ; wsu:appliesToPopulation "MDProgram" .
+
+:Policy_1110 a wsu:Policy ;
+    rdfs:label "Statement of Purpose" ;
+    wsu:hasPolicyNumber "1110" ;
+    rdfs:comment "Cited in the Student Handbook; not listed in the policy index." .
+
+:Policy_8001 a wsu:Policy ;
+    rdfs:label "Discrimination and Harassment Based on Protected Class" ;
+    wsu:hasPolicyNumber "8001" ;
+    rdfs:comment "Cited in the Student Handbook; not listed in the policy index." .
+
+:Policy_5505 a wsu:Policy ;
+    rdfs:label "Program of Study" ;
+    wsu:hasPolicyNumber "5505" ;
+    rdfs:comment "Cited on the Graduate Programs Policies page; the policy index lists Program of Study as 5470." .
+
+:Policy_5510 a wsu:Policy ;
+    rdfs:label "Academic Standards" ;
+    wsu:hasPolicyNumber "5510" ;
+    rdfs:comment "Cited on the Graduate Programs Policies page under Requirements for Master's Degrees; the policy index lists Academic Standards as 5370." .
+
+:Policy_5540 a wsu:Policy ;
+    rdfs:label "Residence Requirements" ;
+    wsu:hasPolicyNumber "5540" ;
+    rdfs:comment "Cited on the Graduate Programs Policies page; the policy index lists Residence Requirements as 5380." .
+
+
+# ==== Credentials ====
+
+:Degree_AccountancyBSB a wsu:DegreeProgram ; rdfs:label "Accountancy, BSB" .
+:Degree_ActingBFA a wsu:DegreeProgram ; rdfs:label "Acting, BFA" .
+:Credential_AdaptedPhysicalEducationEndorsement a wsu:Credential ; rdfs:label "Adapted Physical Education Endorsement" .
+:Credential_AdolescenceToYoungAdultLicensureUndergraduate a wsu:Credential ; rdfs:label "Adolescence to Young Adult Licensure (Undergraduate)" .
+:Credential_AdolescentToYoungAdultEducationLicensureGraduate a wsu:Credential ; rdfs:label "Adolescent to Young Adult Education Licensure (Graduate)" .
+:Degree_AdolescentToYoungAdultEducationMEd a wsu:DegreeProgram ; rdfs:label "Adolescent to Young Adult Education, MEd" .
+:Degree_AerospaceSystemsEngineeringMSASE a wsu:DegreeProgram ; rdfs:label "Aerospace Systems Engineering, MSASE" .
+:Minor_AfricanAndAfricanAmericanStudiesMinor a wsu:Minor ; rdfs:label "African and African American Studies Minor" .
+:Degree_AfricanAndAfricanAmericanStudiesBA a wsu:DegreeProgram ; rdfs:label "African and African American Studies, BA" .
+:Certificate_AgriculturalBusinessManagementCertificate a wsu:Certificate ; rdfs:label "Agricultural Business Management Certificate" .
+:Certificate_AnalyticsForBusinessProfessionalsCertificate a wsu:Certificate ; rdfs:label "Analytics for Business Professionals Certificate" .
+:Certificate_AnatomyCertificate a wsu:Certificate ; rdfs:label "Anatomy Certificate" .
+:Degree_AnatomyMS a wsu:DegreeProgram ; rdfs:label "Anatomy, MS" .
+:Minor_AnthropologyMinor a wsu:Minor ; rdfs:label "Anthropology Minor" .
+:Degree_AnthropologyBA a wsu:DegreeProgram ; rdfs:label "Anthropology, BA" .
+:Degree_AppliedBusinessTechnologiesAAB a wsu:DegreeProgram ; rdfs:label "Applied Business Technologies, AAB" .
+:Certificate_ArchivesAndRecordsManagementCertificate a wsu:Certificate ; rdfs:label "Archives and Records Management Certificate" .
+:Minor_ArtHistoryMinor a wsu:Minor ; rdfs:label "Art History Minor" .
+:Degree_ArtBA a wsu:DegreeProgram ; rdfs:label "Art, BA" .
+:Degree_ArtBFA a wsu:DegreeProgram ; rdfs:label "Art, BFA" .
+:Certificate_ArtsManagementCertificate a wsu:Certificate ; rdfs:label "Arts Management Certificate" .
+:Degree_AthleticTrainingMAT a wsu:DegreeProgram ; rdfs:label "Athletic Training, MAT" .
+:Degree_AviationScienceAndTechnologyBS a wsu:DegreeProgram ; rdfs:label "Aviation Science and Technology, BS" .
+:Certificate_BigAndSmartDataSciencesCertificate a wsu:Certificate ; rdfs:label "Big and Smart Data Sciences Certificate" .
+:Degree_BiochemistryAndMolecularBiologyBS a wsu:DegreeProgram ; rdfs:label "Biochemistry and Molecular Biology, BS" .
+:Degree_BiochemistryAndMolecularBiologyMS a wsu:DegreeProgram ; rdfs:label "Biochemistry and Molecular Biology, MS" .
+:Minor_BiologicalSciencesMinor a wsu:Minor ; rdfs:label "Biological Sciences Minor" .
+:Degree_BiologicalSciencesAS a wsu:DegreeProgram ; rdfs:label "Biological Sciences, AS" .
+:Degree_BiologicalSciencesBA a wsu:DegreeProgram ; rdfs:label "Biological Sciences, BA" .
+:Degree_BiologicalSciencesBS a wsu:DegreeProgram ; rdfs:label "Biological Sciences, BS" .
+:Degree_BiologicalSciencesMS a wsu:DegreeProgram ; rdfs:label "Biological Sciences, MS" .
+:Degree_BiomedicalEngineeringBSBE a wsu:DegreeProgram ; rdfs:label "Biomedical Engineering, BSBE" .
+:Degree_BiomedicalEngineeringMSBME a wsu:DegreeProgram ; rdfs:label "Biomedical Engineering, MSBME" .
+:Certificate_BusinessAnalyticsCertificate a wsu:Certificate ; rdfs:label "Business Analytics Certificate" .
+:Minor_BusinessAnalyticsMinor a wsu:Minor ; rdfs:label "Business Analytics Minor" .
+:Degree_BusinessAndAdministrationAS a wsu:DegreeProgram ; rdfs:label "Business and Administration, AS" .
+:Degree_BusinessEconomicsBSB a wsu:DegreeProgram ; rdfs:label "Business Economics, BSB" .
+:Minor_BusinessMinor a wsu:Minor ; rdfs:label "Business Minor" .
+:Degree_BusinessMBA a wsu:DegreeProgram ; rdfs:label "Business, MBA" .
+:Certificate_CareerAdvancementSkillsICertificate a wsu:Certificate ; rdfs:label "Career Advancement Skills I Certificate" .
+:Certificate_CareerAdvancementSkillsIICertificate a wsu:Certificate ; rdfs:label "Career Advancement Skills II Certificate" .
+:Certificate_ChemicalBiologicalRadiologicalNuclearDefenseCertificate a wsu:Certificate ; rdfs:label "Chemical, Biological Radiological, Nuclear Defense Certificate" .
+:Minor_ChemistryMinor a wsu:Minor ; rdfs:label "Chemistry Minor" .
+:Degree_ChemistryBA a wsu:DegreeProgram ; rdfs:label "Chemistry, BA" .
+:Degree_ChemistryBS a wsu:DegreeProgram ; rdfs:label "Chemistry, BS" .
+:Degree_ChemistryMS a wsu:DegreeProgram ; rdfs:label "Chemistry, MS" .
+:Minor_ClassicalLanguagesAndCulturesMinor a wsu:Minor ; rdfs:label "Classical Languages and Cultures Minor" .
+:Degree_ClinicalMentalHealthCounselingMS a wsu:DegreeProgram ; rdfs:label "Clinical Mental Health Counseling, MS" .
+:Degree_ClinicalPsychologyPsyD a wsu:DegreeProgram ; rdfs:label "Clinical Psychology, PsyD" .
+:Minor_CommunicationStudiesMinor a wsu:Minor ; rdfs:label "Communication Studies Minor" .
+:Degree_CommunicationStudiesBA a wsu:DegreeProgram ; rdfs:label "Communication Studies, BA" .
+:Minor_ComparativeReligionMinor a wsu:Minor ; rdfs:label "Comparative Religion Minor" .
+:Degree_ComparativeReligionBA a wsu:DegreeProgram ; rdfs:label "Comparative Religion, BA" .
+:Degree_ComputerEngineeringBSCE a wsu:DegreeProgram ; rdfs:label "Computer Engineering, BSCE" .
+:Degree_ComputerEngineeringMSCE a wsu:DegreeProgram ; rdfs:label "Computer Engineering, MSCE" .
+:Degree_ComputerScienceAndEngineeringPhD a wsu:DegreeProgram ; rdfs:label "Computer Science and Engineering, PhD" .
+:Minor_ComputerScienceMinor a wsu:Minor ; rdfs:label "Computer Science Minor" .
+:Degree_ComputerScienceBACS a wsu:DegreeProgram ; rdfs:label "Computer Science, BACS" .
+:Degree_ComputerScienceBSCS a wsu:DegreeProgram ; rdfs:label "Computer Science, BSCS" .
+:Degree_ComputerScienceMS a wsu:DegreeProgram ; rdfs:label "Computer Science, MS" .
+:Minor_ComputingAndInformationTechnologyMinor a wsu:Minor ; rdfs:label "Computing and Information Technology Minor" .
+:Minor_ControlsSystemsMinor a wsu:Minor ; rdfs:label "Controls Systems Minor" .
+:Minor_CrimeAndJusticeStudiesMinor a wsu:Minor ; rdfs:label "Crime and Justice Studies Minor" .
+:Degree_CrimeAndJusticeStudiesBA a wsu:DegreeProgram ; rdfs:label "Crime and Justice Studies, BA" .
+:Certificate_CyberSecurityAnalyticsCertificateGraduate a wsu:Certificate ; rdfs:label "Cyber Security Analytics Certificate (Graduate)" .
+:Certificate_CyberSecurityAnalyticsCertificateUndergraduate a wsu:Certificate ; rdfs:label "Cyber Security Analytics Certificate (Undergraduate)" .
+:Degree_CyberSecurityMSCS a wsu:DegreeProgram ; rdfs:label "Cyber Security, MSCS" .
+:Minor_DanceMinor a wsu:Minor ; rdfs:label "Dance Minor" .
+:Degree_DanceBFA a wsu:DegreeProgram ; rdfs:label "Dance, BFA" .
+:Minor_DeafStudiesMinor a wsu:Minor ; rdfs:label "Deaf Studies Minor" .
+:Degree_DesignTechnologyBFA a wsu:DegreeProgram ; rdfs:label "Design/Technology, BFA" .
+:Certificate_DigitalVLSIDigiVLSICertificate a wsu:Certificate ; rdfs:label "Digital VLSI (DigiVLSI) Certificate" .
+:Minor_DisabilityStudiesMinor a wsu:Minor ; rdfs:label "Disability Studies Minor" .
+:Certificate_DiversityAndSocialInequalityCertificateGraduate a wsu:Certificate ; rdfs:label "Diversity and Social Inequality Certificate (Graduate)" .
+:Minor_DSPWirelessMinor a wsu:Minor ; rdfs:label "DSP/Wireless Minor" .
+:Certificate_DyslexiaSpecialistCertificate a wsu:Certificate ; rdfs:label "Dyslexia Specialist Certificate" .
+:Degree_EarthAndEnvironmentalSciencesBS a wsu:DegreeProgram ; rdfs:label "Earth and Environmental Sciences, BS" .
+:Certificate_EconomicIssuesCertificate a wsu:Certificate ; rdfs:label "Economic Issues Certificate" .
+:Minor_EconomicsMinor a wsu:Minor ; rdfs:label "Economics Minor" .
+:Degree_ElectricalEngineeringBSEE a wsu:DegreeProgram ; rdfs:label "Electrical Engineering, BSEE" .
+:Degree_ElectricalEngineeringMSEE a wsu:DegreeProgram ; rdfs:label "Electrical Engineering, MSEE" .
+:Degree_ElectricalEngineeringPhD a wsu:DegreeProgram ; rdfs:label "Electrical Engineering, PhD" .
+:Minor_ElectronicsMinor a wsu:Minor ; rdfs:label "Electronics Minor" .
+:Degree_ElementaryEducationP5BSEd a wsu:DegreeProgram ; rdfs:label "Elementary Education P-5, BSEd" .
+:Minor_EmergencyManagementMinor a wsu:Minor ; rdfs:label "Emergency Management Minor" .
+:Degree_EngineeringPhD a wsu:DegreeProgram ; rdfs:label "Engineering, PhD" .
+:Minor_EnglishMinor a wsu:Minor ; rdfs:label "English Minor" .
+:Degree_EnglishBA a wsu:DegreeProgram ; rdfs:label "English, BA" .
+:Minor_EnglishCreativeWritingMinor a wsu:Minor ; rdfs:label "English, Creative Writing Minor" .
+:Degree_EnglishMA a wsu:DegreeProgram ; rdfs:label "English, MA" .
+:Certificate_EnglishTeachingEnglishAsAForeignLanguageUndergraduateCertificate a wsu:Certificate ; rdfs:label "English, Teaching English as a Foreign Language Undergraduate Certificate" .
+:Credential_EnglishTeachingEnglishToSpeakersOfOtherLanguagesEndorsement a wsu:Credential ; rdfs:label "English, Teaching English to Speakers of Other Languages Endorsement" .
+:Certificate_EnglishTeachingEnglishToSpeakersOfOtherLanguagesGraduateCertificate a wsu:Certificate ; rdfs:label "English, Teaching English to Speakers of Other Languages Graduate Certificate" .
+:Minor_EnglishTeachingEnglishToSpeakersOfOtherLanguagesMinor a wsu:Minor ; rdfs:label "English, Teaching English to Speakers of Other Languages Minor" .
+:Certificate_EnglishTeachingEnglishToSpeakersOfOtherLanguagesUndergraduateCertificate a wsu:Certificate ; rdfs:label "English, Teaching English to Speakers of Other Languages Undergraduate Certificate" .
+:Minor_EntrepreneurshipEssentialsMinor a wsu:Minor ; rdfs:label "Entrepreneurship Essentials Minor" .
+:Minor_EntrepreneurshipMinor a wsu:Minor ; rdfs:label "Entrepreneurship Minor" .
+:Degree_EntrepreneurshipBSB a wsu:DegreeProgram ; rdfs:label "Entrepreneurship, BSB" .
+:Certificate_EpidemiologyCertificate a wsu:Certificate ; rdfs:label "Epidemiology Certificate" .
+:Degree_ExceptionalitiesMEd a wsu:DegreeProgram ; rdfs:label "Exceptionalities, MEd" .
+:Degree_FinanceBSB a wsu:DegreeProgram ; rdfs:label "Finance, BSB" .
+:Degree_FinancialServicesBSB a wsu:DegreeProgram ; rdfs:label "Financial Services, BSB" .
+:Certificate_ForeignServiceGraduateCertificate a wsu:Certificate ; rdfs:label "Foreign Service Graduate Certificate" .
+:Certificate_ForeignServiceUndergraduateCertificate a wsu:Certificate ; rdfs:label "Foreign Service Undergraduate Certificate" .
+:Minor_ForensicStudiesMinor a wsu:Minor ; rdfs:label "Forensic Studies Minor" .
+:Minor_FrenchMinor a wsu:Minor ; rdfs:label "French Minor" .
+:Certificate_GenderRaceAndEconomyCertificate a wsu:Certificate ; rdfs:label "Gender, Race, and Economy Certificate" .
+:Certificate_GeographicInformationScienceCertificate a wsu:Certificate ; rdfs:label "Geographic Information Science Certificate" .
+:Minor_GeographyMinor a wsu:Minor ; rdfs:label "Geography Minor" .
+:Degree_GeographyBS a wsu:DegreeProgram ; rdfs:label "Geography, BS" .
+:Certificate_GerontologyCertificate a wsu:Certificate ; rdfs:label "Gerontology Certificate" .
+:Credential_GiftedInterventionSpecialistEndorsement a wsu:Credential ; rdfs:label "Gifted Intervention Specialist Endorsement" .
+:Degree_GraphicAndMultimediaDesignAAB a wsu:DegreeProgram ; rdfs:label "Graphic and Multimedia Design, AAB" .
+:Certificate_GraphicCommunicationCertificate a wsu:Certificate ; rdfs:label "Graphic Communication Certificate" .
+:Certificate_HealthCareManagementCertificate a wsu:Certificate ; rdfs:label "Health Care Management Certificate" .
+:Minor_HealthCommunicationMinor a wsu:Minor ; rdfs:label "Health Communication Minor" .
+:Minor_HistoryMinor a wsu:Minor ; rdfs:label "History Minor" .
+:Degree_HistoryBA a wsu:DegreeProgram ; rdfs:label "History, BA" .
+:Degree_HistoryMA a wsu:DegreeProgram ; rdfs:label "History, MA" .
+:Degree_HumanFactorsAndIndustrialOrganizationalPsychologyMS a wsu:DegreeProgram ; rdfs:label "Human Factors and Industrial/Organizational Psychology, MS" ; rdfs:comment "Also listed in the A-Z index as 'Industrial/Organizational and Human Factors Psychology, MS'." .
+:Degree_HumanFactorsIndustrialPsychologyPhD a wsu:DegreeProgram ; rdfs:label "Human Factors/Industrial Psychology, PhD" ; rdfs:comment "Listed on the tuition page as 'Human Factors and Industrial/Organizational Psychology (Ph.D.)'." .
+:Certificate_HumanResourceManagementCertificate a wsu:Certificate ; rdfs:label "Human Resource Management Certificate" .
+:Degree_HumanResourceManagementBSB a wsu:DegreeProgram ; rdfs:label "Human Resource Management, BSB" .
+:Certificate_HumanResourcesCertificate a wsu:Certificate ; rdfs:label "Human Resources Certificate" .
+:Degree_HumanitiesMHum a wsu:DegreeProgram ; rdfs:label "Humanities, MHum" .
+:Degree_IndustrialAndHumanFactorsEngineeringMSIHE a wsu:DegreeProgram ; rdfs:label "Industrial and Human Factors Engineering, MSIHE" .
+:Degree_IndustrialAndSystemsEngineeringBSISE a wsu:DegreeProgram ; rdfs:label "Industrial and Systems Engineering, BSISE" .
+:Degree_InformationSystemsMIS a wsu:DegreeProgram ; rdfs:label "Information Systems, MIS" .
+:Degree_InformationTechnologyAndCybersecurityBSITC a wsu:DegreeProgram ; rdfs:label "Information Technology and Cybersecurity, BSITC" .
+:Certificate_InformationTechnologyManagementCertificate a wsu:Certificate ; rdfs:label "Information Technology Management Certificate" .
+:Minor_IntegratedHumanServicesMinor a wsu:Minor ; rdfs:label "Integrated Human Services Minor" .
+:Degree_InterdisciplinaryAppliedScienceAndMathematicsPhD a wsu:DegreeProgram ; rdfs:label "Interdisciplinary Applied Science and Mathematics, PhD" .
+:Minor_InternationalBusinessMinor a wsu:Minor ; rdfs:label "International Business Minor" .
+:Degree_InternationalBusinessBSB a wsu:DegreeProgram ; rdfs:label "International Business, BSB" .
+:Minor_InternationalStudiesMinor a wsu:Minor ; rdfs:label "International Studies Minor" .
+:Degree_InternationalStudiesBA a wsu:DegreeProgram ; rdfs:label "International Studies, BA" .
+:Degree_InterventionSpecialistBSEd a wsu:DegreeProgram ; rdfs:label "Intervention Specialist, BSEd" .
+:Degree_InterventionSpecialistMEd a wsu:DegreeProgram ; rdfs:label "Intervention Specialist, MEd" .
+:Degree_LeadershipDevelopmentMS a wsu:DegreeProgram ; rdfs:label "Leadership Development, MS" .
+:Certificate_LeanErgonomicsForManufacturingAndHealthCareCertificate a wsu:Certificate ; rdfs:label "Lean Ergonomics for Manufacturing and Health Care Certificate" .
+:Certificate_LegalStudiesCertificate a wsu:Certificate ; rdfs:label "Legal Studies Certificate" .
+:Minor_LegalStudiesMinor a wsu:Minor ; rdfs:label "Legal Studies Minor" .
+:Degree_LiteracyMEd a wsu:DegreeProgram ; rdfs:label "Literacy, MEd" .
+:Degree_LogisticsAndSupplyChainManagementMS a wsu:DegreeProgram ; rdfs:label "Logistics and Supply Chain Management, MS" .
+:Minor_ManagementInformationSystemsMinor a wsu:Minor ; rdfs:label "Management Information Systems Minor" .
+:Degree_ManagementInformationSystemsBSB a wsu:DegreeProgram ; rdfs:label "Management Information Systems, BSB" .
+:Minor_ManagementMinor a wsu:Minor ; rdfs:label "Management Minor" .
+:Degree_ManagementBSB a wsu:DegreeProgram ; rdfs:label "Management, BSB" .
+:Degree_MarketingAnalyticsAndInsightsMS a wsu:DegreeProgram ; rdfs:label "Marketing Analytics and Insights, MS" .
+:Minor_MarketingMinor a wsu:Minor ; rdfs:label "Marketing Minor" .
+:Degree_MarketingBSB a wsu:DegreeProgram ; rdfs:label "Marketing, BSB" .
+:Minor_MaterialsScienceAndEngineeringMinor a wsu:Minor ; rdfs:label "Materials Science and Engineering Minor" .
+:Degree_MaterialsScienceAndEngineeringBSMSE a wsu:DegreeProgram ; rdfs:label "Materials Science and Engineering, BSMSE" .
+:Degree_MaterialsScienceAndEngineeringMSMSE a wsu:DegreeProgram ; rdfs:label "Materials Science and Engineering, MSMSE" .
+:Minor_MathematicsMinor a wsu:Minor ; rdfs:label "Mathematics Minor" .
+:Degree_MathematicsBA a wsu:DegreeProgram ; rdfs:label "Mathematics, BA" .
+:Degree_MathematicsBS a wsu:DegreeProgram ; rdfs:label "Mathematics, BS" .
+:Degree_MathematicsMS a wsu:DegreeProgram ; rdfs:label "Mathematics, MS" .
+:Degree_MechanicalEngineeringBSME a wsu:DegreeProgram ; rdfs:label "Mechanical Engineering, BSME" .
+:Degree_MechanicalEngineeringMSME a wsu:DegreeProgram ; rdfs:label "Mechanical Engineering, MSME" .
+:Minor_MediaStudiesMinor a wsu:Minor ; rdfs:label "Media Studies Minor" .
+:Minor_MedicalHumanitiesAndHealthStudiesMinor a wsu:Minor ; rdfs:label "Medical Humanities and Health Studies Minor" .
+:Degree_MedicalLaboratoryScienceBS a wsu:DegreeProgram ; rdfs:label "Medical Laboratory Science, BS" .
+:Degree_MedicineMD a wsu:DegreeProgram ; rdfs:label "Medicine, MD" .
+:Degree_MicrobiologyAndImmunologyMS a wsu:DegreeProgram ; rdfs:label "Microbiology and Immunology, MS" .
+:Degree_MiddleChildhoodEducationBSEd a wsu:DegreeProgram ; rdfs:label "Middle Childhood Education, BSEd" .
+:Degree_ModernLanguagesBA a wsu:DegreeProgram ; rdfs:label "Modern Languages, BA" .
+:Degree_MotionPicturesBA a wsu:DegreeProgram ; rdfs:label "Motion Pictures, BA" .
+:Degree_MotionPicturesBFA a wsu:DegreeProgram ; rdfs:label "Motion Pictures, BFA" .
+:Minor_MovingProjectsMinor a wsu:Minor ; rdfs:label "Moving Projects (Minor)" .
+:Credential_MultiAgeEducationLicensure a wsu:Credential ; rdfs:label "Multi-Age Education Licensure" ; rdfs:comment "Also listed in the A-Z index as 'Multi-Age Licensure'." .
+:Certificate_MuseumStudiesCertificate a wsu:Certificate ; rdfs:label "Museum Studies Certificate" .
+:Degree_MusicEducationBM a wsu:DegreeProgram ; rdfs:label "Music Education, BM" .
+:Minor_MusicMinor a wsu:Minor ; rdfs:label "Music Minor" .
+:Degree_MusicBA a wsu:DegreeProgram ; rdfs:label "Music, BA" .
+:Certificate_NationalSecurityStudiesCertificate a wsu:Certificate ; rdfs:label "National Security Studies Certificate" .
+:Degree_NursingBSN a wsu:DegreeProgram ; rdfs:label "Nursing, BSN" .
+:Certificate_NursingSchoolNurseCertificate a wsu:Certificate ; rdfs:label "Nursing, School Nurse Certificate" .
+:Minor_OrganizationalLeadershipMinor a wsu:Minor ; rdfs:label "Organizational Leadership Minor" .
+:Degree_OrganizationalLeadershipBS a wsu:DegreeProgram ; rdfs:label "Organizational Leadership, BS" .
+:Degree_OrganizationalStudiesEdD a wsu:DegreeProgram ; rdfs:label "Organizational Studies, EdD" .
+:Degree_PerformanceBM a wsu:DegreeProgram ; rdfs:label "Performance, BM" .
+:Degree_PharmacologyAndToxicologyMS a wsu:DegreeProgram ; rdfs:label "Pharmacology and Toxicology, MS" .
+:Minor_PhilosophyMinor a wsu:Minor ; rdfs:label "Philosophy Minor" .
+:Degree_PhilosophyBA a wsu:DegreeProgram ; rdfs:label "Philosophy, BA" .
+:Degree_PhysicalEducationMA a wsu:DegreeProgram ; rdfs:label "Physical Education, MA" .
+:Minor_PhysicsMinor a wsu:Minor ; rdfs:label "Physics Minor" .
+:Degree_PhysicsBA a wsu:DegreeProgram ; rdfs:label "Physics, BA" .
+:Degree_PhysicsBS a wsu:DegreeProgram ; rdfs:label "Physics, BS" .
+:Degree_PhysicsMS a wsu:DegreeProgram ; rdfs:label "Physics, MS" .
+:Degree_PhysiologyAndNeuroscienceBS a wsu:DegreeProgram ; rdfs:label "Physiology and Neuroscience, BS" .
+:Degree_PhysiologyAndNeuroscienceMS a wsu:DegreeProgram ; rdfs:label "Physiology and Neuroscience, MS" .
+:Minor_PolicingAndInvestigativeStudiesMinor a wsu:Minor ; rdfs:label "Policing and Investigative Studies Minor" .
+:Minor_PoliticalScienceMinor a wsu:Minor ; rdfs:label "Political Science Minor" .
+:Degree_PoliticalScienceBA a wsu:DegreeProgram ; rdfs:label "Political Science, BA" .
+:Certificate_PowerElectronicsCertificate a wsu:Certificate ; rdfs:label "Power Electronics Certificate" .
+:Certificate_ProgramEvaluationCertificate a wsu:Certificate ; rdfs:label "Program Evaluation Certificate" .
+:Minor_PsychologyMinor a wsu:Minor ; rdfs:label "Psychology Minor" .
+:Degree_PsychologyBA a wsu:DegreeProgram ; rdfs:label "Psychology, BA" .
+:Degree_PsychologyBS a wsu:DegreeProgram ; rdfs:label "Psychology, BS" .
+:Degree_PublicAdministrationMPA a wsu:DegreeProgram ; rdfs:label "Public Administration, MPA" .
+:Certificate_PublicHealthLeadershipCertificate a wsu:Certificate ; rdfs:label "Public Health Leadership Certificate" .
+:Minor_PublicHealthMinor a wsu:Minor ; rdfs:label "Public Health Minor" .
+:Degree_PublicHealthBA a wsu:DegreeProgram ; rdfs:label "Public Health, BA" .
+:Degree_PublicHealthBS a wsu:DegreeProgram ; rdfs:label "Public Health, BS" .
+:Degree_PublicHealthMPH a wsu:DegreeProgram ; rdfs:label "Public Health, MPH" .
+:Certificate_RadioFrequencyMixedSignalIntegratedCircuitDesignRFCertificate a wsu:Certificate ; rdfs:label "Radio Frequency Mixed Signal Integrated Circuit Design (RF) Certificate" .
+:Credential_ReadingEndorsement a wsu:Credential ; rdfs:label "Reading Endorsement" .
+:Minor_ReligionMinor a wsu:Minor ; rdfs:label "Religion Minor" .
+:Degree_ReligionBA a wsu:DegreeProgram ; rdfs:label "Religion, BA" .
+:Minor_RenewableAndCleanEnergyMinor a wsu:Minor ; rdfs:label "Renewable and Clean Energy Minor" .
+:Degree_RenewableAndCleanEnergyMSRCE a wsu:DegreeProgram ; rdfs:label "Renewable and Clean Energy, MSRCE" .
+:Certificate_RFAndMicrowaveRFMWCertificate a wsu:Certificate ; rdfs:label "RF and Microwave (RFMW) Certificate" .
+:Degree_SchoolCounselingMEd a wsu:DegreeProgram ; rdfs:label "School Counseling, MEd" .
+:Certificate_SensorSignalAndImageProcessingSSIPCertificate a wsu:Certificate ; rdfs:label "Sensor Signal & Image Processing (SSIP) Certificate" .
+:Degree_SocialAndAppliedEconomicsMS a wsu:DegreeProgram ; rdfs:label "Social and Applied Economics, MS" .
+:Degree_SocialWorkBA a wsu:DegreeProgram ; rdfs:label "Social Work, BA" .
+:Degree_SocialWorkMASW a wsu:DegreeProgram ; rdfs:label "Social Work, MASW" .
+:Minor_SociologyMinor a wsu:Minor ; rdfs:label "Sociology Minor" .
+:Degree_SociologyBA a wsu:DegreeProgram ; rdfs:label "Sociology, BA" .
+:Minor_SpanishMinor a wsu:Minor ; rdfs:label "Spanish Minor" .
+:Certificate_SportsManagementCertificate a wsu:Certificate ; rdfs:label "Sports Management Certificate" .
+:Degree_SportsScienceBSEd a wsu:DegreeProgram ; rdfs:label "Sports Science, BSEd" .
+:Minor_StatisticsMinor a wsu:Minor ; rdfs:label "Statistics Minor" .
+:Degree_StatisticsBS a wsu:DegreeProgram ; rdfs:label "Statistics, BS" .
+:Minor_StudioArtMinor a wsu:Minor ; rdfs:label "Studio Art Minor" .
+:Certificate_SupplyChainManagementCertificate a wsu:Certificate ; rdfs:label "Supply Chain Management Certificate" .
+:Minor_SupplyChainManagementMinor a wsu:Minor ; rdfs:label "Supply Chain Management Minor" .
+:Degree_SupplyChainManagementBSB a wsu:DegreeProgram ; rdfs:label "Supply Chain Management, BSB" .
+:Degree_TechnicalAndAppliedStudiesBTAS a wsu:DegreeProgram ; rdfs:label "Technical and Applied Studies, BTAS" .
+:Degree_TechnicalStudyATS a wsu:DegreeProgram ; rdfs:label "Technical Study, ATS" .
+:Degree_TheatreStudiesBA a wsu:DegreeProgram ; rdfs:label "Theatre Studies, BA" .
+:Certificate_TraumaInformedCounselingCertificate a wsu:Certificate ; rdfs:label "Trauma-Informed Counseling Certificate" .
+:Certificate_UserExperienceUXAndDesignThinkingCertificate a wsu:Certificate ; rdfs:label "User Experience (UX) and Design Thinking Certificate" .
+:Minor_VLSIMinor a wsu:Minor ; rdfs:label "VLSI Minor" .
+:Certificate_WirelessCommunicationAndNetworkingCertificate a wsu:Certificate ; rdfs:label "Wireless Communication and Networking Certificate" .
+:Certificate_WomenGenderAndSexualityStudiesCertificateGraduate a wsu:Certificate ; rdfs:label "Women, Gender, and Sexuality Studies Certificate (Graduate)" .
+:Certificate_WomenGenderAndSexualityStudiesCertificateUndergraduate a wsu:Certificate ; rdfs:label "Women, Gender, and Sexuality Studies Certificate (Undergraduate)" .
+:Minor_WomenGenderAndSexualityStudiesMinor a wsu:Minor ; rdfs:label "Women, Gender, and Sexuality Studies Minor" .
+:Degree_WomenGenderAndSexualityStudiesBA a wsu:DegreeProgram ; rdfs:label "Women, Gender, and Sexuality Studies, BA" .
+:Minor_YouthAndCommunityEngagementMinor a wsu:Minor ; rdfs:label "Youth and Community Engagement Minor" .
+:Degree_BiomedicalSciencesPhD a wsu:DegreeProgram ; rdfs:label "Biomedical Sciences, PhD" .
+:Degree_EnvironmentalSciencesPhD a wsu:DegreeProgram ; rdfs:label "Environmental Sciences, PhD" .
+:Degree_NursingMS a wsu:DegreeProgram ; rdfs:label "Nursing, MS" .
+:Degree_DoctorOfNursingPractice a wsu:DegreeProgram ; rdfs:label "Doctor of Nursing Practice" .
+:Degree_MedicineAndPhilosophyMDPhD a wsu:DegreeProgram ; rdfs:label "Medicine and Philosophy, MD/PhD" .
+:Degree_MedicineAndBusinessAdministrationMDMBA a wsu:DegreeProgram ; rdfs:label "Medicine and Business Administration, MD/MBA" .
+:Degree_MedicineAndPublicHealthMDMPH a wsu:DegreeProgram ; rdfs:label "Medicine and Public Health, MD/MPH" .
+
+
+# ==== Student services and tuition program ====
+
+:Service_AcademicAdvising a wsu:StudentService ;
+    rdfs:label "Academic Advising" .
+
+:Service_AcademicSuccessCenters a wsu:StudentService ;
+    rdfs:label "Academic Success Centers" .
+
+:Service_ComputingAndTelecommunicationServices a wsu:StudentService ;
+    rdfs:label "Computing and Telecommunication Services" .
+
+:Service_DivisionOfStudentSuccess a wsu:StudentService ;
+    rdfs:label "Division of Student Success" .
+
+:Service_FoundationStudies a wsu:StudentService ;
+    rdfs:label "Foundation Studies" .
+
+:Service_MathLearningCenter a wsu:StudentService ;
+    rdfs:label "Math Learning Center" .
+
+:Service_TransferCenter a wsu:StudentService ;
+    rdfs:label "Transfer Center" .
+
+:Service_TutoringServices a wsu:StudentService ;
+    rdfs:label "Tutoring Services" .
+
+:Service_UniversityHonorsProgram a wsu:StudentService ;
+    rdfs:label "University Honors Program" ;
+    rdfs:comment "Directory: 101 Student Success Center, 3640 Colonel Glenn Hwy., Dayton, OH 45435; phone 937-775-2660; email Honors@wright.edu." .
+
+:Service_UniversityLibraries a wsu:StudentService ;
+    rdfs:label "University Libraries" .
+
+:Service_UniversityWritingCenter a wsu:StudentService ;
+    rdfs:label "University Writing Center" .
+
+:Service_AdmissionsGraduate a wsu:StudentService ;
+    rdfs:label "Admissions (Graduate)" .
+
+:Service_AdmissionsUndergraduate a wsu:StudentService ;
+    rdfs:label "Admissions (Undergraduate)" .
+
+:Service_Bursar a wsu:StudentService ;
+    rdfs:label "Bursar" .
+
+:Service_CareerServices a wsu:StudentService ;
+    rdfs:label "Career Services" .
+
+:Service_CommunityStandardsAndStudentConduct a wsu:StudentService ;
+    rdfs:label "Community Standards and Student Conduct" ;
+    wsu:administeredBy :OfficeOfCommunityStandardsAndStudentConduct .
+
+:Service_CounselingAndWellnessServices a wsu:StudentService ;
+    rdfs:label "Counseling and Wellness Services" .
+
+:Service_DiningServices a wsu:StudentService ;
+    rdfs:label "Dining Services" .
+
+:Service_DisabilityServices a wsu:StudentService ;
+    rdfs:label "Disability Services" .
+
+:Service_EnrollmentServices a wsu:StudentService ;
+    rdfs:label "Enrollment Services" .
+
+:Service_FinancialAid a wsu:StudentService ;
+    rdfs:label "Financial Aid" .
+
+:Service_ParkingAndTransportation a wsu:StudentService ;
+    rdfs:label "Parking and Transportation" .
+
+:Service_PoliceDepartment a wsu:StudentService ;
+    rdfs:label "Police Department" .
+
+:Service_PrintServices a wsu:StudentService ;
+    rdfs:label "Print Services" .
+
+:Service_RaiderCaresAndMentalHealthEmergencies a wsu:StudentService ;
+    rdfs:label "Raider Cares and Mental Health Emergencies" .
+
+:Service_Registrar a wsu:StudentService ;
+    rdfs:label "Registrar" ;
+    wsu:administeredBy :OfficeOfTheRegistrar .
+
+:Service_ResidenceLifeAndHousing a wsu:StudentService ;
+    rdfs:label "Residence Life and Housing" .
+
+:Service_ROTCAirForce a wsu:StudentService ;
+    rdfs:label "ROTC, Air Force" .
+
+:Service_ROTCArmy a wsu:StudentService ;
+    rdfs:label "ROTC, Army" .
+
+:Service_StudentAdvocacyAndWellness a wsu:StudentService ;
+    rdfs:label "Student Advocacy and Wellness" .
+
+:Service_StudentHealthServices a wsu:StudentService ;
+    rdfs:label "Student Health Services" .
+
+:Service_StudentUnionAdministrativeOffice a wsu:StudentService ;
+    rdfs:label "Student Union Administrative Office" .
+
+:Service_UniversityCenterForInternationalEducation a wsu:StudentService ;
+    rdfs:label "University Center for International Education" .
+
+:Service_VeteranAndMilitaryCenter a wsu:StudentService ;
+    rdfs:label "Veteran and Military Center" .
+
+:Service_VoterRegistration a wsu:StudentService ;
+    rdfs:label "Voter Registration" .
+
+:Service_WrightStateBookstore a wsu:StudentService ;
+    rdfs:label "Wright State Bookstore" .
+
+:Service_AcademicAdvisingLakeCampus a wsu:StudentService ;
+    rdfs:label "Academic Advising, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_StudentServicesLakeCampus a wsu:StudentService ;
+    rdfs:label "Student Services, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_CareerServicesLakeCampus a wsu:StudentService ;
+    rdfs:label "Career Services, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_DisabilityServicesLakeCampus a wsu:StudentService ;
+    rdfs:label "Disability Services, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_EnrollmentServicesLakeCampus a wsu:StudentService ;
+    rdfs:label "Enrollment Services, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_HousingLakeCampus a wsu:StudentService ;
+    rdfs:label "Housing, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:Service_StudentSuccessCenterLakeCampus a wsu:StudentService ;
+    rdfs:label "Student Success Center, Lake Campus" ;
+    wsu:appliesToCampus :LakeCampus .
+
+:WrightGuaranteeTuitionProgram a wsu:TuitionProgram ;
+    rdfs:label "Wright Guarantee Tuition Program" ;
+    rdfs:comment "Guarantees the same annual cost of in-state tuition, housing rates, and meal plans over a four-year college career for new incoming, degree-seeking undergraduate students; available for both the Dayton and Lake campuses. Out-of-state tuition for non-Ohio residents is not guaranteed." .
+
+
+# ==== Tuition: residency, levels, cohorts, cost components ====
+
+:OhioResidentCommuting a wsu:ResidencyStatus ;
+    rdfs:label "Ohio Resident (Commuting)" .
+
+:OhioResidentLivingOnCampus a wsu:ResidencyStatus ;
+    rdfs:label "Ohio Resident (Living on Campus)" .
+
+:OhioResident a wsu:ResidencyStatus ;
+    rdfs:label "Ohio Resident" .
+
+:NonOhioResident a wsu:ResidencyStatus ;
+    rdfs:label "Non-Ohio Resident" .
+
+:Level_Undergraduate a wsu:AcademicLevel ;
+    rdfs:label "Undergraduate" .
+
+:Level_Graduate a wsu:AcademicLevel ;
+    rdfs:label "Graduate" .
+
+:Level_Professional a wsu:AcademicLevel ;
+    rdfs:label "Professional" .
+
+:Cohort_WrightGuarantee_2026_27 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2026–27" ;
+    rdfs:comment "New incoming, degree-seeking undergraduate students starting in Fall 2026 or Spring 2027. Flat tuition covers 11–18 hours per semester; the per-hour rate applies to 1–10.5 hours and to each billable credit hour in excess of 18. Costs do not include course or program fees." .
+
+:Cohort_UndergraduateNonGuarantee_2026_27 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Non-Guarantee 2026–27" ;
+    rdfs:comment "Flat tuition covers 11–18 hours per semester; the per-hour rate applies to 1–10.5 hours and to each billable credit hour in excess of 18. Costs do not include course or program fees." .
+
+:Cohort_GraduateAndProfessional_2026_27 a wsu:TuitionCohort ;
+    rdfs:label "Graduate and Professional 2026–27" ;
+    rdfs:comment "Rates determined annually by the Wright State University Board of Trustees. Flat rates cover 11–18 hours per semester unless the rate label says '11 or more hours'; per-hour rates apply to 1–10.5 hours and, for 11–18-hour rates, to each billable credit hour in excess of 18." .
+
+:Cohort_WrightGuarantee_2018_19 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2018–19" .
+
+:Cohort_WrightGuarantee_2019_20 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2019–20" .
+
+:Cohort_WrightGuarantee_2020_21 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2020–21" .
+
+:Cohort_WrightGuarantee_2021_22 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2021–22" .
+
+:Cohort_WrightGuarantee_2022_23 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2022–23" .
+
+:Cohort_WrightGuarantee_2023_24 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2023–24" .
+
+:Cohort_WrightGuarantee_2024_25 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2024–25" .
+
+:Cohort_WrightGuarantee_2025_26 a wsu:TuitionCohort ;
+    rdfs:label "Undergraduate Wright Guarantee 2025–26" .
+
+:CostComponent_WG_Housing a wsu:CostComponent ;
+    rdfs:label "Campus Housing (Woods Double), Wright Guarantee 2026–27: $2,878 per semester" ;
+    rdfs:comment "Double occupancy for a Woods room." .
+
+:CostComponent_WG_Meals a wsu:CostComponent ;
+    rdfs:label "Meals (Gold Campus Dining), Wright Guarantee 2026–27: $2,000 per semester" ;
+    rdfs:comment "Default meal plan for residential dormitory students." .
+
+:CostComponent_WG_ActivityFees a wsu:CostComponent ;
+    rdfs:label "Activity/Communications/Hospitality Fees, Wright Guarantee 2026–27: $463 per semester" .
+
+:CostComponent_WG_RequiredFees a wsu:CostComponent ;
+    rdfs:label "Required Fees, Wright Guarantee 2026–27: $233.50 per semester" ;
+    rdfs:comment "Career Services and Campus Engagement fees." .
+
+:CostComponent_NG_Housing a wsu:CostComponent ;
+    rdfs:label "Campus Housing (Woods Double), Undergraduate Non-Guarantee 2026–27: $2,300 per semester" ;
+    rdfs:comment "Double occupancy for a Woods room." .
+
+:CostComponent_NG_Dining a wsu:CostComponent ;
+    rdfs:label "Gold Dining Plan, Undergraduate Non-Guarantee 2026–27: $1,939 per semester" ;
+    rdfs:comment "Default meal plan for residential dormitory students." .
+
+:CostComponent_NG_ActivityFees a wsu:CostComponent ;
+    rdfs:label "Activity/Communications/Hospitality Fees, Undergraduate Non-Guarantee 2026–27: $463 per semester" .
+
+:CostComponent_NG_Books a wsu:CostComponent ;
+    rdfs:label "Books and supplies, Undergraduate Non-Guarantee 2026–27: $700 per semester" ;
+    rdfs:comment "Estimate only—not guaranteed." .
+
+
+# ==== Tuition rates ====
+
+:TuitionRate_WG2026_OhioCommuting a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Wright Guarantee 2026–27, Ohio Resident (Commuting)" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_WrightGuarantee_2026_27 ;
+    wsu:appliesToResidency :OhioResidentCommuting ;
+    wsu:ratePerSemester "6085.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "546.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_WG_RequiredFees ;
+    rdfs:comment "Estimated total cost: $6,318.50 for one semester; $12,637.00 for two semesters (fall and spring)." .
+
+:TuitionRate_WG2026_OhioLivingOnCampus a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Wright Guarantee 2026–27, Ohio Resident (Living on Campus)" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_WrightGuarantee_2026_27 ;
+    wsu:appliesToResidency :OhioResidentLivingOnCampus ;
+    wsu:ratePerSemester "6085.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "546.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_WG_Housing, :CostComponent_WG_Meals, :CostComponent_WG_ActivityFees, :CostComponent_WG_RequiredFees ;
+    rdfs:comment "Estimated total cost: $11,659.50 for one semester; $23,319.00 for two semesters (fall and spring)." .
+
+:TuitionRate_WG2026_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Wright Guarantee 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_WrightGuarantee_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "11431.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1038.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_WG_Housing, :CostComponent_WG_Meals, :CostComponent_WG_ActivityFees, :CostComponent_WG_RequiredFees ;
+    rdfs:comment "Estimated total cost: $17,005.50 for one semester; $34,011.00 for two semesters (fall and spring). Non-Ohio resident portion of tuition ($5,346 or $492/hour) is not guaranteed." .
+
+:TuitionRate_NG2026_OhioCommuting a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Non-Guarantee 2026–27, Ohio Resident (Commuting)" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_UndergraduateNonGuarantee_2026_27 ;
+    wsu:appliesToResidency :OhioResidentCommuting ;
+    wsu:ratePerSemester "4722.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "426.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_NG_Books ;
+    rdfs:comment "Estimated total cost: $5,422.00 for one semester; $10,844.00 for two semesters (fall and spring)." .
+
+:TuitionRate_NG2026_OhioLivingOnCampus a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Non-Guarantee 2026–27, Ohio Resident (Living on Campus)" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_UndergraduateNonGuarantee_2026_27 ;
+    wsu:appliesToResidency :OhioResidentLivingOnCampus ;
+    wsu:ratePerSemester "4722.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "426.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_NG_Housing, :CostComponent_NG_Dining, :CostComponent_NG_ActivityFees, :CostComponent_NG_Books ;
+    rdfs:comment "Estimated total cost: $10,124.00 for one semester; $20,248.00 for two semesters (fall and spring)." .
+
+:TuitionRate_NG2026_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Undergraduate Non-Guarantee 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Undergraduate ;
+    wsu:appliesToCohort :Cohort_UndergraduateNonGuarantee_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "10068.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "918.00"^^xsd:decimal ;
+    wsu:hasCostComponent :CostComponent_NG_Housing, :CostComponent_NG_Dining, :CostComponent_NG_ActivityFees, :CostComponent_NG_Books ;
+    rdfs:comment "Estimated total cost: $15,470.00 for one semester; $30,940.00 for two semesters (fall and spring). Non-Ohio resident portion of tuition ($5,346 or $492/hour) is not guaranteed." .
+
+:TuitionRate_GP2026_Graduate_Ohio a wsu:TuitionRate ;
+    rdfs:label "Graduate Tuition 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "7580.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "700.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_Graduate_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Graduate Tuition 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "12824.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1188.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_RSCOB_Ohio a wsu:TuitionRate ;
+    rdfs:label "Raj Soin College of Business Tuition (all programs) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:associatedWithCollege :RSCOB ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_RSCOB_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Raj Soin College of Business Tuition (all programs) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:associatedWithCollege :RSCOB ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_CECS_Ohio a wsu:TuitionRate ;
+    rdfs:label "College of Engineering and Computer Science Tuition (all programs) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:associatedWithCollege :CECS ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_CECS_NonOhio a wsu:TuitionRate ;
+    rdfs:label "College of Engineering and Computer Science Tuition (all programs) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:associatedWithCollege :CECS ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_NursingMS_Ohio a wsu:TuitionRate ;
+    rdfs:label "Nursing (M.S.) Tuition 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_NursingMS_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Nursing (M.S.) Tuition 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_COSM_Ohio a wsu:TuitionRate ;
+    rdfs:label "College of Science and Mathematics Tuition (selected programs) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:associatedWithCollege :CoSM ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal ;
+    rdfs:comment "Applies to Anatomy (M.S.), Biochemistry and Molecular Biology (M.S.), Microbiology and Immunology (M.S.), Physiology and Neuroscience (M.S.), Biomedical Sciences (Ph.D.), Environmental Sciences (Ph.D.), Human Factors and Industrial/Organizational Psychology (Ph.D.), and Interdisciplinary Applied Science and Mathematics (Ph.D.)." .
+
+:TuitionRate_GP2026_COSM_NonOhio a wsu:TuitionRate ;
+    rdfs:label "College of Science and Mathematics Tuition (selected programs) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:associatedWithCollege :CoSM ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal ;
+    rdfs:comment "Applies to Anatomy (M.S.), Biochemistry and Molecular Biology (M.S.), Microbiology and Immunology (M.S.), Physiology and Neuroscience (M.S.), Biomedical Sciences (Ph.D.), Environmental Sciences (Ph.D.), Human Factors and Industrial/Organizational Psychology (Ph.D.), and Interdisciplinary Applied Science and Mathematics (Ph.D.)." .
+
+:TuitionRate_GP2026_MPH_Ohio a wsu:TuitionRate ;
+    rdfs:label "Public Health (M.P.H.) Tuition 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_MPH_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Public Health (M.P.H.) Tuition 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_PharmToxMS_Ohio a wsu:TuitionRate ;
+    rdfs:label "Pharmacology and Toxicology (M.S.) Tuition 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_PharmToxMS_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Pharmacology and Toxicology (M.S.) Tuition 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_DNP_Ohio a wsu:TuitionRate ;
+    rdfs:label "Doctor of Nursing Practice Tuition (11 or more hours) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "8656.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "800.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_DNP_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Doctor of Nursing Practice Tuition (11 or more hours) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "13900.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1288.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_SOPP_Ohio a wsu:TuitionRate ;
+    rdfs:label "School of Professional Psychology Tuition (11 or more hours) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "11213.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1039.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_SOPP_NonOhio a wsu:TuitionRate ;
+    rdfs:label "School of Professional Psychology Tuition (11 or more hours) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Graduate ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "18048.00"^^xsd:decimal ;
+    wsu:ratePerCreditHour "1676.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_BSOM_M1M2M4_Ohio a wsu:TuitionRate ;
+    rdfs:label "Boonshoft School of Medicine Tuition for M1, M2, and M4 (11 or more hours) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Professional ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "24465.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_BSOM_M1M2M4_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Boonshoft School of Medicine Tuition for M1, M2, and M4 (11 or more hours) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Professional ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "40761.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_BSOM_M3_Ohio a wsu:TuitionRate ;
+    rdfs:label "Boonshoft School of Medicine Tuition for M3 (11 or more hours) 2026–27, Ohio Resident" ;
+    wsu:appliesToLevel :Level_Professional ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :OhioResident ;
+    wsu:ratePerSemester "32619.00"^^xsd:decimal .
+
+:TuitionRate_GP2026_BSOM_M3_NonOhio a wsu:TuitionRate ;
+    rdfs:label "Boonshoft School of Medicine Tuition for M3 (11 or more hours) 2026–27, Non-Ohio Resident" ;
+    wsu:appliesToLevel :Level_Professional ;
+    wsu:appliesToCohort :Cohort_GraduateAndProfessional_2026_27 ;
+    wsu:appliesToResidency :NonOhioResident ;
+    wsu:ratePerSemester "48915.00"^^xsd:decimal .
+
+
+# ==== Graduate admission procedures ====
+
+:Procedure_GraduateDegreeAdmission a wsu:AdmissionProcedure ;
+    rdfs:label "Admission Procedure for Graduate Degree Status" ;
+    wsu:hasStep :Procedure_GraduateDegreeAdmission_Step1, :Procedure_GraduateDegreeAdmission_Step2, :Procedure_GraduateDegreeAdmission_Step3, :Procedure_GraduateDegreeAdmission_Step4, :Procedure_GraduateDegreeAdmission_Step5, :Procedure_GraduateDegreeAdmission_Step6, :Procedure_GraduateDegreeAdmission_Step7, :Procedure_GraduateDegreeAdmission_Step8, :Procedure_GraduateDegreeAdmission_Step9 .
+
+:Procedure_GraduateDegreeAdmission_Step1 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 1: Submit application" ;
+    rdfs:comment "Submit a completed graduate admission application via the online portal. Applications and all supporting credentials should be received at least four weeks before registration for the starting semester; some programs have earlier deadlines." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step2 .
+
+:Procedure_GraduateDegreeAdmission_Step2 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 2: Request official transcripts" ;
+    rdfs:comment "Request that registrars of all previously attended colleges or universities send one official transcript directly to the Graduate School." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step3 .
+
+:Procedure_GraduateDegreeAdmission_Step3 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 3: Pay application fee" ;
+    rdfs:comment "Pay a $40 (domestic) or $70 (international) non-refundable application fee; McNair Scholars may have the fee waived with a Certification of Participation." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step4 .
+
+:Procedure_GraduateDegreeAdmission_Step4 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 4: Submit test scores and supporting materials" ;
+    rdfs:comment "Submit test scores and/or documents such as letters of recommendation or statements of purpose if the program requires them, and meet any additional program requirements." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step5 .
+
+:Procedure_GraduateDegreeAdmission_Step5 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 5: Graduate School file review" ;
+    rdfs:comment "The Graduate School reviews the file, calculates undergraduate and graduate GPAs, and sends the application to the program for an admission recommendation." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step6 .
+
+:Procedure_GraduateDegreeAdmission_Step6 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 6: Program recommendation" ;
+    rdfs:comment "The program reviews the applicant's academic credentials and sends an admission recommendation to the Graduate School." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step7 .
+
+:Procedure_GraduateDegreeAdmission_Step7 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 7: Associate Director determination" ;
+    rdfs:comment "The Associate Director of Graduate Admissions reviews the recommendation and credentials and determines whether Graduate School admission requirements have been met." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step8 .
+
+:Procedure_GraduateDegreeAdmission_Step8 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 8: Notification" ;
+    rdfs:comment "The Graduate School notifies the applicant by letter of the admission decision." ;
+    wsu:precedesStep :Procedure_GraduateDegreeAdmission_Step9 .
+
+:Procedure_GraduateDegreeAdmission_Step9 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Degree Status, step 9: Petition for admission" ;
+    rdfs:comment "An applicant who does not meet minimum requirements, or a dismissed student, may petition for admission per Policy 5080." ;
+    wsu:governedByPolicy :Policy_5080 .
+
+:Procedure_GraduateNonDegreeAdmission a wsu:AdmissionProcedure ;
+    rdfs:label "Admission Procedure for Graduate Non-Degree, Certification, and Transient Statuses" ;
+    wsu:hasStep :Procedure_GraduateNonDegreeAdmission_Step1, :Procedure_GraduateNonDegreeAdmission_Step2, :Procedure_GraduateNonDegreeAdmission_Step3, :Procedure_GraduateNonDegreeAdmission_Step4 .
+
+:Procedure_GraduateNonDegreeAdmission_Step1 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Non-Degree, Certification, and Transient Statuses, step 1: Submit application and credentials" ;
+    rdfs:comment "Non-degree and licensure applicants submit a graduate application via the online portal and request official transcript(s); transient applicants submit a Permission for Transient Status form in lieu of transcripts." ;
+    wsu:precedesStep :Procedure_GraduateNonDegreeAdmission_Step2 .
+
+:Procedure_GraduateNonDegreeAdmission_Step2 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Non-Degree, Certification, and Transient Statuses, step 2: Pay application fee" ;
+    rdfs:comment "Non-degree, certificate, and transient applicants pay a $10 (domestic) or $40 (international) non-refundable fee; all other applicants pay $40 (domestic) or $70 (international)." ;
+    wsu:precedesStep :Procedure_GraduateNonDegreeAdmission_Step3 .
+
+:Procedure_GraduateNonDegreeAdmission_Step3 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Non-Degree, Certification, and Transient Statuses, step 3: Admission decision" ;
+    rdfs:comment "The Associate Director of Graduate Admissions decides non-degree and transient applications; licensure applications are sent to the college for decision." ;
+    wsu:precedesStep :Procedure_GraduateNonDegreeAdmission_Step4 .
+
+:Procedure_GraduateNonDegreeAdmission_Step4 a wsu:ProcessStep ;
+    rdfs:label "Admission Procedure for Graduate Non-Degree, Certification, and Transient Statuses, step 4: Notification" ;
+    rdfs:comment "The Graduate School notifies applicants by letter of the admission decision." .
+
+:Procedure_ChangeOfProgram a wsu:AdmissionProcedure ;
+    rdfs:label "Change of Graduate Program Procedure" ;
+    wsu:hasStep :Procedure_ChangeOfProgram_Step1, :Procedure_ChangeOfProgram_Step2, :Procedure_ChangeOfProgram_Step3, :Procedure_ChangeOfProgram_Step4 .
+
+:Procedure_ChangeOfProgram_Step1 a wsu:ProcessStep ;
+    rdfs:label "Change of Graduate Program Procedure, step 1: Submit application" ;
+    rdfs:comment "Submit an application for admission to the new program via the online portal, with any additional admission documents required." ;
+    wsu:precedesStep :Procedure_ChangeOfProgram_Step2 .
+
+:Procedure_ChangeOfProgram_Step2 a wsu:ProcessStep ;
+    rdfs:label "Change of Graduate Program Procedure, step 2: Program recommendation" ;
+    rdfs:comment "The Graduate School forwards the application to the program for an admission recommendation." ;
+    wsu:precedesStep :Procedure_ChangeOfProgram_Step3 .
+
+:Procedure_ChangeOfProgram_Step3 a wsu:ProcessStep ;
+    rdfs:label "Change of Graduate Program Procedure, step 3: Associate Director review" ;
+    rdfs:comment "The Associate Director of Graduate Admissions reviews the recommendation." ;
+    wsu:precedesStep :Procedure_ChangeOfProgram_Step4 .
+
+:Procedure_ChangeOfProgram_Step4 a wsu:ProcessStep ;
+    rdfs:label "Change of Graduate Program Procedure, step 4: Notification" ;
+    rdfs:comment "The Graduate School notifies the student of the admission decision." .
+
+
+# ==== Graduate petition process steps ====
+
+:GraduatePetitionProcess_Step1 a wsu:ProcessStep ;
+    rdfs:label "Graduate petition process, step 1: Graduate School intake review" ;
+    rdfs:comment "The Graduate School records petitions and reviews them for clarity and eligibility; unclear petitions are returned and petitions inconsistent with accreditation or external regulations are rejected." ;
+    wsu:precedesStep :GraduatePetitionProcess_Step2 .
+
+:GraduatePetitionProcess_Step2 a wsu:ProcessStep ;
+    rdfs:label "Graduate petition process, step 2: Program recommendation" ;
+    rdfs:comment "Program chairs/advisors review petitions, make recommendations, and forward them to the college/school petitions committee." ;
+    wsu:precedesStep :GraduatePetitionProcess_Step3 .
+
+:GraduatePetitionProcess_Step3 a wsu:ProcessStep ;
+    rdfs:label "Graduate petition process, step 3: Dean's review" ;
+    rdfs:comment "Petitions return to the Graduate School for the dean's review; unresolved differences are referred to the Graduate Student Affairs Committee." ;
+    wsu:precedesStep :GraduatePetitionProcess_Step4 .
+
+:GraduatePetitionProcess_Step4 a wsu:ProcessStep ;
+    rdfs:label "Graduate petition process, step 4: Written notification" ;
+    rdfs:comment "The Graduate School sends written notification of the final decision to the student within ten days of the decision." ;
+    wsu:precedesStep :GraduatePetitionProcess_Step5 .
+
+:GraduatePetitionProcess_Step5 a wsu:ProcessStep ;
+    rdfs:label "Graduate petition process, step 5: Registrar recording" ;
+    rdfs:comment "The Graduate School advises the Office of the Registrar of approved actions, which the Registrar records on the student's academic record." .
+
+
+# ==== Graduate degree requirements ====
+
+:Requirement_ProgramOfStudy a wsu:DegreeRequirement ;
+    rdfs:label "Approved program of study on file" ;
+    rdfs:comment "Have a current and approved program of study on file in the Graduate School and/or a current degree audit in uAchieve." ;
+    wsu:governedByPolicy :Policy_5470 .
+
+:Requirement_MastersTimeLimit a wsu:DegreeRequirement ;
+    rdfs:label "Master's degree time limit" ;
+    rdfs:comment "Complete master's program requirements within seven calendar years." ;
+    wsu:governedByPolicy :Policy_5520 .
+
+:Requirement_DoctoralTimeLimit a wsu:DegreeRequirement ;
+    rdfs:label "Doctoral degree time limit" ;
+    rdfs:comment "Complete doctoral program requirements within ten years (Policy 5720.3)." ;
+    wsu:governedByPolicy :Policy_5720 .
+
+:Requirement_CertificateTimeLimit a wsu:DegreeRequirement ;
+    rdfs:label "Graduate certificate time limit" ;
+    rdfs:comment "Complete graduate certificate requirements within five years (Policy 5810.2)." ;
+    wsu:governedByPolicy :Policy_5810 .
+
+:Requirement_MinimumGPA a wsu:DegreeRequirement ;
+    rdfs:label "Minimum cumulative GPA of 3.0" ;
+    rdfs:comment "Achieve a cumulative GPA of at least 3.0 in all courses taken for graduate credit; no more than six semester hours of 'C' may be applied to degree requirements (Policy 5370.1)." ;
+    wsu:governedByPolicy :Policy_5370 .
+
+:Requirement_DefenseTermRegistration a wsu:DegreeRequirement ;
+    rdfs:label "Registration during thesis/dissertation defense term" ;
+    rdfs:comment "Register for at least one graduate credit hour during the term in which a thesis/dissertation is defended." ;
+    wsu:governedByPolicy :Policy_5270 .
+
+:Requirement_ComprehensiveExam a wsu:DegreeRequirement ;
+    rdfs:label "Final comprehensive examination (if required)" ;
+    rdfs:comment "Complete a final comprehensive examination if required by the program." .
+
+:Requirement_ApprovedThesis a wsu:DegreeRequirement ;
+    rdfs:label "Approved thesis/dissertation (if required)" ;
+    rdfs:comment "Present one copy of an approved thesis/dissertation for approval of the dean of the Graduate School and submission to OhioLINK (Policy 5515.1.9)." ;
+    wsu:governedByPolicy :Policy_5515 .
+
+:Requirement_ResidenceCredit a wsu:DegreeRequirement ;
+    rdfs:label "At least 50 percent of credit hours at Wright State" ;
+    rdfs:comment "Complete at least 50 percent of the credit hours at Wright State." ;
+    wsu:governedByPolicy :Policy_5380 .
+
+:Requirement_ForeignLanguage a wsu:DegreeRequirement ;
+    rdfs:label "Foreign language reading knowledge (if required)" ;
+    rdfs:comment "A master's candidate may be required to demonstrate reading knowledge of a foreign language, by examination or college credit, depending on the program." .
+
+
+# ==== Academic milestones ====
+
+:Milestone_GraduationApplication a wsu:AcademicMilestone ;
+    rdfs:label "Graduation Application" ;
+    wsu:milestoneType "GraduationApplication" ;
+    wsu:hasFee "35.00"^^xsd:decimal ;
+    rdfs:comment "Submitted online only through WINGS Express; the $35 fee applies each time an application is submitted, and a separate application is required for each degree." .
+
+:Milestone_GraduateAcademicPetition a wsu:AcademicMilestone ;
+    rdfs:label "Graduate Academic Petition" ;
+    wsu:milestoneType "Petition" ;
+    rdfs:comment "Petition to the Graduate School requesting a waiver of a policy governing graduate students; should include the program advisor's recommendation (and the instructor's for course-related petitions). Results may not be further appealed." .
+
+:Milestone_GraduateAdmissionPetition a wsu:AcademicMilestone ;
+    rdfs:label "Graduate Admission Petition" ;
+    wsu:milestoneType "Petition" ;
+    wsu:governedByPolicy :Policy_5080 .
+
+:Milestone_GraduateReadmissionPetition a wsu:AcademicMilestone ;
+    rdfs:label "Graduate Re-admission Petition" ;
+    wsu:milestoneType "Petition" ;
+    wsu:governedByPolicy :Policy_5080 ;
+    rdfs:comment "Only for use by those who have been academically dismissed." .
+
+:Milestone_AdministrativeAdjustmentPetition a wsu:AcademicMilestone ;
+    rdfs:label "Administrative Adjustment Petition" ;
+    wsu:milestoneType "Petition" ;
+    wsu:requiresApprovalFrom :OfficeOfTheRegistrar ;
+    rdfs:comment "Petitions involving university or administrative errors or requiring a retroactive administrative drop for verified non-attendance, which the University Registrar may approve." .
+
+:Milestone_ThesisOrDissertation a wsu:AcademicMilestone ;
+    rdfs:label "Thesis or Dissertation" ;
+    wsu:milestoneType "ThesisOrDissertation" ;
+    wsu:governedByPolicy :Policy_5515 .
+
+:Milestone_ComprehensiveExamination a wsu:AcademicMilestone ;
+    rdfs:label "Comprehensive Examination" ;
+    wsu:milestoneType "ComprehensiveExam" ;
+    rdfs:comment "Required by some programs; may be written, oral, or both. Arrangements should be made at least three weeks before the examination date." .

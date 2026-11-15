@@ -61,6 +61,31 @@ class InputValidator:
         return True, ""
     
     @staticmethod
+    def parse_urls_from_text(content: str) -> List[str]:
+        if not isinstance(content, str):
+            return []
+
+        parsed_urls = []
+        seen_urls = set()
+
+        for raw_line in content.splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+
+            cleaned = line.split("#", 1)[0].strip()
+            if not cleaned:
+                continue
+
+            if cleaned in seen_urls:
+                continue
+
+            seen_urls.add(cleaned)
+            parsed_urls.append(cleaned)
+
+        return parsed_urls
+
+    @staticmethod
     def validate_urls_list(urls: List[str]) -> tuple[bool, List[str], List[str]]:
         if not isinstance(urls, list):
             return False, [], ["URLs must be a list"]

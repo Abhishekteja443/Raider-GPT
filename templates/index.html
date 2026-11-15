@@ -125,6 +125,13 @@
         </div>
         <ul id="extra-url-list"></ul>
 
+        <label for="urls-file">Upload .txt file with URLs (one per line):</label>
+        <div class="input-group">
+            <input type="file" id="urls-file" accept=".txt" />
+            <button onclick="loadURLFile()">Load File</button>
+        </div>
+        <ul id="file-url-list"></ul>
+
         <button class="submit-btn" onclick="submitData()">Submit URLs</button>
         <p id="error-message" class="error"></p>
         <div id="output"></div>

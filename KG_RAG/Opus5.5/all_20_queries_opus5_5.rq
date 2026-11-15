@@ -1,0 +1,414 @@
+# CQ 1: What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?unitType ?unitLabel ?deptLabel WHERE {
+  ?unit (wsu:isPartOf|^wsu:hasPart) :WSU ;
+        a ?t ;
+        rdfs:label ?unitLabel .
+  VALUES ?t { wsu:College wsu:School wsu:BranchCampus }
+  ?t rdfs:label ?unitType .
+  OPTIONAL {
+    ?dept a wsu:Department ;
+          (wsu:isPartOf|^wsu:hasPart)+ ?unit ;
+          rdfs:label ?deptLabel .
+  }
+} ORDER BY ?unitType ?unitLabel ?deptLabel
+
+# CQ 2: Which academic unit is responsible for a given degree program (here: Microbiology and Immunology, MS)?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?programLabel ?programType ?unitLabel ?unitType ?parentLabel WHERE {
+  VALUES ?program { :Degree_MicrobiologyAndImmunologyMS }
+  ?program rdfs:label ?programLabel ; a ?pt .
+  ?pt rdfs:label ?programType .
+  { ?unit wsu:offersCredential ?program } UNION { ?program wsu:jointlyOfferedBy ?unit }
+  ?unit rdfs:label ?unitLabel ; a ?ut .
+  ?ut rdfs:label ?unitType .
+  OPTIONAL { ?unit wsu:isPartOf/rdfs:label ?parentLabel }
+} ORDER BY ?unitLabel
+
+# CQ 3: What is the physical location, phone number, and email contact for each department or office in the College of Engineering and Computer Science?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?unitLabel ?unitType ?location
+       (GROUP_CONCAT(DISTINCT COALESCE(?phone, ""); separator=" | ") AS ?phones)
+       (GROUP_CONCAT(DISTINCT COALESCE(?fax, ""); separator=" | ") AS ?faxes)
+       (GROUP_CONCAT(DISTINCT COALESCE(?email, ""); separator=" | ") AS ?emails)
+WHERE {
+  ?unit (wsu:isPartOf|^wsu:hasPart)+ :CECS ;
+        a ?t ;
+        rdfs:label ?unitLabel .
+  VALUES ?t { wsu:Department wsu:Office }
+  ?t rdfs:label ?unitType .
+  OPTIONAL { ?unit wsu:locatedIn/rdfs:label ?location }
+  OPTIONAL {
+    ?unit wsu:hasContact ?c .
+    OPTIONAL { ?c wsu:hasPhone ?phone }
+    OPTIONAL { ?c wsu:hasFax ?fax }
+    OPTIONAL { ?c wsu:hasEmail ?email }
+  }
+} GROUP BY ?unitLabel ?unitType ?location
+  ORDER BY ?unitLabel
+
+# CQ 4: Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?schoolLabel ?deptLabel WHERE {
+  ?school a wsu:School ;
+          (wsu:isPartOf|^wsu:hasPart) :CHEHS ;
+          rdfs:label ?schoolLabel .
+  OPTIONAL {
+    ?dept a wsu:Department ;
+          (wsu:isPartOf|^wsu:hasPart) ?school ;
+          rdfs:label ?deptLabel .
+  }
+} ORDER BY ?schoolLabel ?deptLabel
+
+# CQ 5: What administrative divisions and units report to the Provost?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?relation ?label ?type WHERE {
+  { :Provost wsu:hasDivision ?x . BIND("division" AS ?relation) }
+  UNION
+  { :Provost wsu:oversees ?x . BIND("oversees" AS ?relation) }
+  ?x rdfs:label ?label ; a ?t .
+  ?t rdfs:label ?type .
+} ORDER BY ?relation ?label
+
+# CQ 6: What types of academic credentials does WSU offer, how many of each, and which units grant them?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?credentialType ?numCredentials
+       (COALESCE(?granted, 0) AS ?numWithKnownGrantor) (COALESCE(?grantorList, "") AS ?grantors)
+WHERE {
+  {
+    SELECT ?t (COUNT(DISTINCT ?cred) AS ?numCredentials) WHERE {
+      ?cred a ?t . ?t rdfs:subClassOf* wsu:Credential .
+    } GROUP BY ?t
+  }
+  OPTIONAL {
+    SELECT ?t (COUNT(DISTINCT ?cred) AS ?granted)
+           (GROUP_CONCAT(DISTINCT ?grantorLabel; separator=" | ") AS ?grantorList)
+    WHERE {
+      ?cred a ?t . ?t rdfs:subClassOf* wsu:Credential .
+      { ?grantor wsu:offersCredential ?cred } UNION { ?cred wsu:jointlyOfferedBy ?grantor }
+      ?grantor rdfs:label ?grantorLabel .
+    } GROUP BY ?t
+  }
+  ?t rdfs:label ?credentialType .
+} ORDER BY DESC(?numCredentials)
+
+# CQ 7: Which programs or units are shared between two colleges or schools (e.g., Neuroscience, Cell Biology, and Physiology spanning Science & Mathematics and the Boonshoft School of Medicine)?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?kind ?itemLabel ?firstLabel ?secondLabel WHERE {
+  {
+    ?item wsu:jointlyOfferedBy ?a, ?b .
+    BIND("degree program jointly offered by" AS ?kind)
+  } UNION {
+    ?item a/rdfs:subClassOf* wsu:AcademicUnit ;
+          (wsu:isPartOf|^wsu:hasPart) ?a, ?b .
+    BIND("unit belonging to" AS ?kind)
+  }
+  FILTER(STR(?a) < STR(?b))
+  ?item rdfs:label ?itemLabel .
+  ?a rdfs:label ?firstLabel .
+  ?b rdfs:label ?secondLabel .
+} ORDER BY ?kind ?itemLabel
+
+# CQ 8: Who holds each university leadership role, and what is the role's scope and area of oversight?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?roleLabel ?personLabel ?scope
+       (GROUP_CONCAT(DISTINCT COALESCE(?overseenLabel, ""); separator=" | ") AS ?oversees)
+WHERE {
+  ?role a wsu:LeadershipRole ; rdfs:label ?roleLabel .
+  OPTIONAL { ?person wsu:holdsRole ?role ; rdfs:label ?personLabel }
+  OPTIONAL { ?role wsu:hasScope ?scope }
+  OPTIONAL { ?role wsu:oversees/rdfs:label ?overseenLabel }
+} GROUP BY ?roleLabel ?personLabel ?scope
+  ORDER BY ?roleLabel
+
+# CQ 9: What administrative divisions exist under the Office of the Provost, and what function does each provide?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?divisionLabel ?function WHERE {
+  :Provost wsu:hasDivision ?division .
+  ?division rdfs:label ?divisionLabel .
+  OPTIONAL { ?division wsu:providesFunction ?function }
+} ORDER BY ?divisionLabel
+
+# CQ 10: What is Wright State's basic institutional profile (namesake, enrollment, number of colleges and programs, campuses)?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?name ?description ?enrollment ?numColleges ?numPrograms ?namesake
+       (GROUP_CONCAT(DISTINCT COALESCE(?campusLabel, ""); separator=" | ") AS ?branchCampuses)
+WHERE {
+  :WSU a wsu:University ; rdfs:label ?name .
+  OPTIONAL { :WSU rdfs:comment ?description }
+  OPTIONAL { :WSU wsu:enrollmentCount ?enrollment }
+  OPTIONAL { :WSU wsu:numColleges ?numColleges }
+  OPTIONAL { :WSU wsu:numPrograms ?numPrograms }
+  OPTIONAL { :Fact_NamedForWrightBrothers rdfs:comment ?namesake }
+  OPTIONAL {
+    ?campus a wsu:BranchCampus ; (wsu:isPartOf|^wsu:hasPart) :WSU ; rdfs:label ?campusLabel .
+  }
+} GROUP BY ?name ?description ?enrollment ?numColleges ?numPrograms ?namesake
+
+# CQ 11: What policies exist within a given policy series (here: Series 3000 – Students and Series 5000 – Graduate Students and Programs), with each policy's number and title?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?seriesLabel ?categoryLabel ?number ?title WHERE {
+  VALUES ?series { :Series_3000 :Series_5000 }
+  ?series rdfs:label ?seriesLabel .
+  ?policy wsu:belongsToSeries ?series ;
+          wsu:hasPolicyNumber ?number ;
+          rdfs:label ?title .
+  OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }
+} ORDER BY ?seriesLabel xsd:integer(?number) ?title
+
+# CQ 12: Which university policy governs a specific procedural topic (academic integrity, course registration, tuition refunds, FERPA/student privacy)?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?topic ?number ?title ?categoryLabel WHERE {
+  VALUES (?topic ?pattern) {
+    ("academic integrity"     "integrity")
+    ("course registration"    "^Registration|Course Registration")
+    ("tuition refunds"        "refund")
+    ("FERPA / student privacy" "FERPA|privacy")
+  }
+  ?policy a wsu:Policy ;
+          wsu:hasPolicyNumber ?number ;
+          rdfs:label ?title .
+  OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }
+  FILTER(REGEX(?title, ?pattern, "i") || REGEX(COALESCE(?categoryLabel, ""), ?pattern, "i"))
+} ORDER BY ?topic xsd:integer(?number)
+
+# CQ 13: Which policies apply specifically to graduate students, undergraduate students, or the Boonshoft School of Medicine MD program?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?population (COUNT(?policy) AS ?numPolicies)
+       (GROUP_CONCAT(CONCAT(?number, " ", ?title); separator=" | ") AS ?policies)
+WHERE {
+  VALUES ?population { "Undergraduate" "Graduate" "MDProgram" }
+  ?policy wsu:appliesToPopulation ?population ;
+          wsu:hasPolicyNumber ?number ;
+          rdfs:label ?title .
+} GROUP BY ?population
+  ORDER BY ?population
+
+# CQ 14: When was each policy most recently updated, and which policies were revised most recently?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?number ?title ?lastUpdated WHERE {
+  ?policy a wsu:Policy ;
+          wsu:hasPolicyNumber ?number ;
+          rdfs:label ?title ;
+          wsu:lastUpdated ?lastUpdated .
+} ORDER BY DESC(?lastUpdated)
+  LIMIT 10
+
+# CQ 15: What student services are available to WSU students, which office administers each, and which campus do campus-specific services apply to?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?serviceLabel ?officeLabel ?campusLabel WHERE {
+  ?service a wsu:StudentService ; rdfs:label ?serviceLabel .
+  OPTIONAL { ?service wsu:administeredBy/rdfs:label ?officeLabel }
+  OPTIONAL { ?service wsu:appliesToCampus/rdfs:label ?campusLabel }
+} ORDER BY ?campusLabel ?serviceLabel
+
+# CQ 16: What policies govern student conduct, student organizations, and general campus life (code of conduct, hazing, posting, alcohol, firearms, and similar)?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT DISTINCT ?number ?title ?categoryLabel ?governedEntity WHERE {
+  {
+    ?policy a wsu:Policy ; wsu:belongsToCategory ?cat .
+    ?cat rdfs:label ?categoryLabel .
+    FILTER(REGEX(?categoryLabel, "^Student Conduct|^Communications and Access|^Regulations \\(Series 7000\\)"))
+  } UNION {
+    ?policy a wsu:Policy ; rdfs:label ?t .
+    FILTER(REGEX(?t, "Student Conduct|Hazing|Posting|Alcohol|Expressive|Harassment", "i"))
+    OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }
+  } UNION {
+    ?entity a wsu:StudentOrganization ; wsu:governedByPolicy ?policy ; rdfs:label ?governedEntity .
+    OPTIONAL { ?policy wsu:belongsToCategory/rdfs:label ?categoryLabel }
+  }
+  ?policy wsu:hasPolicyNumber ?number ; rdfs:label ?title .
+} ORDER BY xsd:integer(?number)
+
+# CQ 17: What is the tuition rate for each student category (level, residency, cohort), and which college or program does it apply to?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?levelLabel ?cohortLabel ?residencyLabel ?rateLabel ?collegeLabel
+       ?ratePerSemester ?ratePerCreditHour
+WHERE {
+  ?rate a wsu:TuitionRate ;
+        rdfs:label ?rateLabel ;
+        wsu:appliesToLevel/rdfs:label ?levelLabel ;
+        wsu:appliesToCohort/rdfs:label ?cohortLabel ;
+        wsu:appliesToResidency/rdfs:label ?residencyLabel .
+  OPTIONAL { ?rate wsu:associatedWithCollege/rdfs:label ?collegeLabel }
+  OPTIONAL { ?rate wsu:ratePerSemester ?ratePerSemester }
+  OPTIONAL { ?rate wsu:ratePerCreditHour ?ratePerCreditHour }
+} ORDER BY ?levelLabel ?cohortLabel ?rateLabel ?residencyLabel
+
+# CQ 18: What additional costs are bundled with tuition under the Wright Guarantee 2026–27 cohort, and how do total costs compare across residency and commuter/on-campus categories?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?residencyLabel ?tuitionPerSemester
+       (GROUP_CONCAT(?componentLabel; separator=" | ") AS ?costComponents)
+       ?estimatedTotals
+WHERE {
+  ?rate a wsu:TuitionRate ;
+        wsu:appliesToCohort :Cohort_WrightGuarantee_2026_27 ;
+        wsu:appliesToResidency/rdfs:label ?residencyLabel ;
+        wsu:ratePerSemester ?tuitionPerSemester .
+  OPTIONAL { ?rate wsu:hasCostComponent/rdfs:label ?componentLabel }
+  OPTIONAL { ?rate rdfs:comment ?estimatedTotals }
+} GROUP BY ?residencyLabel ?tuitionPerSemester ?estimatedTotals
+  ORDER BY ?tuitionPerSemester ?residencyLabel
+
+# CQ 19: What research units exist at WSU, which college (or parent unit) does each belong to, and how much research output is associated with each?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?unitLabel ?collegeLabel
+       (GROUP_CONCAT(DISTINCT COALESCE(?parentLabel, ""); separator=" | ") AS ?parentUnits)
+       (COUNT(DISTINCT ?output) AS ?numOutputs)
+       (GROUP_CONCAT(DISTINCT COALESCE(?outputType, ""); separator=" | ") AS ?outputTypes)
+WHERE {
+  ?unit a wsu:ResearchUnit ; rdfs:label ?unitLabel .
+  OPTIONAL { ?unit wsu:associatedWithCollege/rdfs:label ?collegeLabel }
+  OPTIONAL { ?unit wsu:isPartOf/rdfs:label ?parentLabel }
+  OPTIONAL {
+    ?unit wsu:produces ?output .
+    OPTIONAL { ?output wsu:outputType ?outputType }
+  }
+} GROUP BY ?unitLabel ?collegeLabel
+  ORDER BY ?collegeLabel ?unitLabel
+
+# CQ 20: What is the step-by-step graduate admission procedure, what requirements and milestones lead to graduation, and which university policy governs each item?
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wsu:  <https://example.org/wsu-ontology#>
+PREFIX :     <https://example.org/wsu-data/>
+
+SELECT ?stage ?seq ?itemLabel ?detail ?policyNumber ?policyTitle WHERE {
+  {
+    SELECT ?stage ?item (COUNT(DISTINCT ?earlier) + 1 AS ?seq) WHERE {
+      :Procedure_GraduateDegreeAdmission wsu:hasStep ?item ;
+                                         rdfs:label ?stage .
+      OPTIONAL { ?earlier wsu:precedesStep+ ?item }
+    } GROUP BY ?stage ?item
+  } UNION {
+    ?item a wsu:DegreeRequirement .
+    BIND("Degree requirement" AS ?stage)
+  } UNION {
+    ?item a wsu:AcademicMilestone .
+    BIND("Academic milestone" AS ?stage)
+  }
+  ?item rdfs:label ?itemLabel .
+  OPTIONAL { ?item rdfs:comment ?comment }
+  OPTIONAL { ?item wsu:hasFee ?fee }
+  BIND(IF(BOUND(?fee), CONCAT("Fee: $", STR(?fee), ". ", COALESCE(?comment, "")), COALESCE(?comment, "")) AS ?detail)
+  OPTIONAL {
+    ?item wsu:governedByPolicy ?policy .
+    ?policy wsu:hasPolicyNumber ?policyNumber ; rdfs:label ?policyTitle .
+  }
+} ORDER BY DESC(?stage = "Admission Procedure for Graduate Degree Status") ?stage ?seq ?itemLabel

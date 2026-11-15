@@ -1,0 +1,479 @@
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix wsu:  <https://example.org/wsu-ontology#> .
+@base <https://example.org/wsu-ontology#> .
+
+<https://example.org/wsu-ontology> rdf:type owl:Ontology ;
+    rdfs:label "Wright State University Ontology" ;
+    rdfs:comment "An ontology modeling Wright State University's organizational structure, academic programs, policy framework, student services, finances, research, and graduate processes, derived from 10 wright.edu source pages." ;
+    dc:creator "Built collaboratively via Claude, based on scraped WSU web content" ;
+    owl:versionInfo "1.0" .
+
+
+
+#    Classes
+
+
+### Organizational structure
+
+wsu:University a owl:Class ;
+    rdfs:label "University" ;
+    rdfs:comment "The top-level institution, Wright State University." .
+
+wsu:AcademicUnit a owl:Class ;
+    rdfs:label "Academic Unit" ;
+    rdfs:comment "Abstract superclass for organizational units offering academic programs (College, School, Department, BranchCampus)." .
+
+wsu:College a owl:Class ;
+    rdfs:subClassOf wsu:AcademicUnit ;
+    rdfs:label "College" ;
+    rdfs:comment "A college of the university, e.g. College of Engineering and Computer Science." .
+
+wsu:School a owl:Class ;
+    rdfs:subClassOf wsu:AcademicUnit ;
+    rdfs:label "School" ;
+    rdfs:comment "A school nested within a college, e.g. School of Nursing, Kinesiology, and Health Sciences." .
+
+wsu:Department a owl:Class ;
+    rdfs:subClassOf wsu:AcademicUnit ;
+    rdfs:label "Department" ;
+    rdfs:comment "An academic department, the typical unit offering individual degree programs." .
+
+wsu:BranchCampus a owl:Class ;
+    rdfs:subClassOf wsu:AcademicUnit ;
+    rdfs:label "Branch Campus" ;
+    rdfs:comment "A satellite campus of the university, e.g. Lake Campus." .
+
+wsu:Office a owl:Class ;
+    rdfs:label "Office" ;
+    rdfs:comment "A non-academic administrative office, e.g. Bursar, Dean of Students." .
+
+wsu:Center a owl:Class ;
+    rdfs:label "Center" ;
+    rdfs:comment "A research or service center, e.g. Center for Civics, Culture, and Workforce Development." .
+
+wsu:Organization a owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:comment "Abstract superclass for formally organized groups that are not academic/administrative units (StudentOrganization, Committee)." .
+
+wsu:StudentOrganization a owl:Class ;
+    rdfs:subClassOf wsu:Organization ;
+    rdfs:label "Student Organization" ;
+    rdfs:comment "A student-run club or organization." .
+
+wsu:Committee a owl:Class ;
+    rdfs:subClassOf wsu:Organization ;
+    rdfs:label "Committee" ;
+    rdfs:comment "A faculty, staff, or governance committee, e.g. AAUP chapter." .
+
+### Credentials
+
+wsu:Credential a owl:Class ;
+    rdfs:label "Credential" ;
+    rdfs:comment "Abstract superclass for academic credentials awarded by the university (DegreeProgram, Certificate, Minor)." .
+
+wsu:DegreeProgram a owl:Class ;
+    rdfs:subClassOf wsu:Credential ;
+    rdfs:label "Degree Program" ;
+    rdfs:comment "A degree program, e.g. Bachelor of Science in Computer Science." .
+
+wsu:Certificate a owl:Class ;
+    rdfs:subClassOf wsu:Credential ;
+    rdfs:label "Certificate" ;
+    rdfs:comment "An undergraduate or graduate certificate program." .
+
+wsu:Minor a owl:Class ;
+    rdfs:subClassOf wsu:Credential ;
+    rdfs:label "Minor" ;
+    rdfs:comment "An academic minor." .
+
+### People & governance
+
+wsu:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "An individual affiliated with the university (faculty, staff, administrator)." .
+
+wsu:LeadershipRole a owl:Class ;
+    rdfs:label "Leadership Role" ;
+    rdfs:comment "A university leadership position, e.g. Provost, President." .
+
+wsu:ProvostDivision a owl:Class ;
+    rdfs:label "Provost Division" ;
+    rdfs:comment "An administrative division under the Office of the Provost, e.g. Academic Affairs, Faculty Affairs." .
+
+### Contact & place
+
+wsu:ContactPoint a owl:Class ;
+    rdfs:label "Contact Point" ;
+    rdfs:comment "A bundle of contact details (phone, fax, email) for an academic unit or office." .
+
+wsu:Location a owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "A physical location or building on campus, e.g. Rike Hall." .
+
+wsu:SocialMediaChannel a owl:Class ;
+    rdfs:label "Social Media Channel" ;
+    rdfs:comment "A social media account associated with an academic unit." .
+
+### Policy
+
+wsu:Policy a owl:Class ;
+    rdfs:label "Policy" ;
+    rdfs:comment "A formal university policy, identified by a policy number." .
+
+wsu:PolicySeries a owl:Class ;
+    rdfs:label "Policy Series" ;
+    rdfs:comment "One of the 14 top-level numbered policy series (1000 Organization/Mission/Values ... 14000 BSOM)." .
+
+wsu:PolicyCategory a owl:Class ;
+    rdfs:label "Policy Category" ;
+    rdfs:comment "A subseries/category grouping within a policy series, e.g. 'Admissions' within Series 3000." .
+
+### Recognition & communications
+
+wsu:Accreditation a owl:Class ;
+    rdfs:label "Accreditation" ;
+    rdfs:comment "An accreditation held by a college, e.g. AACSB accreditation." .
+
+wsu:Recognition a owl:Class ;
+    rdfs:label "Recognition" ;
+    rdfs:comment "A ranking or award received by the university or an academic unit." .
+
+wsu:Announcement a owl:Class ;
+    rdfs:label "Announcement" ;
+    rdfs:comment "An official announcement or newsletter item, e.g. from the Office of the Provost." .
+
+wsu:NewsArticle a owl:Class ;
+    rdfs:label "News Article" ;
+    rdfs:comment "A university news item." .
+
+wsu:Fact a owl:Class ;
+    rdfs:label "Fact" ;
+    rdfs:comment "A published institutional fact or trivia item." .
+
+### Student services
+
+wsu:StudentService a owl:Class ;
+    rdfs:label "Student Service" ;
+    rdfs:comment "A service available to students, e.g. Financial Aid, Career Services, Disability Services." .
+
+wsu:TuitionProgram a owl:Class ;
+    rdfs:label "Tuition Program" ;
+    rdfs:comment "A structured tuition program, e.g. the Wright Guarantee Tuition Program." .
+
+### Research
+
+wsu:ResearchUnit a owl:Class ;
+    rdfs:label "Research Unit" ;
+    rdfs:comment "An organizational unit engaged in research, typically a department or program." .
+
+wsu:ResearcherProfile a owl:Class ;
+    rdfs:label "Researcher Profile" ;
+    rdfs:comment "A profile of an individual researcher in the research portal." .
+
+wsu:ResearchOutput a owl:Class ;
+    rdfs:label "Research Output" ;
+    rdfs:comment "Any output of research activity. Differentiated by outputType (Publication, Dataset, Project, Activity, Prize, PressClipping) rather than by separate subclasses." .
+
+### Finance
+
+wsu:TuitionRate a owl:Class ;
+    rdfs:label "Tuition Rate" ;
+    rdfs:comment "A specific tuition rate, scoped by residency, cohort, college/program, and academic level." .
+
+wsu:CostComponent a owl:Class ;
+    rdfs:label "Cost Component" ;
+    rdfs:comment "A component of total cost of attendance, e.g. housing, meal plan, required fees, tuition itself." .
+
+wsu:ResidencyStatus a owl:Class ;
+    rdfs:label "Residency Status" ;
+    rdfs:comment "Ohio resident (commuting or living on campus) vs. non-Ohio resident." .
+
+wsu:TuitionCohort a owl:Class ;
+    rdfs:label "Tuition Cohort" ;
+    rdfs:comment "A tuition cohort/guarantee year, e.g. Wright Guarantee 2026-27." .
+
+wsu:AcademicLevel a owl:Class ;
+    rdfs:label "Academic Level" ;
+    rdfs:comment "Undergraduate, Graduate, or Professional (e.g. Boonshoft Medicine M1-M4)." .
+
+### Graduate process
+
+wsu:AdmissionProcedure a owl:Class ;
+    rdfs:label "Admission Procedure" ;
+    rdfs:comment "The ordered admission procedure for a graduate program." .
+
+wsu:ProcessStep a owl:Class ;
+    rdfs:label "Process Step" ;
+    rdfs:comment "A single step within an admission, registration, or petition procedure." .
+
+wsu:GraduateAssistantship a owl:Class ;
+    rdfs:label "Graduate Assistantship" ;
+    rdfs:comment "A funded graduate assistantship position." .
+
+wsu:Scholarship a owl:Class ;
+    rdfs:label "Scholarship" ;
+    rdfs:comment "A scholarship award available to graduate students." .
+
+wsu:DegreeRequirement a owl:Class ;
+    rdfs:label "Degree Requirement" ;
+    rdfs:comment "A condition that must be satisfied to earn a degree, e.g. maintaining a 3.0 GPA." .
+
+wsu:AcademicMilestone a owl:Class ;
+    rdfs:label "Academic Milestone" ;
+    rdfs:comment "A submitted document or formal event in a graduate student's academic progress. Differentiated by milestoneType (Petition, ThesisOrDissertation, ComprehensiveExam, GraduationApplication) rather than by separate subclasses." .
+
+
+
+
+#    Object Properties
+
+
+wsu:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part" ;
+    rdfs:comment "Generic organizational containment, used across several class pairs: University hasPart College/BranchCampus/Office; College hasPart School/Department; School hasPart Department. Deliberately left without a single rdfs:domain/rdfs:range, since the actual domain/range varies by instance pair and a forced union would be both too broad and uninformative; constrain per-use-case in your reasoner/SHACL shapes instead if needed." ;
+    owl:inverseOf wsu:isPartOf .
+
+wsu:isPartOf a owl:ObjectProperty ;
+    rdfs:label "is part of" ;
+    rdfs:comment "Inverse of hasPart. Domain/range intentionally unconstrained; see hasPart." .
+
+wsu:locatedIn a owl:ObjectProperty ;
+    rdfs:label "located in" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:AcademicUnit wsu:Office ) ] ;
+    rdfs:range wsu:Location .
+
+wsu:hasContact a owl:ObjectProperty ;
+    rdfs:label "has contact" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:AcademicUnit wsu:Office ) ] ;
+    rdfs:range wsu:ContactPoint .
+
+wsu:hasSocialMedia a owl:ObjectProperty ;
+    rdfs:label "has social media" ;
+    rdfs:domain wsu:AcademicUnit ;
+    rdfs:range wsu:SocialMediaChannel .
+
+wsu:offersCredential a owl:ObjectProperty ;
+    rdfs:label "offers credential" ;
+    rdfs:domain wsu:AcademicUnit ;
+    rdfs:range wsu:Credential .
+
+wsu:accreditedBy a owl:ObjectProperty ;
+    rdfs:label "accredited by" ;
+    rdfs:domain wsu:College ;
+    rdfs:range wsu:Accreditation .
+
+wsu:receivedRecognition a owl:ObjectProperty ;
+    rdfs:label "received recognition" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:AcademicUnit wsu:University ) ] ;
+    rdfs:range wsu:Recognition .
+
+wsu:partneredWith a owl:ObjectProperty ;
+    rdfs:label "partnered with" ;
+    rdfs:domain wsu:University ;
+    rdfs:range wsu:Organization .
+
+wsu:holdsRole a owl:ObjectProperty ;
+    rdfs:label "holds role" ;
+    rdfs:domain wsu:Person ;
+    rdfs:range wsu:LeadershipRole .
+
+wsu:hasDivision a owl:ObjectProperty ;
+    rdfs:label "has division" ;
+    rdfs:domain wsu:LeadershipRole ;
+    rdfs:range wsu:ProvostDivision .
+
+wsu:oversees a owl:ObjectProperty ;
+    rdfs:label "oversees" ;
+    rdfs:domain wsu:LeadershipRole ;
+    rdfs:range wsu:AcademicUnit .
+
+wsu:authoredBy a owl:ObjectProperty ;
+    rdfs:label "authored by" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:Announcement wsu:NewsArticle ) ] ;
+    rdfs:range wsu:Office .
+
+wsu:belongsToSeries a owl:ObjectProperty ;
+    rdfs:label "belongs to series" ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range wsu:PolicySeries .
+
+wsu:belongsToCategory a owl:ObjectProperty ;
+    rdfs:label "belongs to category" ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range wsu:PolicyCategory .
+
+wsu:governedByPolicy a owl:ObjectProperty ;
+    rdfs:label "governed by policy" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:StudentService wsu:StudentOrganization wsu:ProcessStep wsu:DegreeRequirement wsu:AcademicMilestone ) ] ;
+    rdfs:range wsu:Policy .
+
+wsu:supersedes a owl:ObjectProperty ;
+    rdfs:label "supersedes" ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range wsu:Policy .
+
+wsu:administeredBy a owl:ObjectProperty ;
+    rdfs:label "administered by" ;
+    rdfs:domain wsu:StudentService ;
+    rdfs:range wsu:Office .
+
+wsu:appliesToCampus a owl:ObjectProperty ;
+    rdfs:label "applies to campus" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:StudentService wsu:TuitionRate ) ] ;
+    rdfs:range wsu:BranchCampus .
+
+wsu:associatedWithCollege a owl:ObjectProperty ;
+    rdfs:label "associated with college" ;
+    rdfs:comment "Merged from the earlier belongsToCollege (ResearchUnit) and appliesToCollege (TuitionRate) relations." ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( wsu:ResearchUnit wsu:TuitionRate ) ] ;
+    rdfs:range wsu:College .
+
+wsu:produces a owl:ObjectProperty ;
+    rdfs:label "produces" ;
+    rdfs:domain wsu:ResearchUnit ;
+    rdfs:range wsu:ResearchOutput .
+
+wsu:affiliatedWith a owl:ObjectProperty ;
+    rdfs:label "affiliated with" ;
+    rdfs:domain wsu:ResearcherProfile ;
+    rdfs:range wsu:ResearchUnit .
+
+wsu:appliesToResidency a owl:ObjectProperty ;
+    rdfs:label "applies to residency" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range wsu:ResidencyStatus .
+
+wsu:appliesToCohort a owl:ObjectProperty ;
+    rdfs:label "applies to cohort" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range wsu:TuitionCohort .
+
+wsu:hasCostComponent a owl:ObjectProperty ;
+    rdfs:label "has cost component" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range wsu:CostComponent .
+
+wsu:precedesStep a owl:ObjectProperty ;
+    rdfs:label "precedes step" ;
+    rdfs:domain wsu:ProcessStep ;
+    rdfs:range wsu:ProcessStep .
+
+wsu:hasStep a owl:ObjectProperty ;
+    rdfs:label "has step" ;
+    rdfs:domain wsu:AdmissionProcedure ;
+    rdfs:range wsu:ProcessStep .
+
+wsu:requiresApprovalFrom a owl:ObjectProperty ;
+    rdfs:label "requires approval from" ;
+    rdfs:comment "Applies specifically where milestoneType = Petition." ;
+    rdfs:domain wsu:AcademicMilestone ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( wsu:Person wsu:Office ) ] .
+
+wsu:jointlyOfferedBy a owl:ObjectProperty ;
+    rdfs:label "jointly offered by" ;
+    rdfs:comment "Many-to-many: a degree program can be jointly offered by more than one department." ;
+    rdfs:domain wsu:DegreeProgram ;
+    rdfs:range wsu:Department .
+
+wsu:appliesToLevel a owl:ObjectProperty ;
+    rdfs:label "applies to level" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range wsu:AcademicLevel .
+
+#    Datatype Properties
+
+
+wsu:hasPhone a owl:DatatypeProperty ;
+    rdfs:label "has phone" ;
+    rdfs:domain wsu:ContactPoint ;
+    rdfs:range xsd:string .
+
+wsu:hasFax a owl:DatatypeProperty ;
+    rdfs:label "has fax" ;
+    rdfs:domain wsu:ContactPoint ;
+    rdfs:range xsd:string .
+
+wsu:hasEmail a owl:DatatypeProperty ;
+    rdfs:label "has email" ;
+    rdfs:domain wsu:ContactPoint ;
+    rdfs:range xsd:string .
+
+wsu:hasPolicyNumber a owl:DatatypeProperty ;
+    rdfs:label "has policy number" ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range xsd:string .
+
+wsu:lastUpdated a owl:DatatypeProperty ;
+    rdfs:label "last updated" ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range xsd:date .
+
+wsu:ratePerCreditHour a owl:DatatypeProperty ;
+    rdfs:label "rate per credit hour" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range xsd:decimal .
+
+wsu:ratePerSemester a owl:DatatypeProperty ;
+    rdfs:label "rate per semester" ;
+    rdfs:domain wsu:TuitionRate ;
+    rdfs:range xsd:decimal .
+
+wsu:hasFee a owl:DatatypeProperty ;
+    rdfs:label "has fee" ;
+    rdfs:comment "Applies where milestoneType = GraduationApplication or Petition." ;
+    rdfs:domain wsu:AcademicMilestone ;
+    rdfs:range xsd:decimal .
+
+wsu:hasDeadline a owl:DatatypeProperty ;
+    rdfs:label "has deadline" ;
+    rdfs:domain wsu:ProcessStep ;
+    rdfs:range xsd:date .
+
+wsu:enrollmentCount a owl:DatatypeProperty ;
+    rdfs:label "enrollment count" ;
+    rdfs:domain wsu:University ;
+    rdfs:range xsd:integer .
+
+wsu:numPrograms a owl:DatatypeProperty ;
+    rdfs:label "number of programs" ;
+    rdfs:domain wsu:University ;
+    rdfs:range xsd:integer .
+
+wsu:numColleges a owl:DatatypeProperty ;
+    rdfs:label "number of colleges" ;
+    rdfs:domain wsu:University ;
+    rdfs:range xsd:integer .
+
+wsu:providesFunction a owl:DatatypeProperty ;
+    rdfs:label "provides function" ;
+    rdfs:comment "Free-text description of what a Provost division does (e.g. 'resources for accreditation, program review, and student learning outcomes')." ;
+    rdfs:domain wsu:ProvostDivision ;
+    rdfs:range xsd:string .
+
+wsu:hasScope a owl:DatatypeProperty ;
+    rdfs:label "has scope" ;
+    rdfs:comment "Free-text description of a leadership role's scope of responsibility." ;
+    rdfs:domain wsu:LeadershipRole ;
+    rdfs:range xsd:string .
+
+wsu:outputType a owl:DatatypeProperty ;
+    rdfs:label "output type" ;
+    rdfs:comment "Enumerated string: Publication | Dataset | Project | Activity | Prize | PressClipping." ;
+    rdfs:domain wsu:ResearchOutput ;
+    rdfs:range xsd:string .
+
+wsu:milestoneType a owl:DatatypeProperty ;
+    rdfs:label "milestone type" ;
+    rdfs:comment "Enumerated string: Petition | ThesisOrDissertation | ComprehensiveExam | GraduationApplication." ;
+    rdfs:domain wsu:AcademicMilestone ;
+    rdfs:range xsd:string .
+
+wsu:appliesToPopulation a owl:DatatypeProperty ;
+    rdfs:label "applies to population" ;
+    rdfs:comment "Enumerated string: Undergraduate | Graduate | MDProgram | Faculty | Staff. Modeled as a datatype property rather than an object property to a PopulationType class, since that class was never formalized in the agreed 45-class model." ;
+    rdfs:domain wsu:Policy ;
+    rdfs:range xsd:string .

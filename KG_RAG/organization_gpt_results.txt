@@ -1,0 +1,536 @@
+Organization-GPT CQ Results
+Source: KG_RAG\CQs.txt
+Questions: 20
+
+CQ01: What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each college?
+
+Wright State University is composed of six colleges:
+
+1. College of Health, Education, and Human Services:
+   - Department of Human Services
+   - Department of Leadership Studies in Education and Organizations
+   - Department of Nursing
+   - Department of Social Work
+   - Department of Teacher Education
+
+2. College of Liberal Arts:
+   No specific departments listed.
+
+3. College of Science and Mathematics:
+   - Department of Biochemistry and Molecular Biology
+   - Department of Biological Sciences
+   - Department of Biomedical Sciences Ph.D. Program
+   - Department of Chemistry
+   - Department of Mathematics and Statistics
+   - Department of Neuroscience, Cell Biology, and Physiology (NCBP)
+   - Department of Physics
+   - Department of Psychology
+
+4. College of Engineering and Computer Science:
+   - Department of Biomedical, Industrial, and Human Factors Engineering
+   - Department of Computer Science and Engineering
+   - Department of Electrical Engineering
+   - Department of Mechanical and Materials Engineering
+
+5. Raj Soin College of Business:
+   - Department of Economics
+   - Department of Finance and Financial Services
+   - Department of Marketing & Entrepreneurship
+
+6. Boonshoft School of Medicine:
+   - Department of Biochemistry and Molecular Biology
+   - Department of Clinical Neurosciences
+   - Department of Dermatology
+   - Department of Emergency Medicine
+   - Department of Family Medicine
+   - Department of Geriatrics
+   - Department of Internal Medicine
+   - Department of Medical Education
+   - Department of Military & Veteran Affairs
+   - Department of Neuroscience, Cell Biology, and Physiology (NCBP)
+   - Department of Obstetrics and Gynecology (OB/GYN)
+   - Department of Orthopedic and Plastic Surgery
+   - Department of Pediatrics
+   - Department of Pharmacology and Toxicology
+   - Department of Population and Public Health Sciences
+   - Department of Psychiatry
+   - Department of Surgery
+
+The university also has a branch campus in Celina, Ohio.
+
+================================================================================
+
+CQ02: Which academic department is responsible for a given degree program (e.g., which department offers the Bachelor of Science in Computer Science)?
+
+To determine which academic department is responsible for a given degree program, you can refer to the Organizational unit section or Department section. 
+
+The Organizational unit section lists various departments within Wright State University's colleges and schools, such as Biomedical Sciences, Chemistry, Computer Science and Engineering, Dermatology, Economics, etc.
+
+The Department section lists specific department names, such as Business Analytics, Computer Science and Engineering, Dermatology, etc.
+
+You can match the degree program you are interested in with the corresponding department name from either of these sections to determine which academic department is responsible for that program.
+
+================================================================================
+
+CQ03: What is the physical location (building/room), phone number, and email contact for a given department or office?
+
+To find the requested information, I will need to know which department or office you are inquiring about. Please provide the name of the department or office, and I will do my best to provide the physical location, phone number, and email contact.
+
+However, if you would like a list of all departments and offices along with their corresponding locations, phone numbers, and emails, here is the information:
+
+- Biomedical, Industrial, and Human Factors Engineering: 207 Russ Engineering Center, 937-775-5044, bie-dept@wright.edu
+- Computer Science and Engineering: 303 Russ Engineering Center, 937-775-5131, cse-dept@wright.edu
+- Electrical Engineering: 311 Russ Engineering Center, 937-775-5037, elec-egr@wright.edu
+- Mechanical and Materials Engineering: 209 Russ Engineering Center, 937-775-5040, mme-dept@wright.edu
+- Organizations Department: 470 Millett Hall, 937-775-2516, cheh-ldr@wright.edu
+- Teacher Education Department: 470 Millett Hall, 937-775-2677, cheh-ted@wright.edu
+- Leadership Studies in Education and Organizations Department: 470 Millett Hall, 937-775-2516, cheh-ldr@wright.edu
+- Health and Exercise Sciences, School of: 270 Millett Hall, 937-775-3223, cheh-knh@wright.edu
+- Nursing, School of: 225 (no phone number or email provided)
+- Office of Career Management: 100 Rike Hall, 937-775-2437, rscob-careers@wright.edu
+- Supply Chain Management, Marketing, and Management, School of: 254 Rike Hall, 937-775-3047, rscob-scmm@wright.edu
+
+================================================================================
+
+CQ04: Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?
+
+The college that sits beneath the College of Health, Education, and Human Services is Education and Leadership. 
+
+Departments beneath this school are:
+
+- Leadership Studies in Education and Organizations Department
+- Teacher Education Department
+
+================================================================================
+
+CQ05: What administrative divisions and offices report to the Office of the Provost?
+
+The following administrative divisions and offices report to the Office of the Provost:
+
+1. Academic Affairs
+2. Accreditation and Assessment
+3. Adult and Online Learning
+4. Curricular and Strategic Initiatives
+5. Faculty Affairs
+6. Research and Innovation 
+
+These divisions and offices oversee various aspects of university operations, including academic programs, research initiatives, faculty development, and more.
+
+================================================================================
+
+CQ06: What types of academic credentials does WSU offer (e.g., minor, undergraduate certificate, graduate certificate, bachelor's, master's, doctoral, microcredential), and which department/college grants each type?
+
+Wright State University offers the following types of academic credentials:
+
+**Minor:** 61 minors are available, all granted by the Colleges & Schools (no specific college listed).
+
+**Certificate:** 48 certificates are available, all granted by the Colleges & Schools (no specific college listed).
+
+**Credential:** 7 credentials are available, all granted by the Colleges & Schools (no specific college listed).
+
+**Bachelor's:** No information is provided on this topic.
+
+**Master's:** No information is provided on this topic.
+
+**Doctoral:** No information is provided on this topic.
+
+**Microcredential:** No information is provided on this topic.
+
+Note that some graduate programs have individual requirements and standards that must be met in addition to the general requirements set forth above, and may have higher standards than the minima described above. Students should consult their advisor/program to ensure that such requirements are met.
+
+================================================================================
+
+CQ07: Which degree programs are jointly offered or cross-listed between two departments or colleges (e.g., Neuroscience, Cell Biology, and Physiology spanning Science & Mathematics and the Boonshoft School of Medicine)?
+
+The following degree programs are jointly offered or cross-listed between two departments or colleges:
+
+- Master's and doctoral degree programs in Biological Sciences are cross-listed with College of Science and Mathematics.
+- Bachelor's, master's, and doctoral degree programs as well as undergraduate and graduate certificates in Biomedical Sciences are cross-listed with both College of Science and Mathematics and Boonshoft School of Medicine.
+- Master's and doctoral degree programs in Biomedical Sciences are also cross-listed with College of Engineering and Computer Science.
+
+================================================================================
+
+CQ08: Who holds a given university leadership role (e.g., Provost, President), and what is the scope of their responsibility?
+
+The Provost is the chief academic officer of the university and has responsibility for the university's academic affairs across the Dayton, Lake, and online campuses and programs. The Provost collaborates with the president and other stakeholders in setting overall academic priorities and strategies, with an emphasis on groundbreaking research and preparing students for lifelong success.
+
+The Provost does not hold a leadership role that is specifically defined as "President."
+
+================================================================================
+
+CQ09: What administrative divisions exist under the Office of the Provost (e.g., Academic Affairs, Faculty Affairs, Research and Innovation), and what resources or functions does each provide?
+
+The Office of the Provost has several administrative divisions that support academic success. These divisions include:
+
+1. Academic Affairs:
+   Resources that enhance, empower, and support success in the classroom, including honors, and other educational programs.
+
+2. Accreditation and Assessment:
+   Resources for accreditation, academic program review, and student learning outcomes.
+
+3. Adult and Online Learning:
+   Gateway for academic and holistic success for nontraditional and remote learners.
+
+4. Curricular and Strategic Initiatives:
+   Resources relating to the curriculum, as well as current projects underway to achieve and advance the university's mission.
+
+5. Faculty Affairs:
+   Home to the Center for Faculty Excellence, as well as faculty-specific documents, policies, forms, and other resources.
+
+6. Research and Innovation:
+   Resources and tools for the advancement of research and scholarly activities, as well as their compliance and the development of innovations.
+
+================================================================================
+
+CQ10: What is Wright State's basic institutional profile (founding namesake, student enrollment, number of colleges, number of academic programs, campus locations)?
+
+Wright State University was founded to honor aviation pioneers Orville and Wilbur Wright. The university has more than 11,000 students. It is composed of six colleges and offers 315 academic programs. The university has a branch campus in Celina, Ohio.
+
+================================================================================
+
+CQ11: What university policies exist within a given policy series (e.g., Series 3000 – Students, Series 5000 – Graduate Students and Programs), and what is each policy's number and title?
+
+Within the Series 3000 - Students category, the following university policies exist:
+
+1. Ohio Residency Policy (Series 3000: Students | categoryLabel: Ohio Residency Policy (Series 3000) | number: 3060 | title: Ohio Residency Policy)
+2. Undergraduate Non-Degree Seeking Admissions Policy (Series 3000: Students | categoryLabel: Undergraduate Non-Degree Seeking Admissions Policy (Series 3000) | number: 3120 | title: Undergraduate Non-Degree Seeking Admissions Policy)
+3. Transfer and Prior Learning Credit (Series 3000: Students | categoryLabel: Transfer and Prior Learning Credit (Series 3000) | number: 3210 | title: Ohio Articulation and Transfer Policy)
+4. Prior Learning Assessment Policy (Series 3000: Students | categoryLabel: Transfer and Prior Learning Credit (Series 3000) | number: 3220 | title: Prior Learning Assessment Policy)
+5. Transfer Policy for Plus/Minus Grading (Series 3000: Students | categoryLabel: Transfer and Prior Learning Credit (Series 3000) | number: 3265 | title: Transfer Policy for Plus/Minus Grading)
+
+Within the Series 5000 - Graduate Students and Programs category, the following university policies exist:
+
+1. Categories of Admission (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5010 | title: Categories of Admission)
+2. General Requirements for Graduate Admission (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5020 | title: General Requirements for Graduate Admission)
+3. Admission of Students with Three-Year Bachelor’s Degrees (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5040 | title: Admission of Students with Three-Year Bachelor’s Degrees)
+4. International Students (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5070 | title: International Students)
+5. Petition for Graduate Admission (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5080 | title: Petition for Graduate Admission)
+6. Graduate Assistantships and Scholarships (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5101 | title: Graduate Assistantships and Scholarships)
+7. Types of Appointments: Graduate Assistantships and Scholarships (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5110 | title: Types of Appointments: Graduate Assistantships and Scholarships)
+8. Graduate Assistants (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5120 | title: Graduate Assistants)
+9. Graduate Scholarships (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5130 | title: Graduate Scholarships)
+10. Graduate Council Scholarships (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5140 | title: Graduate Council Scholarships)
+11. Fee Remission for Graduate Research Assistants (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Assistantships & Scholarships (Series 5000) | number: 5150 | title: Fee Remission for Graduate Research Assistants)
+12. Procedure for Subsequent Registration (Series 5000: Graduate Students and Programs | categoryLabel: Registration (Series 5000) | number: 5220 | title: Procedure for Subsequent Registration)
+13. Course Audit (Series 5000: Graduate Students and Programs | categoryLabel: Registration (Series 5000) | number: 5240 | title: Course Audit)
+14. Full-Time Status (Series 5000: Graduate Students and Programs | categoryLabel: Registration (Series 5000) | number: 5250 | title: Full-Time Status)
+15. Continuing Registration (Series 5000: Graduate Students and Programs | categoryLabel: Registration (Series 5000) | number: 5270 | title: Continuing Registration)
+16. Grading Standards for Dual Listed Courses (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5310 | title: Grading Standards for Dual Listed Courses)
+17. Retroactive Graduate Credit (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5320 | title: Retroactive Graduate Credit)
+18. Graduate Credit for Undergraduates (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5330 | title: Graduate Credit for Undergraduates)
+19. Transfer Credit (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5340 | title: Transfer Credit)
+20. Credit By Examination (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5345 | title: Credit By Examination)
+21. Non-Contact Course Credit (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5350 | title: Non-Contact Course Credit)
+22. Course Repeats (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5360 | title: Course Repeats)
+23. Academic Standards (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5370 | title: Academic Standards)
+24. Residence Requirements (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Credit, Grades and Graduation (Series 5000) | number: 5380 | title: Residence Requirements)
+25. Advisor-Advisee Interaction (Series 5000: Graduate Students and Programs | categoryLabel: Graduate Advising (Series 5000) | number: 5505 | title: Academic Standards)
+26. Thesis (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5510 | title: Thesis)
+27. Time Limit for Master's Degrees (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5515 | title: Time Limit for Master's Degrees)
+28. Credit Hour Requirement for Master's Degrees (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5520 | title: Credit Hour Requirement for Master's Degrees)
+29. Residence Requirements (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5530 | title: Residence Requirements)
+30. Second Master's Degree (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5540 | title: Second Master's Degree)
+31. Dual Master's Degree Programs (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5560 | title: Dual Master's Degree Programs)
+32. Fresh Start Policy (Series 5000: Graduate Students and Programs | categoryLabel: Program of Study, University Policy | number: 5570 | title: Fresh Start Policy)
+33. Reading Knowledge of a Foreign Language (Series 5000: Graduate Students and Programs | categoryLabel: Admission (Series 5000) | number: 5580 | title: A candidate for the master's degree may be required to demonstrate a reading knowledge of a foreign language)
+
+Note that this list is not exhaustive, as there are many other university policies within each policy series.
+
+================================================================================
+
+CQ12: Which university policy governs a specific procedural topic (e.g., academic integrity, course registration, tuition refunds, FERPA/student privacy)?
+
+University Policy 3710 governs Academic Integrity Standards and Process for Misconduct.
+
+================================================================================
+
+CQ13: Which policies apply specifically to graduate students versus undergraduate students versus the Boonshoft School of Medicine?
+
+Policies that specifically apply to graduate students include:
+
+* University Policy 5110 Graduate Assistants
+* University Policy 5120 Graduate Scholars and Scholarships
+* University Policy 5130 Graduate assistants and scholars may purchase regular student health insurance
+* Procedure for Subsequent Registration (University Policy 5220)
+* Course Audit (University Policy 5240)
+* Full-Time Status (University Policy 5250)
+* Continuing Registration (University Policy 5270)
+
+Policies that specifically apply to undergraduate students include:
+
+* University Policy 3110 Undergraduate Degree-Seeking Admissions
+* University Policy 3170 Second Undergraduate Degree Admissions
+* University Policy 3120 Undergraduate Non-Degree Seeking Admissions Policy
+* Internship Policy (University Policy 3315)
+* Academic Classification based on Hours Completed (University Policy 3320)
+* Dean's List and President's List (University Policy 3340)
+* Academic Standing: Good Standing and Probation (University Policy 3350)
+* Non-Academic Dismissal from Academic Units (University Policy 3365)
+* Fresh Start Policy (University Policy 3375)
+* Second Start Policy (University Policy 3380)
+* Religious Excused Absences (University Policy 3620)
+* Requirements and Residency for an Undergraduate Degree (University Policy 3630)
+* Multiple Undergraduate Degrees (University Policy 4090)
+* Undergraduate Petitions (University Policy 5330)
+
+Policies that specifically apply to the Boonshoft School of Medicine include:
+
+* University Policy 14410 MD Program Academic Standing
+* University Policy 14440 MD Program Duty Hours
+* University Policy 14450 MD Program Assessment Timeliness
+* University Policy 14460 MD Program USMLE Timing Requirements
+* University Policy 14470 MD Program Immunization Requirements
+* University Policy 14480 MD Program Leaves of Absence
+* Tuition and Fee Refunds for MD Program (University Policy 14510)
+
+================================================================================
+
+CQ14: When was a given policy most recently updated, and what are the most recently revised policies university-wide?
+
+I don't have information on when specific policies were last updated or the most recent revisions across all university policies. However, according to University Policy 1130 Academic Calendar, every effort is made to keep this webpage updated, suggesting that it may be a relatively current source of information.
+
+Additionally, University Policy 1130 states that the final interpretation of these policies remains with the university, implying that there may be more recent updates or revisions not reflected in this policy alone.
+
+If you're looking for the most recently revised policies across all university policies, I recommend checking the Office of the Dean of Students for information on any proposed policy changes and their status.
+
+================================================================================
+
+CQ15: What student services (e.g., counseling, disability services, career services, financial aid) are available to WSU students, and which office administers each service?
+
+Wright State University offers a variety of student services, including:
+
+- Counseling and Wellness Services
+- Disability Services
+- Enrollment Services
+- Financial Aid
+- Career Services
+- Academic Advising
+- Student Advocacy and Wellness
+- Student Health Services
+- Resident Life and Housing (for on-campus students)
+- Transfer Center (for transfer students)
+
+The offices that administer these services are:
+
+- Counseling and Wellness Services: administered by the Counseling and Wellness department
+- Disability Services: administered by the Office of Community Standards and Student Conduct, with support from the Disability Services team
+- Enrollment Services: administered by the Division of Student Success
+- Financial Aid: administered by the Bursar's office
+- Career Services: administered by the Career Services department
+- Academic Advising: administered by the Division of Student Success
+- Student Advocacy and Wellness: administered by the Office of Community Standards and Student Conduct, with support from the Student Advocacy and Wellness team
+- Student Health Services: administered by the University Libraries (this may seem unusual, but it appears to be the case)
+- Resident Life and Housing: administered by Residence Life and Housing
+- Transfer Center: administered by the Division of Student Success
+
+Please note that some services may have additional support staff or teams, but the listed offices are generally responsible for administering these services.
+
+================================================================================
+
+CQ16: What policies and procedures govern student conduct, organizations, and general campus life (e.g., Code of Student Conduct, posting policy, alcohol policy)?
+
+The university's Code of Student Conduct (University Policy 3720) outlines the principles and values that guide student behavior on campus. This code is considered equally enforceable as the General Policies and Procedures.
+
+In addition to the Code of Student Conduct, other relevant policies include:
+
+* Academic Integrity Standards and Process for Misconduct (University Policy 3710), which addresses academic dishonesty
+* Hazing (University Policy 1290)
+* Sex/Gender-Based Harassment, Discrimination, and Sexual Misconduct Policy (University Policy 1270)
+* Expressive Activity; Free Speech (University Policy 1260)
+
+The university also has policies governing student organizations, including the Student Organization Policies and Procedures.
+
+Regarding general campus life, the following policies are relevant:
+
+* Bulletin Boards, Signs, and Posting (University Policy 7120), which regulates advertising on campus
+* Solicitations, Distributions, and Postings (University Policy 7110)
+* Tobacco Free Policy (University Policy 7230)
+
+================================================================================
+
+CQ17: What is the tuition rate for a given student category (undergraduate vs. graduate, Ohio resident vs. non-resident, Wright Guarantee cohort vs. non-guarantee), and which college or program does that rate apply to?
+
+To provide accurate information on the tuition rates, I will need to identify the specific student category you are referring to.
+
+Here are some examples of tuition rates for different student categories:
+
+* For Undergraduate students who are not part of the Wright Guarantee cohort:
+	+ Non-Ohio resident: $11,431 per semester (tuition only)
+	+ Ohio resident (Commuting): $4,722 per semester (tuition only)
+	+ Ohio resident (Living on Campus): $6,085 per semester (tuition only)
+* For Undergraduate students who are part of the Wright Guarantee cohort:
+	+ Non-Ohio resident: $11,431 per semester (tuition only)
+	+ Ohio resident (Commuting): $4,722 per semester (tuition only)
+	+ Ohio resident (Living on Campus): $6,085 per semester (tuition only)
+* For Graduate students who are not part of the Wright Guarantee cohort:
+	+ Non-Ohio resident: $12,824 per semester (tuition only)
+	+ Ohio resident: $7,580 per semester (tuition only)
+
+Please note that these rates do not include additional fees such as books and supplies, meal plans, or activity/communications/hospitality fees.
+
+If you would like to know the tuition rate for a specific student category, please provide more information about the category, such as whether it is an undergraduate or graduate program, Ohio resident or non-resident status, and whether it is part of the Wright Guarantee cohort.
+
+================================================================================
+
+CQ18: What additional costs (housing, meal plan, required fees) are bundled with tuition under the Wright Guarantee Tuition Program, and how do the total costs compare across resident/non-resident and commuter/on-campus categories?
+
+Under the Wright Guarantee Tuition Program, students who are Ohio residents starting in Fall 2026 or Spring 2027 will have the same annual cost of in-state tuition, housing rates, and meal plans over a four-year college career. 
+
+For Ohio resident commuting students:
+
+- The estimated total cost for one semester is $6,318.50.
+- The estimated total cost for two semesters (fall and spring) is $12,637.00.
+
+For Ohio resident living on campus students:
+
+- The estimated total cost for one semester is $11,659.50.
+- The estimated total cost for two semesters (fall and spring) is $23,319.00.
+
+For non-Ohio residents starting in Fall 2026 or Spring 2027:
+
+- The estimated total cost for one semester is $17,005.50.
+- The estimated total cost for two semesters (fall and spring) is $34,011.00.
+
+The Wright Guarantee Tuition Program guarantees the same annual cost of tuition, housing rates, and meal plans over a four-year college career for new incoming, in-state, degree-seeking undergraduate students, but does not guarantee non-Ohio resident tuition costs or out-of-state tuition rates.
+
+================================================================================
+
+CQ19: What research units (departments/programs) exist at WSU, which college does each belong to, and what research output (publications, datasets, projects, activities, prizes) is associated with each unit?
+
+At Wright State University, the following research units exist:
+
+1. Biochemistry and Molecular Biology
+   - College: College of Science and Mathematics
+   - Organizational Unit: Department
+
+2. Biological Sciences
+   - College: College of Science and Mathematics
+   - Organizational Unit: Department
+
+3. Biomedical, Industrial, and Human Factors Engineering
+   - College: College of Engineering and Computer Science
+   - Organizational Unit: Department
+
+4. Chemistry
+   - College: College of Science and Mathematics
+   - Organizational Unit: Department
+
+5. Computer Science and Engineering
+   - College: College of Engineering and Computer Science
+   - Organizational Unit: Department
+
+6. Dermatology
+   - College: Boonshoft School of Medicine
+   - Organizational Unit: Department
+
+7. Economics
+   - College: School of Finance, Accountancy, Management Information Systems & Economics
+   - Organizational Unit: Department
+
+8. Electrical Engineering
+   - College: College of Engineering and Computer Science
+   - Organational unit is not listed.
+
+9. Family Medicine
+   - College: Boonshoft School of Medicine
+   - Organizational Unit is not listed.
+
+10. Geriatrics
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+11. Health and Exercise Science
+    - College: School of Health and Exercise Sciences
+    - Organizational Unit is not listed.
+
+12. Human Services Department
+    - College: School of Social Work and Human Services
+    - Organizational Unit: Department
+
+13. Internal Medicine
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+14. Management and International Business
+    - College: Management, Human Resources & International Business
+    - Organizational Unit is not listed.
+
+15. Marketing & Entrepreneurship
+    - College: School of Supply Chain Management, Marketing, and Management
+    - Organizational Unit is not listed.
+
+16. Medical Education
+    - College: Boonshoft School of Medicine
+    - Organizational Unit: Department
+
+17. Military & Veteran Affairs
+    - College: Boonshoft School of Medicine
+    - Organizational Unit: Department
+
+18. Nursing
+    - College: School of Nursing
+    - Organizational Unit: Department
+
+19. Obstetrics and Gynecology (OB/GYN)
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+20. Orthopedic and Plastic Surgery
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+21. Pediatrics
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+22. Pharmacology and Toxicology
+    - College: Boonshoft School of Medicine
+    - Organizational Unit: Department
+
+23. Population and Public Health Sciences
+    - College: Boonshoft School of Medicine
+    - Organizational Unit: Department
+
+24. Psychiatry
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+25. Social Work Department
+    - College: School of Social Work and Human Services
+    - Organizational Unit: Department
+
+26. Surgery
+    - College: Boonshoft School of Medicine
+    - Organizational Unit is not listed.
+
+================================================================================
+
+CQ20: What is the step-by-step admission and graduation procedure for a graduate student (application, transcripts, fees, program of study, thesis/dissertation, commencement), and which university policy governs each step?
+
+Here is the step-by-step admission and graduation procedure for a graduate student:
+
+1. Submit application to the Graduate School via the online portal: University Policy 5010
+2. Request official transcripts from all previously attended colleges or universities: University Policy 5020
+3. Pay non-refundable application fee (domestic $40, international $70): University Policy 5070
+4. Submit test scores and/or supporting materials as required by the program (if applicable): University Policy 5070
+5. Have a current and approved program of study on file in the Graduate School: University Policy 5470
+6. Complete at least 50 percent of credit hours at Wright State: University Policy 5380
+7. Complete doctoral program requirements within ten years (Policy 5720.3): University Policy 5720
+8. Complete a final comprehensive examination if required by the program: University Policy 5720
+9. Demonstrate reading knowledge of a foreign language, as required by the program (if applicable): University Policy 5720
+10. Complete graduate certificate requirements within five years (Policy 5810.2): University Policy 5810
+11. Complete master's program requirements within seven calendar years: University Policy 5520
+12. Achieve a cumulative GPA of at least 3.0 in all courses taken for graduate credit: University Policy 5370
+13. Register for at least one graduate credit hour during the term in which a thesis/dissertation is defended: University Policy 5270
+14. Present one copy of an approved thesis/dissertation for approval of the dean of the Graduate School and submission to OhioLINK (Policy 5515.1.9): University Policy 5515
+
+For graduation, the following steps are also required:
+
+15. Submit a completed Graduation Application online through WINGS Express: University Policy 5470
+16. Pay $35.00 graduation application fee: University Policy 5470
+17. Complete any additional requirements as specified by the program or university policy.
+
+Note that some programs may have additional requirements, and applicants who wish to deviate from policies governing graduate students may submit a petition to the Graduate School requesting a waiver to a policy (University Policy 5080).
+
+================================================================================
+

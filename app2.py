@@ -87,55 +87,82 @@ def index_panel():
 @log_request
 def receive_urls():
     try:
-        data =request.json or {}
-        
-        is_valid, error =validate_json_request(data, ["base_urls", "extra_urls"])
-        if not is_valid:
-            return jsonify({"error": error}), 400
-        
-        base_urls =data.get("base_urls", [])
-        extra_urls= data.get("extra_urls", [])
-        
-        if not isinstance(base_urls, list) or not isinstance(extra_urls, list):
-            return jsonify({"error": "base_urls and extra_urls must be lists"}), 400
-        
+        file_urls = []
+        uploaded_file = None
+
+        if request.files:
+            uploaded_file = request.files.get("urls_file") or request.files.get("file")
+            if uploaded_file and uploaded_file.filename:
+                if not uploaded_file.filename.lower().endswith(".txt"):
+                    return jsonify({"error": "Only .txt files are supported for URL uploads"}), 400
+
+                file_content = uploaded_file.read().decode("utf-8", errors="replace")
+                file_urls = InputValidator.parse_urls_from_text(file_content)
+
+        data = {}
+
+        if request.is_json and request.get_json(silent=True) is not None:
+            data = request.get_json(silent=True) or {}
+        elif request.form:
+            for field in ["base_urls", "extra_urls"]:
+                raw_value = request.form.get(field)
+                if raw_value:
+                    try:
+                        parsed_value = json.loads(raw_value)
+                        if isinstance(parsed_value, list):
+                            data[field] = parsed_value
+                    except (TypeError, ValueError):
+                        logger.warning(f"Invalid form data for {field}: {raw_value}")
+
+        if not data and uploaded_file is None:
+            return jsonify({"error": "Request body is required"}), 400
+
+        if not data and uploaded_file is not None:
+            data = {"base_urls": [], "extra_urls": file_urls}
+
+        if data:
+            is_valid, error = validate_json_request(data, ["base_urls", "extra_urls"])
+            if not is_valid:
+                return jsonify({"error": error}), 400
+
+            base_urls = data.get("base_urls", [])
+            extra_urls = data.get("extra_urls", [])
+            if not isinstance(base_urls, list) or not isinstance(extra_urls, list):
+                return jsonify({"error": "base_urls and extra_urls must be lists"}), 400
+
+            if file_urls:
+                extra_urls = list(dict.fromkeys(file_urls + extra_urls))
+        else:
+            base_urls = []
+            extra_urls = file_urls
+
         stored_urls = set()
-        
+
         for url in base_urls:
             is_valid, error_msg = InputValidator.validate_url(url)
             if not is_valid:
                 logger.warning(f"Invalid base URL:{url} - {error_msg}")
                 continue
-            
-            sitemap_urls =helper.fetch_urls_from_sitemap(url)
+
+            sitemap_urls = helper.fetch_urls_from_sitemap(url)
             stored_urls.update(sitemap_urls)
-        
-        all_valid, valid_urls, errors =InputValidator.validate_urls_list(extra_urls)
+
+        all_valid, valid_urls, errors = InputValidator.validate_urls_list(extra_urls)
         if errors:
             logger.warning(f"Invalid extra URLs: {errors}")
 
-        # Single URL pass
         stored_urls.update(valid_urls)
 
-        # Nested URL pass for fetching URLs in URL domains
-        # for url in valid_urls:
-        #     try:
-        #         domain_urls, graph =helper.fetch_urls_from_domain(url)
-        #         print(graph)
-        #         stored_urls.update(domain_urls)
-        #     except Exception as e:
-        #         logger.warning(f"Failed to fetch URLs from domain {url}:{e}")
-        
         if not stored_urls:
             return jsonify({
                 "error": "No valid URLs to process",
                 "validation_errors": errors
             }), 400
-        
+
         logger.info(f"Processing {len(stored_urls)} URLs")
-        
+
         unscraped_urls = helper.process_urls(stored_urls)
-        
+
         return jsonify({
             "message": f"Successfully processed {len(stored_urls)} URLs for indexing!",
             "total_urls": len(stored_urls),
@@ -145,9 +172,9 @@ def receive_urls():
             "chat_url": "/organization-gpt",
             "success": True
         }), 202
-    
+
     except Exception as e:
-        logger.error(f"Error in receive_urls: {e}",exc_info=True)
+        logger.error(f"Error in receive_urls: {e}", exc_info=True)
         return jsonify({"error": "Failed to process URLs"}), 500
 
 

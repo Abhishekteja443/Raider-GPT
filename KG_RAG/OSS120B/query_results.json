@@ -1,0 +1,1717 @@
+[
+  {
+    "id": "CQ1",
+    "question": "What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each college?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT \n       ?parentLabel \n       ?parentTypeLabel \n       ?deptLabel\nWHERE {\n  # --- locate the university by its label (case‑insensitive) ---\n  ?uni a wsu:University ;\n       rdfs:label ?uniLabel .\n  FILTER(CONTAINS(LCASE(STR(?uniLabel)), \"wright state university\"))\n\n  # --- find all Colleges, Schools, or Branch Campuses that belong to the university ---\n  ?uni (wsu:isPartOf|^wsu:hasPart)+ ?parent .\n  ?parent a ?parentClass .\n  FILTER(?parentClass IN (wsu:College, wsu:School, wsu:BranchCampus))\n  ?parent rdfs:label ?parentLabel .\n  OPTIONAL { ?parentClass rdfs:label ?parentTypeLabel }\n\n  # --- find Departments that are (directly or indirectly) under each parent unit ---\n  ?parent (wsu:isPartOf|^wsu:hasPart)+ ?dept .\n  ?dept a wsu:Department ;\n        rdfs:label ?deptLabel .\n}\nORDER BY ?parentLabel ?deptLabel",
+    "variables": [
+      "parentLabel",
+      "parentTypeLabel",
+      "deptLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ2",
+    "question": "Which academic department is responsible for a given degree program (e.g., which department offers the Bachelor of Science in Computer Science)?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?deptLabel ?programLabel WHERE {\n  # degree program (any Credential that is a DegreeProgram)\n  ?program a wsu:DegreeProgram ;\n           rdfs:label ?programLabel .\n  FILTER(CONTAINS(LCASE(STR(?programLabel)),\n                  \"bachelor of science in computer science\"))   # <-- change term as needed\n\n  # academic department\n  ?dept a wsu:Department ;\n        rdfs:label ?deptLabel .\n\n  # department either offers the credential directly or is a joint offering\n  { ?dept wsu:offersCredential ?program }\n  UNION\n  { ?program wsu:jointlyOfferedBy ?dept }\n}\nORDER BY ?deptLabel",
+    "variables": [
+      "deptLabel",
+      "programLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ3",
+    "question": "What is the physical location (building/room), phone number, and email contact for a given department or office?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?unitLabel ?location ?phone ?email WHERE {\n  # Find the department or office by (partial) name – replace \"computer science\" with the desired term\n  ?unit rdfs:label ?unitLabel .\n  FILTER ( CONTAINS( LCASE( STR(?unitLabel) ), \"computer science\" ) )\n  ?unit a ?type .\n  FILTER ( ?type IN (wsu:Department, wsu:Office) )\n  \n  # Physical location (building/room)\n  ?unit wsu:locatedIn ?loc .\n  ?loc rdfs:label ?location .\n  \n  # Contact information\n  ?unit wsu:hasContact ?cp .\n  ?cp wsu:hasPhone ?phone .\n  OPTIONAL { ?cp wsu:hasEmail ?email }\n}\nORDER BY ?unitLabel",
+    "variables": [
+      "unitLabel",
+      "location",
+      "phone",
+      "email"
+    ],
+    "bindings": [
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Computer Science and Engineering Department"
+        },
+        "location": {
+          "type": "literal",
+          "value": "303 Russ Engineering Center"
+        },
+        "phone": {
+          "type": "literal",
+          "value": "937-775-5131"
+        },
+        "email": {
+          "type": "literal",
+          "value": "cse-dept@wright.edu"
+        }
+      }
+    ],
+    "count": 1
+  },
+  {
+    "id": "CQ4",
+    "question": "Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?collegeLabel ?schoolLabel ?deptLabel\nWHERE {\n  # --- the target college -------------------------------------------------\n  ?college a wsu:College ;\n           rdfs:label ?collegeLabel .\n  FILTER(CONTAINS(LCASE(STR(?collegeLabel)),\n                  \"college of health, education, and human services\"))\n\n  # --- schools that belong to the college ---------------------------------\n  ?school (wsu:isPartOf|^wsu:hasPart)+ ?college ;\n          a wsu:School ;\n          rdfs:label ?schoolLabel .\n\n  # --- departments that belong to each school -----------------------------\n  OPTIONAL {\n    ?dept (wsu:isPartOf|^wsu:hasPart)+ ?school ;\n          a wsu:Department ;\n          rdfs:label ?deptLabel .\n  }\n}\nORDER BY ?schoolLabel ?deptLabel",
+    "variables": [
+      "collegeLabel",
+      "schoolLabel",
+      "deptLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ5",
+    "question": "What administrative divisions and offices report to the Office of the Provost?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?unitLabel ?typeLabel WHERE {\n  # Find the Office of the Provost by its label (case‑insensitive search)\n  ?provostOffice rdfs:label ?provLabel .\n  FILTER(CONTAINS(LCASE(STR(?provLabel)), \"office of the provost\"))\n\n  # Any administrative unit (division or office) that is part of the Provost Office,\n  # using the flexible containment path that works with either direction.\n  ?unit (wsu:isPartOf|^wsu:hasPart)+ ?provostOffice .\n\n  # Keep only Provost divisions or generic offices\n  ?unit a ?type .\n  FILTER(?type = wsu:ProvostDivision || ?type = wsu:Office)\n\n  # Labels for the unit and its type\n  ?unit rdfs:label ?unitLabel .\n  ?type rdfs:label ?typeLabel .\n}\nORDER BY ?unitLabel",
+    "variables": [
+      "unitLabel",
+      "typeLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ6",
+    "question": "What types of academic credentials does WSU offer (e.g., minor, undergraduate certificate, graduate certificate, bachelor's, master's, doctoral, microcredential), and which department/college grants each type?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT\n       ?credentialLabel\n       ?credentialTypeLabel\n       ?grantingUnitLabel\n       ?grantingParentLabel\nWHERE {\n  # --- locate the university -------------------------------------------------\n  ?univ rdfs:label ?univLabel .\n  FILTER(CONTAINS(LCASE(STR(?univLabel)), \"wright state university\"))\n\n  # --- any academic unit (college, school, department, etc.) that offers a credential\n  ?univ wsu:hasPart ?grantingUnit .\n  ?grantingUnit wsu:offersCredential ?cred .\n  ?grantingUnit rdfs:label ?grantingUnitLabel .\n\n  # --- credential label and its concrete type (Certificate, Minor, DegreeProgram, …)\n  ?cred rdfs:label ?credentialLabel .\n  ?cred rdf:type ?credType .\n  ?credType rdfs:label ?credentialTypeLabel .\n\n  # --- if the granting unit is a department, also retrieve the college or school it belongs to\n  OPTIONAL {\n    ?grantingUnit (wsu:isPartOf|^wsu:hasPart)+ ?parentUnit .\n    ?parentUnit a ?parentClass .\n    FILTER( ?parentClass = wsu:College || ?parentClass = wsu:School )\n    ?parentUnit rdfs:label ?grantingParentLabel .\n  }\n}\nORDER BY ?credentialLabel ?grantingUnitLabel",
+    "variables": [
+      "credentialLabel",
+      "credentialTypeLabel",
+      "grantingUnitLabel",
+      "grantingParentLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ7",
+    "question": "Which degree programs are jointly offered or cross-listed between two departments or colleges (e.g., Neuroscience, Cell Biology, and Physiology spanning Science & Mathematics and the Boonshoft School of Medicine)?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT \n       ?programLabel\n       ?dept1Label ?parent1Label\n       ?dept2Label ?parent2Label\nWHERE {\n  # degree programs\n  ?program a wsu:DegreeProgram ;\n           rdfs:label ?programLabel ;\n           wsu:jointlyOfferedBy ?dept1 , ?dept2 .\n\n  # ensure the two departments are different\n  FILTER ( ?dept1 != ?dept2 )\n\n  # department labels\n  ?dept1 rdfs:label ?dept1Label .\n  ?dept2 rdfs:label ?dept2Label .\n\n  # find the college or school each department belongs to (any level up the hierarchy)\n  OPTIONAL {\n    ?dept1 (wsu:isPartOf|^wsu:hasPart)+ ?parent1 .\n    ?parent1 a ?parentType .\n    FILTER ( ?parentType = wsu:College || ?parentType = wsu:School )\n    ?parent1 rdfs:label ?parent1Label .\n  }\n  OPTIONAL {\n    ?dept2 (wsu:isPartOf|^wsu:hasPart)+ ?parent2 .\n    ?parent2 a ?parentType2 .\n    FILTER ( ?parentType2 = wsu:College || ?parentType2 = wsu:School )\n    ?parent2 rdfs:label ?parent2Label .\n  }\n}\nORDER BY ?programLabel ?dept1Label ?dept2Label",
+    "variables": [
+      "programLabel",
+      "dept1Label",
+      "parent1Label",
+      "dept2Label",
+      "parent2Label"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ8",
+    "question": "Who holds a given university leadership role (e.g., Provost, President), and what is the scope of their responsibility?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\n# Given a leadership role name (e.g., \"Provost\" or \"President\"),\n# return the person(s) who hold it and the scope of the role.\nSELECT DISTINCT ?personName ?roleName ?scope WHERE {\n  # Find the LeadershipRole whose label matches the requested title\n  ?role a wsu:LeadershipRole ;\n        rdfs:label ?roleName ;\n        wsu:hasScope ?scope .\n  FILTER ( CONTAINS(LCASE(STR(?roleName)), \"provost\") ||\n           CONTAINS(LCASE(STR(?roleName)), \"president\") )\n  \n  # Person holding that role\n  ?person a wsu:Person ;\n          rdfs:label ?personName ;\n          wsu:holdsRole ?role .\n}\nORDER BY ?roleName ?personName",
+    "variables": [
+      "personName",
+      "roleName",
+      "scope"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ9",
+    "question": "What administrative divisions exist under the Office of the Provost (e.g., Academic Affairs, Faculty Affairs, Research and Innovation), and what resources or functions does each provide?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?divisionLabel ?function WHERE {\n  # locate the Office of the Provost (label may vary)\n  ?provostOffice rdfs:label ?provostLabel .\n  FILTER(CONTAINS(LCASE(STR(?provostLabel)), \"provost\"))\n\n  # a LeadershipRole that oversees an academic unit that is (directly or indirectly) part of that office\n  ?role wsu:oversees ?unit .\n  ?unit (wsu:isPartOf|^wsu:hasPart)* ?provostOffice .\n\n  # the divisions attached to that role\n  ?role wsu:hasDivision ?division .\n  ?division rdfs:label ?divisionLabel .\n\n  # optional description of what the division provides (functions/resources)\n  OPTIONAL { ?division wsu:providesFunction ?function }\n}\nORDER BY ?divisionLabel",
+    "variables": [
+      "divisionLabel",
+      "function"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ10",
+    "question": "What is Wright State's basic institutional profile (founding namesake, student enrollment, number of colleges, number of academic programs, campus locations)?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT\n       ?founderName\n       ?enrollment\n       ?collegeCount\n       ?programCount\n       ?campusLabel\nWHERE {\n  # ---- University -------------------------------------------------\n  ?uni a wsu:University ;\n       rdfs:label ?uniLabel .\n  FILTER(CONTAINS(LCASE(STR(?uniLabel)), \"wright state\"))\n\n  # ---- Enrollment --------------------------------------------------\n  OPTIONAL { ?uni wsu:enrollmentCount ?enrollment . }\n\n  # ---- Founder (person whose leadership‑role scope mentions “founder”) ----\n  OPTIONAL {\n    ?person a wsu:Person ;\n            rdfs:label ?founderName ;\n            wsu:holdsRole ?role .\n    ?role wsu:hasScope ?scope .\n    FILTER(CONTAINS(LCASE(STR(?scope)), \"founder\"))\n  }\n\n  # ---- Campus locations --------------------------------------------\n  ?campus a wsu:BranchCampus ;\n          wsu:locatedIn ?loc ;\n          (wsu:isPartOf|^wsu:hasPart)+ ?uni .\n  ?loc rdfs:label ?campusLabel .\n\n  # ---- Number of colleges (under the university) -------------------\n  {\n    SELECT (COUNT(DISTINCT ?college) AS ?collegeCount) WHERE {\n      ?college a wsu:College ;\n               (wsu:isPartOf|^wsu:hasPart)+ ?uni .\n    }\n  }\n\n  # ---- Number of academic programs (credentials offered) ----------\n  {\n    SELECT (COUNT(DISTINCT ?program) AS ?programCount) WHERE {\n      ?unit a wsu:AcademicUnit ;\n            (wsu:isPartOf|^wsu:hasPart)+ ?uni ;\n            wsu:offersCredential ?program .\n      ?program a wsu:Credential .\n    }\n  }\n}\nORDER BY ?campusLabel",
+    "variables": [
+      "founderName",
+      "enrollment",
+      "collegeCount",
+      "programCount",
+      "campusLabel"
+    ],
+    "bindings": [
+      {
+        "collegeCount": {
+          "type": "literal",
+          "value": "5",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "programCount": {
+          "type": "literal",
+          "value": "0",
+          "datatype": "http://www.w3.org/2001/XMLSchema#integer"
+        },
+        "campusLabel": {
+          "type": "literal",
+          "value": "7600 Lake Campus Drive, Celina, OH 45822, United States"
+        }
+      }
+    ],
+    "count": 1
+  },
+  {
+    "id": "CQ11",
+    "question": "What university policies exist within a given policy series (e.g., Series 3000 – Students, Series 5000 – Graduate Students and Programs), and what is each policy's number and title?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\n# Replace the string in the FILTER with the desired series identifier\n# e.g., \"3000\" for “Series 3000 – Students” or \"5000\" for “Series 5000 – Graduate Students and Programs”\n\nSELECT DISTINCT ?policyNumber ?policyTitle ?seriesLabel WHERE {\n  ?policy a wsu:Policy ;\n          wsu:hasPolicyNumber ?policyNumber ;\n          rdfs:label ?policyTitle ;\n          wsu:belongsToSeries ?series .\n\n  ?series rdfs:label ?seriesLabel .\n\n  # case‑insensitive match on the series label\n  FILTER(CONTAINS(LCASE(STR(?seriesLabel)), \"3000\"))\n}\nORDER BY ?policyNumber",
+    "variables": [
+      "policyNumber",
+      "policyTitle",
+      "seriesLabel"
+    ],
+    "bindings": [
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13210",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Emergency Management"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13220",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Emergency Closing Procedures"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13270",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Emergency Care for Injuries and Illnesses"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13275",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Reporting Injuries and Illnesses"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13301",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Environmental Health and Safety"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13310",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Fire Safety Plan"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13320",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Pregnancy in the Workplace and in Academic and Research Settings"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13330",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Exit Policy for the Closeout/Decommissioning of University Laboratories"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13340",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Safety Shoes"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13350",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Non-occupational Exposure to Blood-Borne Pathogens"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13350",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Non-occupational Exposure to Bloodborne Pathogens"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13370",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Space Heater Usage"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13375",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Holiday Lighting & Decoration"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13410",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Children on Campus and Working with Minors Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13620",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Digital Accessibility"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "13650",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Service Animal Use on Campus"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3010",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Student Privacy and Release of Educational Records - FERPA"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3020",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "F-1 International Students"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3030",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "J-1 Exchange Visitor"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3060",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Ohio Residency Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3110",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Undergraduate Degree-Seeking Admissions"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3120",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Undergraduate Non-Degree Seeking Admissions Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3130",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Dual Enrollment Admissions (College Credit Plus)"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3140",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Readmission"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3160",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Wright Path Program"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3170",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Second Undergraduate Degree Admissions"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3210",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Ohio Articulation and Transfer Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3215",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Credit Regulations"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3220",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Prior Learning Assessment Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3230",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Ohio Transfer Module (OTM)"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3240",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Completion of Wright State Core Using Transfer Courses"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3245",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Student Requirements for Writing Across the Curriculum"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3260",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Credit for \"D\" Grades"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3265",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Policy for Plus/Minus Grading"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3280",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Credit for Advanced Placement (AP)"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3285",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Transfer Credit for Military Training, Experience and Coursework"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3315",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Internship Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3320",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Academic Classification based on Hours Completed"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3340",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Dean's List and President's List"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3350",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Academic Standing: Good Standing and Probation"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3365",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Non-Academic Dismissal from Academic Units"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3370",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Fresh Start Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3375",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Second Start Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3380",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Religious Excused Absences"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3404",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Required Advisor Approval for Registration Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3405",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Auditing Classes"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3410",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Required Selective Service Registration for In-State Tuition"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3420",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Refunds and Refund Appeals"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3430",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Course Registration, Add, Attendance, and Administrative Drop Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3435",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Credit Hour Maximums"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3510",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Withdrawal Policy"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3520",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Course Repeats and Replacement"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3601",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Semester Credit Hours Required to meet Degree Requirements"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3620",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Requirements and Residency for an Undergraduate Degree"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3625",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Course Substitutions to Accommodate Disabilities"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3630",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Multiple Undergraduate Degrees"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3640",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Graduating with Latin Honors"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3660",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Posthumous Degrees and Recognitions"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3670",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Honorary Degree"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3685",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Degree Application and Commencement Participation"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3710",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "policyNumber": {
+          "type": "literal",
+          "value": "3720",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "policyTitle": {
+          "type": "literal",
+          "value": "Code of Student Conduct"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      }
+    ],
+    "count": 62
+  },
+  {
+    "id": "CQ12",
+    "question": "Which university policy governs a specific procedural topic (e.g., academic integrity, course registration, tuition refunds, FERPA/student privacy)?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\n# Replace the string in the FILTER with the desired procedural topic\n# (e.g., \"academic integrity\", \"course registration\", \"tuition refunds\", \"ferpa\")\nSELECT DISTINCT ?policyLabel ?policyNumber ?categoryLabel WHERE {\n  # --- a Policy that directly mentions the topic in its label\n  ?policy a wsu:Policy ;\n          rdfs:label ?policyLabel ;\n          wsu:hasPolicyNumber ?policyNumber .\n  OPTIONAL {\n    ?policy wsu:belongsToCategory ?cat .\n    ?cat rdfs:label ?categoryLabel .\n  }\n\n  # also capture policies that are linked to a ProcessStep (or other entity)\n  # whose label mentions the topic; the step is governed by the policy\n  OPTIONAL {\n    ?step a wsu:ProcessStep ;\n          rdfs:label ?stepLabel ;\n          wsu:governedByPolicy ?policy .\n  }\n\n  # keep only rows where the topic appears in either the policy label\n  # or the governed step label\n  FILTER (\n    CONTAINS(LCASE(STR(?policyLabel)), \"academic integrity\") ||\n    CONTAINS(LCASE(STR(?stepLabel)),   \"academic integrity\")\n  )\n}\nORDER BY ?policyNumber",
+    "variables": [
+      "policyLabel",
+      "policyNumber",
+      "categoryLabel"
+    ],
+    "bindings": [
+      {
+        "policyLabel": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "3710",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity"
+        }
+      }
+    ],
+    "count": 1
+  },
+  {
+    "id": "CQ13",
+    "question": "Which policies apply specifically to graduate students versus undergraduate students versus the Boonshoft School of Medicine?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?policyLabel ?appliesTo WHERE {\n  # all policies\n  ?policy a wsu:Policy ;\n          rdfs:label ?policyLabel .\n\n  # ---- graduate / undergraduate population ----\n  OPTIONAL {\n    ?policy wsu:appliesToPopulation ?pop .\n    FILTER ( ?pop = \"Graduate\" || ?pop = \"Undergraduate\" )\n    BIND ( ?pop AS ?appliesTo )\n  }\n\n  # ---- policies that apply to the Boonshoft School of Medicine ----\n  OPTIONAL {\n    # locate the school by its label (do not guess the IRI)\n    ?school a wsu:School ;\n            rdfs:label ?schoolLabel .\n    FILTER ( CONTAINS( LCASE( STR(?schoolLabel) ), \"boonshoft\" ) )\n    \n    # follow either isPartOf or the inverse of hasPart (nested levels allowed)\n    ?policy ( wsu:isPartOf | ^wsu:hasPart )+ ?school .\n    \n    BIND ( ?schoolLabel AS ?appliesTo )\n  }\n\n  # keep only those policies that matched one of the above cases\n  FILTER ( BOUND(?appliesTo) )\n}\nORDER BY ?policyLabel",
+    "variables": [
+      "policyLabel",
+      "appliesTo"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ14",
+    "question": "When was a given policy most recently updated, and what are the most recently revised policies university-wide?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\n# ------------------------------------------------------------\n#  1️⃣  When was the *given* policy most recently updated?\n# ------------------------------------------------------------\n# Replace the text inside the FILTER with a phrase that uniquely\n# identifies the policy you are interested in (e.g. \"student‑code\").\n# ------------------------------------------------------------\nSELECT ?policyLabel ?policyLastUpdated ?recentPolicyLabel ?recentPolicyUpdated\nWHERE {\n  # ----- specific policy -------------------------------------------------\n  OPTIONAL {\n    ?policy rdfs:label ?policyLabel .\n    FILTER(CONTAINS(LCASE(STR(?policyLabel)), \"given policy\"))   # <-- edit this string\n    ?policy wsu:lastUpdated ?policyLastUpdated .\n  }\n\n  # ----- most‑recently revised policies university‑wide -----------------\n  {\n    # Find the latest update date that exists for any policy\n    SELECT (MAX(?date) AS ?latestDate) WHERE {\n      ?anyPolicy wsu:lastUpdated ?date .\n    }\n  }\n  # Return every policy that was updated on that latest date\n  ?recentPolicy rdfs:label ?recentPolicyLabel ;\n                wsu:lastUpdated ?latestDate .\n  BIND(?latestDate AS ?recentPolicyUpdated)\n}\nORDER BY ?policyLabel ?recentPolicyLabel",
+    "variables": [
+      "policyLabel",
+      "policyLastUpdated",
+      "recentPolicyLabel",
+      "recentPolicyUpdated"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ15",
+    "question": "What student services (e.g., counseling, disability services, career services, financial aid) are available to WSU students, and which office administers each service?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?serviceLabel ?officeLabel WHERE {\n  ?service a wsu:StudentService ;\n           rdfs:label ?serviceLabel ;\n           wsu:administeredBy ?office .\n  ?office rdfs:label ?officeLabel .\n\n  FILTER (\n    CONTAINS(LCASE(STR(?serviceLabel)), \"counsel\") ||\n    CONTAINS(LCASE(STR(?serviceLabel)), \"disability\") ||\n    CONTAINS(LCASE(STR(?serviceLabel)), \"career\") ||\n    CONTAINS(LCASE(STR(?serviceLabel)), \"financial aid\") ||\n    CONTAINS(LCASE(STR(?serviceLabel)), \"financial\")\n  )\n}\nORDER BY ?serviceLabel",
+    "variables": [
+      "serviceLabel",
+      "officeLabel"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ16",
+    "question": "What policies and procedures govern student conduct, organizations, and general campus life (e.g., Code of Student Conduct, posting policy, alcohol policy)?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT\n       ?itemLabel\n       ?itemType\n       ?policyNumber\n       ?categoryLabel\n       ?seriesLabel\n       ?lastUpdated\nWHERE {\n  {\n    # --- Policies -------------------------------------------------\n    ?item a wsu:Policy ;\n          rdfs:label ?itemLabel .\n    BIND(\"Policy\" AS ?itemType)\n\n    # keep only those that look like they govern conduct, orgs or campus life\n    FILTER ( CONTAINS(LCASE(STR(?itemLabel)), \"conduct\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"organization\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"campus\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"posting\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"alcohol\") )\n    \n    OPTIONAL { ?item wsu:hasPolicyNumber ?policyNumber . }\n    OPTIONAL { ?item wsu:belongsToCategory ?cat .\n               ?cat rdfs:label ?categoryLabel . }\n    OPTIONAL { ?item wsu:belongsToSeries ?ser .\n               ?ser rdfs:label ?seriesLabel . }\n    OPTIONAL { ?item wsu:lastUpdated ?lastUpdated . }\n  }\n  UNION\n  {\n    # --- Procedures (AdmissionProcedure) -------------------------\n    ?item a wsu:AdmissionProcedure ;\n          rdfs:label ?itemLabel .\n    BIND(\"Procedure\" AS ?itemType)\n\n    FILTER ( CONTAINS(LCASE(STR(?itemLabel)), \"conduct\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"organization\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"campus\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"posting\")\n          || CONTAINS(LCASE(STR(?itemLabel)), \"alcohol\") )\n    \n    # Procedures typically do not have policy numbers, but we keep the same optional fields\n    OPTIONAL { ?item wsu:hasPolicyNumber ?policyNumber . }\n    OPTIONAL { ?item wsu:belongsToCategory ?cat .\n               ?cat rdfs:label ?categoryLabel . }\n    OPTIONAL { ?item wsu:belongsToSeries ?ser .\n               ?ser rdfs:label ?seriesLabel . }\n    OPTIONAL { ?item wsu:lastUpdated ?lastUpdated . }\n  }\n}\nORDER BY ?itemLabel",
+    "variables": [
+      "itemLabel",
+      "itemType",
+      "policyNumber",
+      "categoryLabel",
+      "seriesLabel",
+      "lastUpdated"
+    ],
+    "bindings": [
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Academic Integrity Standards and Process for Misconduct"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "3710",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Academic Organization"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "1020",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Organization"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "1000 Organization, Mission and Values"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Administrative Organization"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "1010",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Organization"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "1000 Organization, Mission and Values"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Administrative Procedures for Allegations of Research Misconduct"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "6120",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Researcher Rights and Responsibilities"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Research"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Alcohol Consumption on University Property"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "9710",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Hospitality Services/Food"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 9000 Business and Finance"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Bulletin Boards, Signs, and Posting"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "7120",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Communications and Access"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Facilities and Operations"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Campus Traffic Control"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "7420",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Children on Campus and Working with Minors Policy"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "13410",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Emergency, Health, Safety and Accessibility"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Code of Student Conduct"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "3720",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Student Conduct and Integrity"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "3000 Students"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Gender-Based Harassment, Discrimination, and Sexual Misconduct"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "1270",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Reorganization"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "1030",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Organization"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "1000 Organization, Mission and Values"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Service Animal Use on Campus"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "13650",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Accessibility"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Series 13000 Emergency, Health, Safety and Accessibility"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Sex/Gender-Based Harassment, Discrimination, and Sexual Misconduct Policy"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "1270",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Principles and Values"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "1000 Organization, Mission and Values"
+        }
+      },
+      {
+        "itemLabel": {
+          "type": "literal",
+          "value": "Solicitations, Distributions, and Postings"
+        },
+        "itemType": {
+          "type": "literal",
+          "value": "Policy"
+        },
+        "policyNumber": {
+          "type": "literal",
+          "value": "7110",
+          "datatype": "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "categoryLabel": {
+          "type": "literal",
+          "value": "Communications and Access"
+        },
+        "seriesLabel": {
+          "type": "literal",
+          "value": "Facilities and Operations"
+        }
+      }
+    ],
+    "count": 14
+  },
+  {
+    "id": "CQ17",
+    "question": "What is the tuition rate for a given student category (undergraduate vs. graduate, Ohio resident vs. non-resident, Wright Guarantee cohort vs. non-guarantee), and which college or program does that rate apply to?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT\n       ?unitLabel\n       ?levelLabel\n       ?residencyLabel\n       ?cohortLabel\n       ?ratePerCreditHour\n       ?ratePerSemester\nWHERE {\n  # TuitionRate instances\n  ?rate a wsu:TuitionRate .\n\n  # What academic level the rate applies to (undergrad / grad)\n  OPTIONAL {\n    ?rate wsu:appliesToLevel ?level .\n    ?level rdfs:label ?levelLabel .\n  }\n\n  # Residency status (Ohio resident / non‑resident)\n  OPTIONAL {\n    ?rate wsu:appliesToResidency ?residency .\n    ?residency rdfs:label ?residencyLabel .\n  }\n\n  # Tuition cohort (Wright Guarantee / non‑guarantee)\n  OPTIONAL {\n    ?rate wsu:appliesToCohort ?cohort .\n    ?cohort rdfs:label ?cohortLabel .\n  }\n\n  # Monetary values\n  OPTIONAL { ?rate wsu:ratePerCreditHour ?ratePerCreditHour }\n  OPTIONAL { ?rate wsu:ratePerSemester   ?ratePerSemester }\n\n  # Find the academic unit (College or DegreeProgram) that the rate is attached to.\n  # The graph may use either wsu:isPartOf or the inverse of wsu:hasPart, possibly at\n  # multiple nesting levels, so we use a flexible path.\n  OPTIONAL {\n    ?rate (wsu:isPartOf|^wsu:hasPart)+ ?unit .\n    ?unit a ?unitType .\n    FILTER ( ?unitType = wsu:College || ?unitType = wsu:DegreeProgram )\n    ?unit rdfs:label ?unitLabel .\n  }\n\n  # -----------------------------------------------------------------\n  # Optional filters to focus on the requested categories.\n  # Comment out any FILTER you do NOT need.\n  # -----------------------------------------------------------------\n  # Undergraduate vs. Graduate\n  FILTER ( !BOUND(?levelLabel) ||\n           CONTAINS(LCASE(STR(?levelLabel)), \"undergraduate\") ||\n           CONTAINS(LCASE(STR(?levelLabel)), \"graduate\") )\n  # Ohio resident vs. non‑resident\n  FILTER ( !BOUND(?residencyLabel) ||\n           CONTAINS(LCASE(STR(?residencyLabel)), \"ohio\") )\n  # Wright Guarantee cohort vs. non‑guarantee\n  FILTER ( !BOUND(?cohortLabel) ||\n           CONTAINS(LCASE(STR(?cohortLabel)), \"guarantee\") )\n}\nORDER BY ?unitLabel ?levelLabel ?residencyLabel ?cohortLabel",
+    "variables": [
+      "unitLabel",
+      "levelLabel",
+      "residencyLabel",
+      "cohortLabel",
+      "ratePerCreditHour",
+      "ratePerSemester"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ18",
+    "question": "What additional costs (housing, meal plan, required fees) are bundled with tuition under the Wright Guarantee Tuition Program, and how do the total costs compare across resident/non-resident and commuter/on-campus categories?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\n#  What additional cost components are attached to the Wright Guarantee Tuition Program,\n#  and how do the total tuition‑related costs differ by residency (resident vs non‑resident)\n#  and by cohort (commuter vs on‑campus)?\n\nSELECT DISTINCT\n       ?residencyLabel\n       ?cohortLabel\n       ?baseRatePerSemester\n       (SUM(?compCost) AS ?totalAdditionalCost)\n       ((?baseRatePerSemester) + SUM(?compCost) AS ?totalCost)\n       (GROUP_CONCAT(DISTINCT ?compLabel ; SEPARATOR=\", \") AS ?costComponents)\nWHERE {\n  # ---- Identify the Wright Guarantee Tuition Program ---------------------------------\n  ?tuitionProgram a wsu:TuitionProgram ;\n                  rdfs:label ?progLabel .\n  FILTER ( CONTAINS(LCASE(STR(?progLabel)), \"wright guarantee\") )\n\n  # ---- Find TuitionRate(s) that belong to this program (using either direction of the\n  #      containment relationship) ----------------------------------------------------\n  ?tuitionRate a wsu:TuitionRate ;\n               (wsu:isPartOf|^wsu:hasPart)+ ?tuitionProgram ;\n               wsu:ratePerSemester ?baseRatePerSemester .\n\n  # ---- Residency status (Resident / Non‑Resident) ------------------------------------\n  OPTIONAL {\n    ?tuitionRate wsu:appliesToResidency ?residency .\n    ?residency rdfs:label ?residencyLabel .\n  }\n\n  # ---- Cohort (e.g., Commuter, On‑Campus) --------------------------------------------\n  OPTIONAL {\n    ?tuitionRate wsu:appliesToCohort ?cohort .\n    ?cohort rdfs:label ?cohortLabel .\n  }\n\n  # ---- Cost components that are bundled with this tuition rate -----------------------\n  OPTIONAL {\n    ?tuitionRate wsu:hasCostComponent ?costComp .\n    ?costComp rdfs:label ?compLabel .\n    #  The ontology does not prescribe a numeric property for a CostComponent,\n    #  but many implementations store the amount as a literal via a generic\n    #  data property (e.g., wsu:hasFee).  We therefore try to retrieve it if it exists.\n    OPTIONAL { ?costComp wsu:hasFee ?compCost . }\n    #  If no explicit fee is stored, treat the component cost as 0 so that the SUM works.\n    BIND ( IF(BOUND(?compCost), ?compCost, 0) AS ?compCost )\n  }\n\n  # ---- Ensure we have at least a residency and a cohort value for grouping ----------\n  # (If missing, use a placeholder string so the row still appears.)\n  BIND ( COALESCE(?residencyLabel, \"Unspecified Residency\") AS ?residencyLabel )\n  BIND ( COALESCE(?cohortLabel,    \"Unspecified Cohort\")    AS ?cohortLabel )\n}\nGROUP BY ?residencyLabel ?cohortLabel ?baseRatePerSemester\nORDER BY ?residencyLabel ?cohortLabel",
+    "variables": [
+      "residencyLabel",
+      "cohortLabel",
+      "baseRatePerSemester",
+      "totalAdditionalCost",
+      "totalCost",
+      "costComponents"
+    ],
+    "bindings": [],
+    "count": 0
+  },
+  {
+    "id": "CQ19",
+    "question": "What research units (departments/programs) exist at WSU, which college does each belong to, and what research output (publications, datasets, projects, activities, prizes) is associated with each unit?",
+    "query": "PREFIX wsu: <https://example.org/wsu-ontology#>\nPREFIX wsud: <https://example.org/wsu-data#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT \n       ?unitLabel \n       ?collegeLabel \n       ?outputLabel \n       ?outputType\nWHERE {\n  # --- units that are research‑related (departments, degree programs, or explicit research units) ---\n  ?unit a ?unitClass .\n  FILTER ( ?unitClass IN (wsu:ResearchUnit, wsu:Department, wsu:DegreeProgram) )\n  ?unit rdfs:label ?unitLabel .\n\n  # --- the unit must belong to Wright State University (any nesting level) ---\n  ?unit (wsu:isPartOf|^wsu:hasPart)+ wsud:WrightStateUniversity .\n\n  # --- find the college that directly or indirectly contains the unit ---\n  ?unit (wsu:isPartOf|^wsu:hasPart)+ ?college .\n  ?college a wsu:College ;\n           rdfs:label ?collegeLabel .\n\n  # --- research outputs produced by the unit (if any) ---\n  OPTIONAL {\n    ?unit wsu:produces ?output .\n    ?output rdfs:label ?outputLabel .\n    OPTIONAL { ?output wsu:outputType ?outputType }\n  }\n}\nORDER BY ?collegeLabel ?unitLabel",
+    "variables": [
+      "unitLabel",
+      "collegeLabel",
+      "outputLabel",
+      "outputType"
+    ],
+    "bindings": [
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biomedical, Industrial, and Human Factors Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Computer Science and Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Electrical Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Mechanical and Materials Engineering"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Engineering and Computer Science"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biochemistry and Molecular Biology"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biological Sciences"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Biomedical Sciences"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Chemistry"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Mathematics and Statistics"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Neuroscience, Cell Biology, and Physiology (NCBP)"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Physics"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      },
+      {
+        "unitLabel": {
+          "type": "literal",
+          "value": "Psychology"
+        },
+        "collegeLabel": {
+          "type": "literal",
+          "value": "College of Science and Mathematics"
+        }
+      }
+    ],
+    "count": 12
+  },
+  {
+    "id": "CQ20",
+    "question": "What is the step-by-step admission and graduation procedure for a graduate student (application, transcripts, fees, program of study, thesis/dissertation, commencement), and which university policy governs each step?",
+    "query": "PREFIX wsu:   <https://example.org/wsu-ontology#>\nPREFIX wsud:  <https://example.org/wsu-data#>\nPREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT\n       ?procLabel\n       ?stepLabel\n       ?policyNumber\n       ?policyLabel\nWHERE {\n  {\n    # Admission procedure steps for graduate students\n    ?proc a wsu:AdmissionProcedure ;\n          rdfs:label ?procLabel ;\n          wsu:hasStep ?step .\n    FILTER ( CONTAINS(LCASE(STR(?procLabel)), \"graduate\") )\n    ?step rdfs:label ?stepLabel .\n    FILTER ( CONTAINS(LCASE(STR(?stepLabel)), \"application\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"transcript\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"fee\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"program of study\") )\n    OPTIONAL {\n      ?step wsu:governedByPolicy ?pol .\n      ?pol wsu:hasPolicyNumber ?policyNumber .\n      OPTIONAL { ?pol rdfs:label ?policyLabel }\n    }\n  }\n  UNION\n  {\n    # Graduation‑related milestones (thesis, dissertation, commencement, etc.)\n    ?milestone a wsu:AcademicMilestone ;\n               rdfs:label ?stepLabel .\n    FILTER ( CONTAINS(LCASE(STR(?stepLabel)), \"thesis\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"dissertation\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"commencement\") ||\n             CONTAINS(LCASE(STR(?stepLabel)), \"graduation\") )\n    BIND ( \"Graduation Milestones\" AS ?procLabel )\n    OPTIONAL {\n      ?milestone wsu:governedByPolicy ?pol .\n      ?pol wsu:hasPolicyNumber ?policyNumber .\n      OPTIONAL { ?pol rdfs:label ?policyLabel }\n    }\n  }\n}\nORDER BY ?procLabel ?stepLabel",
+    "variables": [
+      "procLabel",
+      "stepLabel",
+      "policyNumber",
+      "policyLabel"
+    ],
+    "bindings": [
+      {
+        "procLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "stepLabel": {
+          "type": "literal",
+          "value": "A $40 (domestic applicants) or $70 (international applicants) non‑refundable application fee is required. Applicants who are McNair Scholars should submit a Certification of Participation to have the application fee waived."
+        }
+      },
+      {
+        "procLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "stepLabel": {
+          "type": "literal",
+          "value": "Applicants request that the registrars of all colleges or universities previously attended send one official transcript directly to the Graduate School."
+        }
+      },
+      {
+        "procLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Degree Status"
+        },
+        "stepLabel": {
+          "type": "literal",
+          "value": "Applicants submit a completed graduate admission application to the Graduate School via the online application portal."
+        }
+      },
+      {
+        "procLabel": {
+          "type": "literal",
+          "value": "Admission Procedure for Graduate Non‑Degree, Certification, and Transient Statuses"
+        },
+        "stepLabel": {
+          "type": "literal",
+          "value": "Applicants for non‑degree status must submit a completed graduate application to the Graduate School via the online portal and request an official transcript; licensure applicants follow the same process; transient applicants submit a Permission for Transient Status form; all pay the applicable non‑refundable application fee."
+        }
+      },
+      {
+        "procLabel": {
+          "type": "literal",
+          "value": "Graduation Milestones"
+        },
+        "stepLabel": {
+          "type": "literal",
+          "value": "Graduation Application"
+        }
+      }
+    ],
+    "count": 5
+  }
+]

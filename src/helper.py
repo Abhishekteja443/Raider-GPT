@@ -33,6 +33,37 @@ session.headers.update({"User-Agent": "Mozilla/5.0 (Organization-LLM-App)"})
 unscraped_urls = []
 
 
+def load_or_create_context_file(file_path: str = None) -> str:
+    if file_path is None:
+        file_path = os.path.join(os.getcwd(), "scraped_context.txt")
+
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory, exist_ok=True)
+
+    if not os.path.exists(file_path):
+        with open(file_path, "w", encoding="utf-8") as context_file:
+            context_file.write("")
+        logger.info(f"Created context file: {file_path}")
+
+    return file_path
+
+
+def save_scraped_url_context(url: str, context: str, file_path: str = None) -> str:
+    context_path = load_or_create_context_file(file_path)
+    cleaned_context = (context or "").strip()
+
+    if not cleaned_context:
+        return context_path
+
+    with open(context_path, "a", encoding="utf-8") as context_file:
+        context_file.write(f"\n--- URL: {url} ---\n")
+        context_file.write(cleaned_context)
+        context_file.write("\n")
+
+    return context_path
+
+
 def fetch_urls_from_domain(domain: str, max_depth: int = 3, visited: Set[str] = None, graph: dict = None) -> tuple[Set[str], dict]:
     if visited is None:
         visited = set()
@@ -244,6 +275,7 @@ def embed_texts(chunks: List[str]) -> List:
         return []
 
 
+
 def process_single_url(url: str):
     try:
         faiss_manager.check_and_delete_chunks(url)
@@ -255,6 +287,7 @@ def process_single_url(url: str):
             return
         
         text = result["text"]
+        save_scraped_url_context(url, text)
         page_metadata = result["metadata"]
         chunks = chunk_text(text)
         

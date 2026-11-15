@@ -1,0 +1,762 @@
+# CQ 1: What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each college?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT 
+       ?parentLabel 
+       ?parentTypeLabel 
+       ?deptLabel
+WHERE {
+  # --- locate the university by its label (case‑insensitive) ---
+  ?uni a wsu:University ;
+       rdfs:label ?uniLabel .
+  FILTER(CONTAINS(LCASE(STR(?uniLabel)), "wright state university"))
+
+  # --- find all Colleges, Schools, or Branch Campuses that belong to the university ---
+  ?uni (wsu:isPartOf|^wsu:hasPart)+ ?parent .
+  ?parent a ?parentClass .
+  FILTER(?parentClass IN (wsu:College, wsu:School, wsu:BranchCampus))
+  ?parent rdfs:label ?parentLabel .
+  OPTIONAL { ?parentClass rdfs:label ?parentTypeLabel }
+
+  # --- find Departments that are (directly or indirectly) under each parent unit ---
+  ?parent (wsu:isPartOf|^wsu:hasPart)+ ?dept .
+  ?dept a wsu:Department ;
+        rdfs:label ?deptLabel .
+}
+ORDER BY ?parentLabel ?deptLabel
+
+# CQ 2: Which academic department is responsible for a given degree program (e.g., which department offers the Bachelor of Science in Computer Science)?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?deptLabel ?programLabel WHERE {
+  # degree program (any Credential that is a DegreeProgram)
+  ?program a wsu:DegreeProgram ;
+           rdfs:label ?programLabel .
+  FILTER(CONTAINS(LCASE(STR(?programLabel)),
+                  "bachelor of science in computer science"))   # <-- change term as needed
+
+  # academic department
+  ?dept a wsu:Department ;
+        rdfs:label ?deptLabel .
+
+  # department either offers the credential directly or is a joint offering
+  { ?dept wsu:offersCredential ?program }
+  UNION
+  { ?program wsu:jointlyOfferedBy ?dept }
+}
+ORDER BY ?deptLabel
+
+# CQ 3: What is the physical location (building/room), phone number, and email contact for a given department or office?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?unitLabel ?location ?phone ?email WHERE {
+  # Find the department or office by (partial) name – replace "computer science" with the desired term
+  ?unit rdfs:label ?unitLabel .
+  FILTER ( CONTAINS( LCASE( STR(?unitLabel) ), "computer science" ) )
+  ?unit a ?type .
+  FILTER ( ?type IN (wsu:Department, wsu:Office) )
+  
+  # Physical location (building/room)
+  ?unit wsu:locatedIn ?loc .
+  ?loc rdfs:label ?location .
+  
+  # Contact information
+  ?unit wsu:hasContact ?cp .
+  ?cp wsu:hasPhone ?phone .
+  OPTIONAL { ?cp wsu:hasEmail ?email }
+}
+ORDER BY ?unitLabel
+
+# CQ 4: Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?collegeLabel ?schoolLabel ?deptLabel
+WHERE {
+  # --- the target college -------------------------------------------------
+  ?college a wsu:College ;
+           rdfs:label ?collegeLabel .
+  FILTER(CONTAINS(LCASE(STR(?collegeLabel)),
+                  "college of health, education, and human services"))
+
+  # --- schools that belong to the college ---------------------------------
+  ?school (wsu:isPartOf|^wsu:hasPart)+ ?college ;
+          a wsu:School ;
+          rdfs:label ?schoolLabel .
+
+  # --- departments that belong to each school -----------------------------
+  OPTIONAL {
+    ?dept (wsu:isPartOf|^wsu:hasPart)+ ?school ;
+          a wsu:Department ;
+          rdfs:label ?deptLabel .
+  }
+}
+ORDER BY ?schoolLabel ?deptLabel
+
+# CQ 5: What administrative divisions and offices report to the Office of the Provost?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?unitLabel ?typeLabel WHERE {
+  # Find the Office of the Provost by its label (case‑insensitive search)
+  ?provostOffice rdfs:label ?provLabel .
+  FILTER(CONTAINS(LCASE(STR(?provLabel)), "office of the provost"))
+
+  # Any administrative unit (division or office) that is part of the Provost Office,
+  # using the flexible containment path that works with either direction.
+  ?unit (wsu:isPartOf|^wsu:hasPart)+ ?provostOffice .
+
+  # Keep only Provost divisions or generic offices
+  ?unit a ?type .
+  FILTER(?type = wsu:ProvostDivision || ?type = wsu:Office)
+
+  # Labels for the unit and its type
+  ?unit rdfs:label ?unitLabel .
+  ?type rdfs:label ?typeLabel .
+}
+ORDER BY ?unitLabel
+
+# CQ 6: What types of academic credentials does WSU offer (e.g., minor, undergraduate certificate, graduate certificate, bachelor's, master's, doctoral, microcredential), and which department/college grants each type?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT
+       ?credentialLabel
+       ?credentialTypeLabel
+       ?grantingUnitLabel
+       ?grantingParentLabel
+WHERE {
+  # --- locate the university -------------------------------------------------
+  ?univ rdfs:label ?univLabel .
+  FILTER(CONTAINS(LCASE(STR(?univLabel)), "wright state university"))
+
+  # --- any academic unit (college, school, department, etc.) that offers a credential
+  ?univ wsu:hasPart ?grantingUnit .
+  ?grantingUnit wsu:offersCredential ?cred .
+  ?grantingUnit rdfs:label ?grantingUnitLabel .
+
+  # --- credential label and its concrete type (Certificate, Minor, DegreeProgram, …)
+  ?cred rdfs:label ?credentialLabel .
+  ?cred rdf:type ?credType .
+  ?credType rdfs:label ?credentialTypeLabel .
+
+  # --- if the granting unit is a department, also retrieve the college or school it belongs to
+  OPTIONAL {
+    ?grantingUnit (wsu:isPartOf|^wsu:hasPart)+ ?parentUnit .
+    ?parentUnit a ?parentClass .
+    FILTER( ?parentClass = wsu:College || ?parentClass = wsu:School )
+    ?parentUnit rdfs:label ?grantingParentLabel .
+  }
+}
+ORDER BY ?credentialLabel ?grantingUnitLabel
+
+# CQ 7: Which degree programs are jointly offered or cross-listed between two departments or colleges (e.g., Neuroscience, Cell Biology, and Physiology spanning Science & Mathematics and the Boonshoft School of Medicine)?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT 
+       ?programLabel
+       ?dept1Label ?parent1Label
+       ?dept2Label ?parent2Label
+WHERE {
+  # degree programs
+  ?program a wsu:DegreeProgram ;
+           rdfs:label ?programLabel ;
+           wsu:jointlyOfferedBy ?dept1 , ?dept2 .
+
+  # ensure the two departments are different
+  FILTER ( ?dept1 != ?dept2 )
+
+  # department labels
+  ?dept1 rdfs:label ?dept1Label .
+  ?dept2 rdfs:label ?dept2Label .
+
+  # find the college or school each department belongs to (any level up the hierarchy)
+  OPTIONAL {
+    ?dept1 (wsu:isPartOf|^wsu:hasPart)+ ?parent1 .
+    ?parent1 a ?parentType .
+    FILTER ( ?parentType = wsu:College || ?parentType = wsu:School )
+    ?parent1 rdfs:label ?parent1Label .
+  }
+  OPTIONAL {
+    ?dept2 (wsu:isPartOf|^wsu:hasPart)+ ?parent2 .
+    ?parent2 a ?parentType2 .
+    FILTER ( ?parentType2 = wsu:College || ?parentType2 = wsu:School )
+    ?parent2 rdfs:label ?parent2Label .
+  }
+}
+ORDER BY ?programLabel ?dept1Label ?dept2Label
+
+# CQ 8: Who holds a given university leadership role (e.g., Provost, President), and what is the scope of their responsibility?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+# Given a leadership role name (e.g., "Provost" or "President"),
+# return the person(s) who hold it and the scope of the role.
+SELECT DISTINCT ?personName ?roleName ?scope WHERE {
+  # Find the LeadershipRole whose label matches the requested title
+  ?role a wsu:LeadershipRole ;
+        rdfs:label ?roleName ;
+        wsu:hasScope ?scope .
+  FILTER ( CONTAINS(LCASE(STR(?roleName)), "provost") ||
+           CONTAINS(LCASE(STR(?roleName)), "president") )
+  
+  # Person holding that role
+  ?person a wsu:Person ;
+          rdfs:label ?personName ;
+          wsu:holdsRole ?role .
+}
+ORDER BY ?roleName ?personName
+
+# CQ 9: What administrative divisions exist under the Office of the Provost (e.g., Academic Affairs, Faculty Affairs, Research and Innovation), and what resources or functions does each provide?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?divisionLabel ?function WHERE {
+  # locate the Office of the Provost (label may vary)
+  ?provostOffice rdfs:label ?provostLabel .
+  FILTER(CONTAINS(LCASE(STR(?provostLabel)), "provost"))
+
+  # a LeadershipRole that oversees an academic unit that is (directly or indirectly) part of that office
+  ?role wsu:oversees ?unit .
+  ?unit (wsu:isPartOf|^wsu:hasPart)* ?provostOffice .
+
+  # the divisions attached to that role
+  ?role wsu:hasDivision ?division .
+  ?division rdfs:label ?divisionLabel .
+
+  # optional description of what the division provides (functions/resources)
+  OPTIONAL { ?division wsu:providesFunction ?function }
+}
+ORDER BY ?divisionLabel
+
+# CQ 10: What is Wright State's basic institutional profile (founding namesake, student enrollment, number of colleges, number of academic programs, campus locations)?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT
+       ?founderName
+       ?enrollment
+       ?collegeCount
+       ?programCount
+       ?campusLabel
+WHERE {
+  # ---- University -------------------------------------------------
+  ?uni a wsu:University ;
+       rdfs:label ?uniLabel .
+  FILTER(CONTAINS(LCASE(STR(?uniLabel)), "wright state"))
+
+  # ---- Enrollment --------------------------------------------------
+  OPTIONAL { ?uni wsu:enrollmentCount ?enrollment . }
+
+  # ---- Founder (person whose leadership‑role scope mentions “founder”) ----
+  OPTIONAL {
+    ?person a wsu:Person ;
+            rdfs:label ?founderName ;
+            wsu:holdsRole ?role .
+    ?role wsu:hasScope ?scope .
+    FILTER(CONTAINS(LCASE(STR(?scope)), "founder"))
+  }
+
+  # ---- Campus locations --------------------------------------------
+  ?campus a wsu:BranchCampus ;
+          wsu:locatedIn ?loc ;
+          (wsu:isPartOf|^wsu:hasPart)+ ?uni .
+  ?loc rdfs:label ?campusLabel .
+
+  # ---- Number of colleges (under the university) -------------------
+  {
+    SELECT (COUNT(DISTINCT ?college) AS ?collegeCount) WHERE {
+      ?college a wsu:College ;
+               (wsu:isPartOf|^wsu:hasPart)+ ?uni .
+    }
+  }
+
+  # ---- Number of academic programs (credentials offered) ----------
+  {
+    SELECT (COUNT(DISTINCT ?program) AS ?programCount) WHERE {
+      ?unit a wsu:AcademicUnit ;
+            (wsu:isPartOf|^wsu:hasPart)+ ?uni ;
+            wsu:offersCredential ?program .
+      ?program a wsu:Credential .
+    }
+  }
+}
+ORDER BY ?campusLabel
+
+# CQ 11: What university policies exist within a given policy series (e.g., Series 3000 – Students, Series 5000 – Graduate Students and Programs), and what is each policy's number and title?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+# Replace the string in the FILTER with the desired series identifier
+# e.g., "3000" for “Series 3000 – Students” or "5000" for “Series 5000 – Graduate Students and Programs”
+
+SELECT DISTINCT ?policyNumber ?policyTitle ?seriesLabel WHERE {
+  ?policy a wsu:Policy ;
+          wsu:hasPolicyNumber ?policyNumber ;
+          rdfs:label ?policyTitle ;
+          wsu:belongsToSeries ?series .
+
+  ?series rdfs:label ?seriesLabel .
+
+  # case‑insensitive match on the series label
+  FILTER(CONTAINS(LCASE(STR(?seriesLabel)), "3000"))
+}
+ORDER BY ?policyNumber
+
+# CQ 12: Which university policy governs a specific procedural topic (e.g., academic integrity, course registration, tuition refunds, FERPA/student privacy)?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+# Replace the string in the FILTER with the desired procedural topic
+# (e.g., "academic integrity", "course registration", "tuition refunds", "ferpa")
+SELECT DISTINCT ?policyLabel ?policyNumber ?categoryLabel WHERE {
+  # --- a Policy that directly mentions the topic in its label
+  ?policy a wsu:Policy ;
+          rdfs:label ?policyLabel ;
+          wsu:hasPolicyNumber ?policyNumber .
+  OPTIONAL {
+    ?policy wsu:belongsToCategory ?cat .
+    ?cat rdfs:label ?categoryLabel .
+  }
+
+  # also capture policies that are linked to a ProcessStep (or other entity)
+  # whose label mentions the topic; the step is governed by the policy
+  OPTIONAL {
+    ?step a wsu:ProcessStep ;
+          rdfs:label ?stepLabel ;
+          wsu:governedByPolicy ?policy .
+  }
+
+  # keep only rows where the topic appears in either the policy label
+  # or the governed step label
+  FILTER (
+    CONTAINS(LCASE(STR(?policyLabel)), "academic integrity") ||
+    CONTAINS(LCASE(STR(?stepLabel)),   "academic integrity")
+  )
+}
+ORDER BY ?policyNumber
+
+# CQ 13: Which policies apply specifically to graduate students versus undergraduate students versus the Boonshoft School of Medicine?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?policyLabel ?appliesTo WHERE {
+  # all policies
+  ?policy a wsu:Policy ;
+          rdfs:label ?policyLabel .
+
+  # ---- graduate / undergraduate population ----
+  OPTIONAL {
+    ?policy wsu:appliesToPopulation ?pop .
+    FILTER ( ?pop = "Graduate" || ?pop = "Undergraduate" )
+    BIND ( ?pop AS ?appliesTo )
+  }
+
+  # ---- policies that apply to the Boonshoft School of Medicine ----
+  OPTIONAL {
+    # locate the school by its label (do not guess the IRI)
+    ?school a wsu:School ;
+            rdfs:label ?schoolLabel .
+    FILTER ( CONTAINS( LCASE( STR(?schoolLabel) ), "boonshoft" ) )
+    
+    # follow either isPartOf or the inverse of hasPart (nested levels allowed)
+    ?policy ( wsu:isPartOf | ^wsu:hasPart )+ ?school .
+    
+    BIND ( ?schoolLabel AS ?appliesTo )
+  }
+
+  # keep only those policies that matched one of the above cases
+  FILTER ( BOUND(?appliesTo) )
+}
+ORDER BY ?policyLabel
+
+# CQ 14: When was a given policy most recently updated, and what are the most recently revised policies university-wide?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+# ------------------------------------------------------------
+#  1️⃣  When was the *given* policy most recently updated?
+# ------------------------------------------------------------
+# Replace the text inside the FILTER with a phrase that uniquely
+# identifies the policy you are interested in (e.g. "student‑code").
+# ------------------------------------------------------------
+SELECT ?policyLabel ?policyLastUpdated ?recentPolicyLabel ?recentPolicyUpdated
+WHERE {
+  # ----- specific policy -------------------------------------------------
+  OPTIONAL {
+    ?policy rdfs:label ?policyLabel .
+    FILTER(CONTAINS(LCASE(STR(?policyLabel)), "given policy"))   # <-- edit this string
+    ?policy wsu:lastUpdated ?policyLastUpdated .
+  }
+
+  # ----- most‑recently revised policies university‑wide -----------------
+  {
+    # Find the latest update date that exists for any policy
+    SELECT (MAX(?date) AS ?latestDate) WHERE {
+      ?anyPolicy wsu:lastUpdated ?date .
+    }
+  }
+  # Return every policy that was updated on that latest date
+  ?recentPolicy rdfs:label ?recentPolicyLabel ;
+                wsu:lastUpdated ?latestDate .
+  BIND(?latestDate AS ?recentPolicyUpdated)
+}
+ORDER BY ?policyLabel ?recentPolicyLabel
+
+# CQ 15: What student services (e.g., counseling, disability services, career services, financial aid) are available to WSU students, and which office administers each service?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT ?serviceLabel ?officeLabel WHERE {
+  ?service a wsu:StudentService ;
+           rdfs:label ?serviceLabel ;
+           wsu:administeredBy ?office .
+  ?office rdfs:label ?officeLabel .
+
+  FILTER (
+    CONTAINS(LCASE(STR(?serviceLabel)), "counsel") ||
+    CONTAINS(LCASE(STR(?serviceLabel)), "disability") ||
+    CONTAINS(LCASE(STR(?serviceLabel)), "career") ||
+    CONTAINS(LCASE(STR(?serviceLabel)), "financial aid") ||
+    CONTAINS(LCASE(STR(?serviceLabel)), "financial")
+  )
+}
+ORDER BY ?serviceLabel
+
+# CQ 16: What policies and procedures govern student conduct, organizations, and general campus life (e.g., Code of Student Conduct, posting policy, alcohol policy)?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT
+       ?itemLabel
+       ?itemType
+       ?policyNumber
+       ?categoryLabel
+       ?seriesLabel
+       ?lastUpdated
+WHERE {
+  {
+    # --- Policies -------------------------------------------------
+    ?item a wsu:Policy ;
+          rdfs:label ?itemLabel .
+    BIND("Policy" AS ?itemType)
+
+    # keep only those that look like they govern conduct, orgs or campus life
+    FILTER ( CONTAINS(LCASE(STR(?itemLabel)), "conduct")
+          || CONTAINS(LCASE(STR(?itemLabel)), "organization")
+          || CONTAINS(LCASE(STR(?itemLabel)), "campus")
+          || CONTAINS(LCASE(STR(?itemLabel)), "posting")
+          || CONTAINS(LCASE(STR(?itemLabel)), "alcohol") )
+    
+    OPTIONAL { ?item wsu:hasPolicyNumber ?policyNumber . }
+    OPTIONAL { ?item wsu:belongsToCategory ?cat .
+               ?cat rdfs:label ?categoryLabel . }
+    OPTIONAL { ?item wsu:belongsToSeries ?ser .
+               ?ser rdfs:label ?seriesLabel . }
+    OPTIONAL { ?item wsu:lastUpdated ?lastUpdated . }
+  }
+  UNION
+  {
+    # --- Procedures (AdmissionProcedure) -------------------------
+    ?item a wsu:AdmissionProcedure ;
+          rdfs:label ?itemLabel .
+    BIND("Procedure" AS ?itemType)
+
+    FILTER ( CONTAINS(LCASE(STR(?itemLabel)), "conduct")
+          || CONTAINS(LCASE(STR(?itemLabel)), "organization")
+          || CONTAINS(LCASE(STR(?itemLabel)), "campus")
+          || CONTAINS(LCASE(STR(?itemLabel)), "posting")
+          || CONTAINS(LCASE(STR(?itemLabel)), "alcohol") )
+    
+    # Procedures typically do not have policy numbers, but we keep the same optional fields
+    OPTIONAL { ?item wsu:hasPolicyNumber ?policyNumber . }
+    OPTIONAL { ?item wsu:belongsToCategory ?cat .
+               ?cat rdfs:label ?categoryLabel . }
+    OPTIONAL { ?item wsu:belongsToSeries ?ser .
+               ?ser rdfs:label ?seriesLabel . }
+    OPTIONAL { ?item wsu:lastUpdated ?lastUpdated . }
+  }
+}
+ORDER BY ?itemLabel
+
+# CQ 17: What is the tuition rate for a given student category (undergraduate vs. graduate, Ohio resident vs. non-resident, Wright Guarantee cohort vs. non-guarantee), and which college or program does that rate apply to?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT
+       ?unitLabel
+       ?levelLabel
+       ?residencyLabel
+       ?cohortLabel
+       ?ratePerCreditHour
+       ?ratePerSemester
+WHERE {
+  # TuitionRate instances
+  ?rate a wsu:TuitionRate .
+
+  # What academic level the rate applies to (undergrad / grad)
+  OPTIONAL {
+    ?rate wsu:appliesToLevel ?level .
+    ?level rdfs:label ?levelLabel .
+  }
+
+  # Residency status (Ohio resident / non‑resident)
+  OPTIONAL {
+    ?rate wsu:appliesToResidency ?residency .
+    ?residency rdfs:label ?residencyLabel .
+  }
+
+  # Tuition cohort (Wright Guarantee / non‑guarantee)
+  OPTIONAL {
+    ?rate wsu:appliesToCohort ?cohort .
+    ?cohort rdfs:label ?cohortLabel .
+  }
+
+  # Monetary values
+  OPTIONAL { ?rate wsu:ratePerCreditHour ?ratePerCreditHour }
+  OPTIONAL { ?rate wsu:ratePerSemester   ?ratePerSemester }
+
+  # Find the academic unit (College or DegreeProgram) that the rate is attached to.
+  # The graph may use either wsu:isPartOf or the inverse of wsu:hasPart, possibly at
+  # multiple nesting levels, so we use a flexible path.
+  OPTIONAL {
+    ?rate (wsu:isPartOf|^wsu:hasPart)+ ?unit .
+    ?unit a ?unitType .
+    FILTER ( ?unitType = wsu:College || ?unitType = wsu:DegreeProgram )
+    ?unit rdfs:label ?unitLabel .
+  }
+
+  # -----------------------------------------------------------------
+  # Optional filters to focus on the requested categories.
+  # Comment out any FILTER you do NOT need.
+  # -----------------------------------------------------------------
+  # Undergraduate vs. Graduate
+  FILTER ( !BOUND(?levelLabel) ||
+           CONTAINS(LCASE(STR(?levelLabel)), "undergraduate") ||
+           CONTAINS(LCASE(STR(?levelLabel)), "graduate") )
+  # Ohio resident vs. non‑resident
+  FILTER ( !BOUND(?residencyLabel) ||
+           CONTAINS(LCASE(STR(?residencyLabel)), "ohio") )
+  # Wright Guarantee cohort vs. non‑guarantee
+  FILTER ( !BOUND(?cohortLabel) ||
+           CONTAINS(LCASE(STR(?cohortLabel)), "guarantee") )
+}
+ORDER BY ?unitLabel ?levelLabel ?residencyLabel ?cohortLabel
+
+# CQ 18: What additional costs (housing, meal plan, required fees) are bundled with tuition under the Wright Guarantee Tuition Program, and how do the total costs compare across resident/non-resident and commuter/on-campus categories?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+#  What additional cost components are attached to the Wright Guarantee Tuition Program,
+#  and how do the total tuition‑related costs differ by residency (resident vs non‑resident)
+#  and by cohort (commuter vs on‑campus)?
+
+SELECT DISTINCT
+       ?residencyLabel
+       ?cohortLabel
+       ?baseRatePerSemester
+       (SUM(?compCost) AS ?totalAdditionalCost)
+       ((?baseRatePerSemester) + SUM(?compCost) AS ?totalCost)
+       (GROUP_CONCAT(DISTINCT ?compLabel ; SEPARATOR=", ") AS ?costComponents)
+WHERE {
+  # ---- Identify the Wright Guarantee Tuition Program ---------------------------------
+  ?tuitionProgram a wsu:TuitionProgram ;
+                  rdfs:label ?progLabel .
+  FILTER ( CONTAINS(LCASE(STR(?progLabel)), "wright guarantee") )
+
+  # ---- Find TuitionRate(s) that belong to this program (using either direction of the
+  #      containment relationship) ----------------------------------------------------
+  ?tuitionRate a wsu:TuitionRate ;
+               (wsu:isPartOf|^wsu:hasPart)+ ?tuitionProgram ;
+               wsu:ratePerSemester ?baseRatePerSemester .
+
+  # ---- Residency status (Resident / Non‑Resident) ------------------------------------
+  OPTIONAL {
+    ?tuitionRate wsu:appliesToResidency ?residency .
+    ?residency rdfs:label ?residencyLabel .
+  }
+
+  # ---- Cohort (e.g., Commuter, On‑Campus) --------------------------------------------
+  OPTIONAL {
+    ?tuitionRate wsu:appliesToCohort ?cohort .
+    ?cohort rdfs:label ?cohortLabel .
+  }
+
+  # ---- Cost components that are bundled with this tuition rate -----------------------
+  OPTIONAL {
+    ?tuitionRate wsu:hasCostComponent ?costComp .
+    ?costComp rdfs:label ?compLabel .
+    #  The ontology does not prescribe a numeric property for a CostComponent,
+    #  but many implementations store the amount as a literal via a generic
+    #  data property (e.g., wsu:hasFee).  We therefore try to retrieve it if it exists.
+    OPTIONAL { ?costComp wsu:hasFee ?compCost . }
+    #  If no explicit fee is stored, treat the component cost as 0 so that the SUM works.
+    BIND ( IF(BOUND(?compCost), ?compCost, 0) AS ?compCost )
+  }
+
+  # ---- Ensure we have at least a residency and a cohort value for grouping ----------
+  # (If missing, use a placeholder string so the row still appears.)
+  BIND ( COALESCE(?residencyLabel, "Unspecified Residency") AS ?residencyLabel )
+  BIND ( COALESCE(?cohortLabel,    "Unspecified Cohort")    AS ?cohortLabel )
+}
+GROUP BY ?residencyLabel ?cohortLabel ?baseRatePerSemester
+ORDER BY ?residencyLabel ?cohortLabel
+
+# CQ 19: What research units (departments/programs) exist at WSU, which college does each belong to, and what research output (publications, datasets, projects, activities, prizes) is associated with each unit?
+
+PREFIX wsu: <https://example.org/wsu-ontology#>
+PREFIX wsud: <https://example.org/wsu-data#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT 
+       ?unitLabel 
+       ?collegeLabel 
+       ?outputLabel 
+       ?outputType
+WHERE {
+  # --- units that are research‑related (departments, degree programs, or explicit research units) ---
+  ?unit a ?unitClass .
+  FILTER ( ?unitClass IN (wsu:ResearchUnit, wsu:Department, wsu:DegreeProgram) )
+  ?unit rdfs:label ?unitLabel .
+
+  # --- the unit must belong to Wright State University (any nesting level) ---
+  ?unit (wsu:isPartOf|^wsu:hasPart)+ wsud:WrightStateUniversity .
+
+  # --- find the college that directly or indirectly contains the unit ---
+  ?unit (wsu:isPartOf|^wsu:hasPart)+ ?college .
+  ?college a wsu:College ;
+           rdfs:label ?collegeLabel .
+
+  # --- research outputs produced by the unit (if any) ---
+  OPTIONAL {
+    ?unit wsu:produces ?output .
+    ?output rdfs:label ?outputLabel .
+    OPTIONAL { ?output wsu:outputType ?outputType }
+  }
+}
+ORDER BY ?collegeLabel ?unitLabel
+
+# CQ 20: What is the step-by-step admission and graduation procedure for a graduate student (application, transcripts, fees, program of study, thesis/dissertation, commencement), and which university policy governs each step?
+
+PREFIX wsu:   <https://example.org/wsu-ontology#>
+PREFIX wsud:  <https://example.org/wsu-data#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+SELECT DISTINCT
+       ?procLabel
+       ?stepLabel
+       ?policyNumber
+       ?policyLabel
+WHERE {
+  {
+    # Admission procedure steps for graduate students
+    ?proc a wsu:AdmissionProcedure ;
+          rdfs:label ?procLabel ;
+          wsu:hasStep ?step .
+    FILTER ( CONTAINS(LCASE(STR(?procLabel)), "graduate") )
+    ?step rdfs:label ?stepLabel .
+    FILTER ( CONTAINS(LCASE(STR(?stepLabel)), "application") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "transcript") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "fee") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "program of study") )
+    OPTIONAL {
+      ?step wsu:governedByPolicy ?pol .
+      ?pol wsu:hasPolicyNumber ?policyNumber .
+      OPTIONAL { ?pol rdfs:label ?policyLabel }
+    }
+  }
+  UNION
+  {
+    # Graduation‑related milestones (thesis, dissertation, commencement, etc.)
+    ?milestone a wsu:AcademicMilestone ;
+               rdfs:label ?stepLabel .
+    FILTER ( CONTAINS(LCASE(STR(?stepLabel)), "thesis") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "dissertation") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "commencement") ||
+             CONTAINS(LCASE(STR(?stepLabel)), "graduation") )
+    BIND ( "Graduation Milestones" AS ?procLabel )
+    OPTIONAL {
+      ?milestone wsu:governedByPolicy ?pol .
+      ?pol wsu:hasPolicyNumber ?policyNumber .
+      OPTIONAL { ?pol rdfs:label ?policyLabel }
+    }
+  }
+}
+ORDER BY ?procLabel ?stepLabel

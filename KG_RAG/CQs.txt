@@ -1,0 +1,39 @@
+CQ01: What colleges, schools, and branch campuses make up Wright State University, and which departments belong to each college?
+
+CQ02: Which academic department is responsible for a given degree program?
+
+CQ03: What is the physical location (building/room), phone number, and email contact for a given department or office?
+
+CQ04: Which schools sit beneath the College of Health, Education, and Human Services, and which departments sit beneath each school?
+
+CQ05: What administrative divisions and offices report to the Office of the Provost?
+
+CQ06: What types of academic credentials does WSU offer (minor, undergraduate certificate, graduate certificate, bachelor's, master's, doctoral, microcredential), and which department/college grants each type?
+
+CQ07: Which degree programs are jointly offered or cross-listed between two departments or colleges, spanning Science & Mathematics and the Boonshoft School of Medicine?
+
+CQ08: Who holds a given university leadership role (Provost, President), and what is the scope of their responsibility?
+
+CQ09: What administrative divisions exist under the Office of the Provost (Academic Affairs, Faculty Affairs, Research and Innovation), and what resources or functions does each provide?
+
+CQ10: What is Wright State's basic institutional profile (founding namesake, student enrollment, number of colleges, number of academic programs, campus locations)?
+
+CQ11: What university policies exist within a given policy series (Series 3000 – Students, Series 5000 – Graduate Students and Programs), and what is each policy's number and title?
+
+CQ12: Which university policy governs a specific procedural topic (academic integrity, course registration, tuition refunds, FERPA/student privacy)?
+
+CQ13: Which policies apply specifically to graduate students versus undergraduate students versus the Boonshoft School of Medicine?
+
+CQ14: When was a given policy most recently updated, and what are the most recently revised policies university-wide?
+
+CQ15: What student services (counseling, disability services, career services, financial aid) are available to WSU students, and which office administers each service?
+
+CQ16: What policies and procedures govern student conduct, organizations, and general campus life (Code of Student Conduct, posting policy, alcohol policy)?
+
+CQ17: What is the tuition rate for a given student category (undergraduate vs. graduate, Ohio resident vs. non-resident, Wright Guarantee cohort vs. non-guarantee), and which college or program does that rate apply to?
+
+CQ18: What additional costs (housing, meal plan, required fees) are bundled with tuition under the Wright Guarantee Tuition Program, and how do the total costs compare across resident/non-resident and commuter/on-campus categories?
+
+CQ19: What research units (departments/programs) exist at WSU, which college does each belong to, and what research output (publications, datasets, projects, activities, prizes) is associated with each unit?
+
+CQ20: What is the step-by-step admission and graduation procedure for a graduate student (application, transcripts, fees, program of study, thesis/dissertation, commencement), and which university policy governs each step?
