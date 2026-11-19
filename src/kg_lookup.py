@@ -10,10 +10,16 @@ from sqlalchemy import text
 from src import logger
 
 # ---------------------------------------------------------------- config
-KG_PATH = r"C:\Users\gabhi\Projects\RaiderGPT\KG_RAG\Opus5.5\query_results.json"
+KG_PATH = os.getenv(
+    "KG_PATH",
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "KG_RAG", "Opus5.5", "query_results.json",
+    ),
+)
 EMBED_MODEL = "nomic-embed-text"   # run once: ollama pull nomic-embed-text
 MATCH_THRESHOLD = 0.72             # tune by printing scores on real queries
-MAX_KG_CHARS = 8000                # ~2000 tokens (CQ11 alone is ~14.5k chars)
+MAX_KG_CHARS = 15000                # ~2000 tokens (CQ11 alone is ~14.5k chars)
 
 # ---------------------------------------------------------------- state
 _cqs = []

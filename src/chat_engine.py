@@ -11,7 +11,7 @@ conversation_history = []
 history_lock = threading.Lock()
 MAX_TOKENS_PER_MESSAGE = 500
 MAX_CONTEXT_TOKENS = 2000 
-NUM_CTX = 6000           # total Ollama window: system + history + KG + RAG + query
+NUM_CTX = 10000           # total Ollama window: system + history + KG + RAG + query
 
 
 def count_tokens_approximate(text: str) -> int:
