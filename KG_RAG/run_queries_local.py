@@ -1,15 +1,47 @@
-import json, re, sys
+import argparse
+import json
+import re
 from pathlib import Path
+
 from rdflib import Graph, URIRef, BNode
 
 
-ONTOLOGY = Path(r"C:\Users\gabhi\Projects\KG-RAG\wsu-ontology.ttl")
-GRAPH    = Path(r"C:\Users\gabhi\Projects\KG-RAG\Models comparision\Online models\Opus5.5\opus 5_5.ttl")
-QUERIES  = Path(r"C:\Users\gabhi\Projects\KG-RAG\Models comparision\Online models\Opus5.5\all_20_queries_opus5_5.rq")   # <-- adjust to where your .rq file is
-OUTPUT   = GRAPH.parent / "query_results.json"                          # saved next to Graph.ttl
+parser = argparse.ArgumentParser(description="Run CQ SPARQL queries against local Turtle graphs")
+parser.add_argument("ontology", nargs="?", help="Ontology Turtle file")
+parser.add_argument("graph", nargs="?", help="Knowledge graph Turtle file")
+parser.add_argument("queries", nargs="?", help="RQ file containing # CQ queries")
+parser.add_argument("output", nargs="?", help="Output JSON file")
+args = parser.parse_args()
 
-if len(sys.argv) == 5:
-    ONTOLOGY, GRAPH, QUERIES, OUTPUT = map(Path, sys.argv[1:5])
+
+def find_file(filename):
+    """Find a file from the current directory or the script's workspace."""
+    search_roots = (Path.cwd(), Path(__file__).resolve().parent)
+    for root in search_roots:
+        candidate = root / filename
+        if candidate.is_file():
+            return candidate
+        matches = sorted(root.rglob(filename), key=lambda p: len(p.parts))
+        if matches:
+            return matches[0]
+    return None
+
+
+ONTOLOGY = Path(args.ontology).expanduser() if args.ontology else find_file("wsu-ontology.ttl")
+GRAPH = Path(args.graph).expanduser() if args.graph else find_file("*.ttl")
+QUERIES = Path(args.queries).expanduser() if args.queries else (find_file("*.rq") if find_file("*.rq") else None)
+
+if ONTOLOGY is None:
+    parser.error("Ontology not found; provide its path as the first argument")
+if GRAPH is None:
+    parser.error("Graph not found; provide its path as the second argument")
+if QUERIES is None:
+    parser.error("RQ file not found; provide its path as the third argument")
+
+ONTOLOGY = ONTOLOGY.resolve()
+GRAPH = GRAPH.resolve()
+QUERIES = QUERIES.resolve()
+OUTPUT = Path(args.output).expanduser().resolve() if args.output else GRAPH.parent / "query_results.json"
 
 g = Graph()
 g.parse(ONTOLOGY, format="turtle")
