@@ -1,0 +1,20 @@
+CQ16: What policies and procedures govern student conduct, organizations, and general campus life (Code of Student Conduct, posting policy, alcohol policy)?
+ERROR: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+--------------------
+
+CQ17: What is the tuition rate for a given student category (undergraduate vs. graduate, Ohio resident vs. non-resident, Wright Guarantee cohort vs. non-guarantee), and which college or program does that rate apply to?
+ERROR: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /chat-stream?query=CQ17%3A+What+is+the+tuition+rate+for+a+given+student+category+%28undergraduate+vs.+graduate%2C+Ohio+resident+vs.+non-resident%2C+Wright+Guarantee+cohort+vs.+non-guarantee%29%2C+and+which+college+or+program+does+that+rate+apply+to%3F (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+--------------------
+
+CQ18: What additional costs (housing, meal plan, required fees) are bundled with tuition under the Wright Guarantee Tuition Program, and how do the total costs compare across resident/non-resident and commuter/on-campus categories?
+ERROR: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /chat-stream?query=CQ18%3A+What+additional+costs+%28housing%2C+meal+plan%2C+required+fees%29+are+bundled+with+tuition+under+the+Wright+Guarantee+Tuition+Program%2C+and+how+do+the+total+costs+compare+across+resident%2Fnon-resident+and+commuter%2Fon-campus+categories%3F (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+--------------------
+
+CQ19: What research units (departments/programs) exist at WSU, which college does each belong to, and what research output (publications, datasets, projects, activities, prizes) is associated with each unit?
+ERROR: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /chat-stream?query=CQ19%3A+What+research+units+%28departments%2Fprograms%29+exist+at+WSU%2C+which+college+does+each+belong+to%2C+and+what+research+output+%28publications%2C+datasets%2C+projects%2C+activities%2C+prizes%29+is+associated+with+each+unit%3F (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+--------------------
+
+CQ20: What is the step-by-step admission and graduation procedure for a graduate student (application, transcripts, fees, program of study, thesis/dissertation, commencement), and which university policy governs each step?
+ERROR: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /chat-stream?query=CQ20%3A+What+is+the+step-by-step+admission+and+graduation+procedure+for+a+graduate+student+%28application%2C+transcripts%2C+fees%2C+program+of+study%2C+thesis%2Fdissertation%2C+commencement%29%2C+and+which+university+policy+governs+each+step%3F (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5000): Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it"))
+--------------------
+

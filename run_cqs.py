@@ -8,10 +8,12 @@ import re
 # API endpoint
 API_URL = "http://127.0.0.1:5000/chat-stream"
 
-# Input and output files
-INPUT_FILE = r"C:\Users\gabhi\Projects\RaiderGPT\KG_RAG\CQs.txt"
-OUTPUT_FILE = r"C:\Users\gabhi\Projects\RaiderGPT\KG_RAG\rag_responses.txt"
-FAILED_FILE = r"C:\Users\gabhi\Projects\RaiderGPT\KG_RAG\failed_cqs.txt"
+# Input and output files, resolved relative to this script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+KG_RAG_DIR = os.getenv("KG_RAG_DIR", os.path.join(BASE_DIR, "KG_RAG"))
+INPUT_FILE = os.getenv("CQS_INPUT_FILE", os.path.join(KG_RAG_DIR, "CQs.txt"))
+OUTPUT_FILE = os.getenv("CQS_OUTPUT_FILE", os.path.join(KG_RAG_DIR, "rag_responses.txt"))
+FAILED_FILE = os.getenv("CQS_FAILED_FILE", os.path.join(KG_RAG_DIR, "failed_cqs.txt"))
 
 def load_cqs(file_path):
     """Read and extract all CQs from the input text file."""
